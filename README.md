@@ -7,11 +7,11 @@ Client repository for team dev project.
 1. Copy the `.env.example` file to a new file named `.env` (NOTE: Make sure to copy the file, don't remove the original .env.example)
 2. Make sure the `REACT_APP_API_URL` environment variable in the `.env` file contains the URL of the server app on your machine
 3. `npm ci` to install dependencies
-4. `npm start` to run the app. The server must also be running on your machine
+4. `npm start` to run the app. The [server](https://github.com/boolean-uk/team-dev-server-c9/) must also be running on your machine
 
 ### Project Management
 
-https://github.com/orgs/boolean-uk/projects/10/views/1
+[https://github.com/orgs/boolean-uk/projects/10/views/1](https://trello.com/b/NXE9Z6hG/c10-team-dev-client)
 
 ### Contributing
 
