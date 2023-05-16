@@ -13,6 +13,10 @@ Client repository for team dev project.
 
 [https://github.com/orgs/boolean-uk/projects/10/views/1](https://trello.com/b/NXE9Z6hG/c10-team-dev-client)
 
+### API Documentation
+
+[https://supreme-bassoon-7v7v8r2.pages.github.io/](https://supreme-bassoon-7v7v8r2.pages.github.io/)
+
 ### Contributing
 
 - Pull requests should be made from branches following the naming convention: `<username>-<issue_number>-<feature>`, e.g. `vherus-#1-user_registration`
