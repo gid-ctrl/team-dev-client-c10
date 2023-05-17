@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "../../assets/icons/searchIcon";
 import Button from "../../components/button";
 import Card from "../../components/card";
@@ -10,10 +10,27 @@ import "./style.css";
 
 const Dashboard = () => {
 	const [searchVal, setSearchVal] = useState('');
+	const [users, setUsers] = useState([])
 
 	const onChange = (e) => {
-		setSearchVal(e.target.value);
+		const searchVal = e.target.value
+		setSearchVal(searchVal);
+		console.log(searchVal)
+		
+
 	};
+
+	useEffect(() => {
+		fetch(`https://team-dev-backend-api-c9.fly.dev/users`, {
+			headers: {
+				Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY4NDMyNTU1NCwiZXhwIjoxNjg0NDExOTU0fQ.NhxsXHYZlFvYCO2PXqQD2D6Jbz7I6NCwS-UjrY3NXoU'
+			}
+	})
+		.then((res) => res.json())
+		.then(json => console.log('yay', JSON.stringify(json)))
+	}, [])
+
+	  
 
 	// Use the useModal hook to get the openModal and setModal functions
 	const { openModal, setModal } = useModal();
