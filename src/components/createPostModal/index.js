@@ -18,9 +18,6 @@ const CreatePostModal = ({triggerUpdate, setTriggerUpdate}) => {
     const onSubmit = (e) => {
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
         post('posts', {"content": text})
-        .then((newPost) => {
-            console.log(`newPost:`, newPost)
-        })
         .then(() => {
             setTriggerUpdate(true)
         })

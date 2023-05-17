@@ -4,11 +4,7 @@ import { getPosts } from "../../service/apiClient";
 
 const Posts = ({triggerUpdate, setTriggerUpdate}) => {
     const [posts, setPosts] = useState([])
-
-    // useEffect(() => {
-    //         getPosts().then(setPosts)
-    // }, [])
-    
+   
     useEffect(() => {
         if (triggerUpdate) {
             getPosts().then(setPosts)
