@@ -2,17 +2,28 @@ import { useState } from "react"
 import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
+import { patch } from '../../service/apiClient'
 
-const EditPostModal = () => {
+const EditPostModal = ({ id, content }) => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
-    const [text, setText] = useState('')
+    const [text, setText] = useState(content)
 
     const onChange = (e) => {
         setText(e.target.value)
     }
 
     const onSubmit = () => {
+
+        // sends patch request to update current message with edited message
+        console.log('id', id)
+        console.log('message', text)
+        patch(`posts/${id}`, {
+            'content': text
+        })
+
+        //async function patch(endpoint, data, auth = true) {
+        //    return await request('PATCH', endpoint, data, auth)}
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
 
         setTimeout(() => {
@@ -20,6 +31,7 @@ const EditPostModal = () => {
             closeModal()
         }, 2000)
     }
+
 
     return (
         <>
@@ -29,7 +41,7 @@ const EditPostModal = () => {
             </section>
 
             <section>
-                <textarea onChange={onChange} value={text} placeholder="Edit your post"></textarea>
+                <textarea onChange={onChange} value={text} placeholder={content}></textarea>
             </section>
 
             <section className="create-post-actions">
