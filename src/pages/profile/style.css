@@ -1,0 +1,19 @@
+.profile-container {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.main-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 30px;
+  row-gap: 30px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-rows: 90px repeat(90px, auto-fill)
+}
