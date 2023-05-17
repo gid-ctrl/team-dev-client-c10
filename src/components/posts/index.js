@@ -9,6 +9,8 @@ const Posts = () => {
         getPosts().then(setPosts)
     }, [])
 
+    
+
     return (
         <>
             {posts.map(post => {
