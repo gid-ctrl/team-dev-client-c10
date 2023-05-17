@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
 
         if (storedToken && !token) {
             setToken(storedToken)
-            navigate(location.state?.from?.pathname || "/")
+            navigate("/")
         }
     }, [location.pathname])
 
@@ -32,8 +32,8 @@ const AuthProvider = ({ children }) => {
 
         localStorage.setItem('token', res.data.token)
 
-		setToken(res.token)
-		navigate(location.state?.from?.pathname || "/")
+		setToken(res.data.token)
+		navigate("/")
 	};
 
 	const handleLogout = () => {
