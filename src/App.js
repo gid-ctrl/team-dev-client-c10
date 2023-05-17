@@ -9,6 +9,7 @@ import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
 import Navigation from "./components/navigation";
+import ViewProfile from "./pages/profile"
 
 const App = () => {
 	return (
@@ -43,7 +44,15 @@ const App = () => {
                                 <ProtectedRoute>
                                     <p>to do</p>
                                 </ProtectedRoute>
-                        }
+                            }
+                        />
+                        <Route
+                            path="/profile/:id"
+                            element={ 
+                                <ProtectedRoute>
+                                    <ViewProfile />
+                                </ProtectedRoute>
+                            }
                         />
                     </Routes>
                 </ModalProvider>
