@@ -4,6 +4,8 @@ import './style.css'
 import Button from '../button'
 import { patch } from '../../service/apiClient'
 
+
+// passing current post ID and message content through props
 const EditPostModal = ({ id, content }) => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
@@ -14,16 +16,11 @@ const EditPostModal = ({ id, content }) => {
     }
 
     const onSubmit = () => {
-
         // sends patch request to update current message with edited message
-        console.log('id', id)
-        console.log('message', text)
         patch(`posts/${id}`, {
             'content': text
         })
 
-        //async function patch(endpoint, data, auth = true) {
-        //    return await request('PATCH', endpoint, data, auth)}
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
 
         setTimeout(() => {
