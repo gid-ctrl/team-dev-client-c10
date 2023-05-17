@@ -1,12 +1,32 @@
 import { Route } from "react-router-dom";
+import Card from "../../components/card";
+import TextInput from "../../components/form/textInput";
+
+import "./style.css";
 
 const ViewProfile = () => {
-    return(
-      <>
-      <p>This is a test</p>
-      
-      </> 
-    )
-}
+  return (
+    <>
+      <main>
+        <h2>Profile</h2>
+        <Card>
+          <div className="create-post-input">
+            <div className="profile-icon">
+              <p>AJ</p>
+            </div>
+          </div>
+        </Card>
 
-export default ViewProfile
+        <h4>Basic info</h4>
+        <div className="profile-icon">
+              <p>AJ</p>
+              <TextInput/>
+
+            </div>
+            
+      </main>
+    </>
+  );
+};
+
+export default ViewProfile;
