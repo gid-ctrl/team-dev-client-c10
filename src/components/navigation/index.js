@@ -17,7 +17,7 @@ const Navigation = () => {
             <ul>
                 <li><NavLink to='/'><HomeIcon colour="#000046" /><p>Home</p></NavLink></li>
                 <li><NavLink to='/'><ProfileIcon /><p>Profile</p></NavLink></li>
-                <li><NavLink to='/'><CohortIcon /><p>Cohort</p></NavLink></li>
+                <li><NavLink to='/MyCohort'><CohortIcon /><p>Cohort</p></NavLink></li>
             </ul>
         </nav>
     )
