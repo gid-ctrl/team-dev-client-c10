@@ -20,7 +20,6 @@ const EditPostModal = ({ id, content, setTriggerUpdate}) => {
         patch(`posts/${id}`, {
             'content': text
         }).then(() => {
-            console.log('in .then')
             setTriggerUpdate(true)
         })
 
