@@ -1,6 +1,10 @@
+import BackButton from "../../components/backbutton"
+
 function SearchPage () {
     return (
-        <p>search</p>
+        <>
+            <BackButton />
+        </>
     )
 }
 
