@@ -55,5 +55,6 @@ export {
     login,
     getPosts,
     register,
-    createProfile
+    createProfile,
+    post
 }
