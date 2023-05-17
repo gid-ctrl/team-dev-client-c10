@@ -6,7 +6,7 @@ import { patch } from '../../service/apiClient'
 
 
 // passing current post ID and message content through props
-const EditPostModal = ({ id, content }) => {
+const EditPostModal = ({ id, content, setTriggerUpdate}) => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
     const [text, setText] = useState(content)
@@ -19,7 +19,11 @@ const EditPostModal = ({ id, content }) => {
         // sends patch request to update current message with edited message
         patch(`posts/${id}`, {
             'content': text
+        }).then(() => {
+            console.log('in .then')
+            setTriggerUpdate(true)
         })
+
 
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
 

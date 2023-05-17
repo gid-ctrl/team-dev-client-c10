@@ -24,6 +24,7 @@ const Posts = ({triggerUpdate, setTriggerUpdate}) => {
                         content={post.content}
                         comments={post.comments}
                         id={post.id}
+                        setTriggerUpdate={setTriggerUpdate}
                     />
             })}
         </>

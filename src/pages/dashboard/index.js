@@ -39,7 +39,7 @@ const Dashboard = () => {
 					</div>
 				</Card>
 
-				<Posts triggerUpdate = {triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />
+				<Posts triggerUpdate={triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />
 			</main>
 
 			<aside>
