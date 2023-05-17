@@ -10,7 +10,7 @@ import "./style.css";
 
 const Dashboard = () => {
 	const [searchVal, setSearchVal] = useState('');
-
+	const [triggerUpdate, setTriggerUpdate] = useState(false)
 	const onChange = (e) => {
 		setSearchVal(e.target.value);
 	};
@@ -21,7 +21,7 @@ const Dashboard = () => {
 	// Create a function to run on user interaction
 	const showModal = () => {
 		// Use setModal to set the header of the modal and the component the modal should render
-		setModal("Create a post", <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
+		setModal("Create a post", <CreatePostModal triggerUpdate = {triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />); // CreatePostModal is just a standard React component, nothing special
 
 		// Open the modal!
 		openModal();
@@ -39,7 +39,7 @@ const Dashboard = () => {
 					</div>
 				</Card>
 
-				<Posts />
+				<Posts triggerUpdate = {triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />
 			</main>
 
 			<aside>

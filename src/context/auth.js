@@ -17,11 +17,11 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const storedToken = localStorage.getItem('token')
 
-        if (storedToken) {
+        if (storedToken && !token) {
             setToken(storedToken)
-            navigate(location.state?.from?.pathname || "/")
+            navigate("/")
         }
-    }, [location.state?.from?.pathname, navigate])
+    }, [location.pathname])
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)
@@ -32,8 +32,8 @@ const AuthProvider = ({ children }) => {
 
         localStorage.setItem('token', res.data.token)
 
-		setToken(res.token)
-		navigate(location.state?.from?.pathname || "/")
+		setToken(res.data.token)
+		navigate("/")
 	};
 
 	const handleLogout = () => {
