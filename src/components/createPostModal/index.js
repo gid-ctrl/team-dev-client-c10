@@ -4,7 +4,7 @@ import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
 
-const CreatePostModal = () => {
+const CreatePostModal = ({triggerUpdate, setTriggerUpdate}) => {
     // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
 
@@ -20,6 +20,9 @@ const CreatePostModal = () => {
         post('posts', {"content": text})
         .then((newPost) => {
             console.log(`newPost:`, newPost)
+        })
+        .then(() => {
+            setTriggerUpdate(true)
         })
 
         setTimeout(() => {
