@@ -2,9 +2,9 @@ import { Route } from "react-router-dom";
 import Card from "../../components/card";
 import TextInput from "../../components/form/textInput";
 import "./style.css";
+import "../../styles/index.css"
 
 const hrStyle = {
-  color: "black",
   backgroundColor: "black",
   height: 0.5
 }
@@ -53,9 +53,14 @@ const ViewProfile = () => {
               <br/>
                 <h4>Contact info</h4>
               <div className="contact-info-content info-grid">
-                <p>Contact info</p>
-                <p>Contact info</p>
-                <p>Contact info</p>
+                <p>Email*</p>
+                <textarea rows="1" cols="40" className="textarea-small"></textarea>
+
+                <p>Mobile*</p>
+                <textarea rows="" cols="40" className="textarea-small"></textarea>
+
+                <p>Password*</p>
+                <textarea rows="" cols="40" className="textarea-small"></textarea>
               </div>
             </div>
 
@@ -64,6 +69,8 @@ const ViewProfile = () => {
               <br/>
                 <h4>Bio</h4>
               <div className="bio-content">
+                <p>Bio</p>
+                <textarea rows="" cols="40"></textarea>
               </div>
             </div>
 

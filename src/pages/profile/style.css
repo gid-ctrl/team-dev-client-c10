@@ -1,3 +1,14 @@
+/* :root { */
+/*     --color-blue: #000046; */
+/*     --color-blue1: #64648c; */
+/*     --color-blue2: #96a0be; */
+/*     --color-blue5: #e6ebf5; */
+/*     --color-blue7: #f5faff; */
+/*     --color-green: #64dc78; */
+/*     --color-offwhite: #f0f5fa; */
+/*     --color-lightgrey: #f5f5f5; */
+/* } */
+
 .profile-container {
   display: grid;
   grid-template-columns: 70px 1fr;
@@ -8,7 +19,7 @@
 .main-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr auto;
   column-gap: 30px;
   row-gap: 30px;
 }
@@ -17,3 +28,8 @@
   display: grid;
   grid-template-rows: 90px repeat(90px, auto-fill)
 }
+
+.textarea-small {
+  height: 50px;
+}
+
