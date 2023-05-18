@@ -1,7 +1,9 @@
+
 import TextInput from "../../components/form/textInput";
 import { useState } from "react";
 import SearchIcon from "../../assets/icons/searchIcon";
 import "./search.css";
+import BackButton from "../../components/backbutton"
 
 
 function SearchPage () {
@@ -15,6 +17,7 @@ const onChange = (e) => {
         <>
 
         <div className="parent">
+            <BackButton />
             <h1>Search Results</h1>
             <section className="searchparent">
                 <div className="">
