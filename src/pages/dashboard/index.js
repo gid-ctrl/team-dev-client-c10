@@ -8,6 +8,7 @@ import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
 import jwt_decode from "jwt-decode"
 import { get } from "../../service/apiClient";
+import useAuth from "../../hooks/useAuth";
 
 import "./style.css";
 
@@ -17,6 +18,7 @@ const Dashboard = ({ name, userInitials }) => {
 	const [users, setUsers] = useState([]);
 	const [currentUser, setCurrentUser] = useState()
 	const [showResults, setShowResults] = useState(false);
+	const { token } = useAuth()
 
   useEffect(() => {
     get("users").then((response) => {
@@ -52,8 +54,6 @@ const Dashboard = ({ name, userInitials }) => {
   );
 
   useEffect(() => {
-	const token = localStorage.getItem('token');
-
 	const fetchData = async () => {
 		const { userId } = jwt_decode(token)
 		const res = await get(`users/${userId}`)
