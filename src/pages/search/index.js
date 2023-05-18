@@ -43,8 +43,7 @@ function SearchPage () {
     }
     
 
-    // THIS IS THE ARRAY THAT CONTAINS THE INFORMATION OF THE LIST TO BE RENDERED!
-    console.log(results)
+   
 
     return (
         <>
