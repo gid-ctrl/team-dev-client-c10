@@ -4,12 +4,14 @@ import SearchIcon from "../../assets/icons/searchIcon";
 import "./search.css";
 import BackButton from "../../components/backbutton"
 import { getUsers } from "../../service/apiClient"
+import { Link } from "react-router-dom";
 
 function SearchPage () {
     // create a state hook that will store the fetched data.
     const [formData, setFormData] = useState('')
     const [users, setUsers] = useState([])
     const [results, setResults] = useState([])
+    const [showMore, setShowMore] = useState(false)
     
 
     useEffect(() => {
@@ -54,7 +56,9 @@ function SearchPage () {
     
     }
 
-
+    const clickShowMore = () => {
+        setShowMore(!showMore)
+    }
 
 
     return (
@@ -112,8 +116,14 @@ function SearchPage () {
                                     }
                                 
                                 </div>
-                                <div className="profiles">Profile</div>
-                                <div className="profiles">. . .</div>
+                                <Link to='/' className="profiles">Profile</Link>
+                                {/* Requires link to profile page */}
+                                <div className="edit-icon">
+                                    <p onClick={clickShowMore}>
+                                        ...
+                                    </p>
+                                </div>
+                                {showMore && <div><Link to='/' className="profiles">Profile</Link></div>}
                             </li>
             )
             
