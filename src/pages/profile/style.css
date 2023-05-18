@@ -33,8 +33,6 @@
   height: 50px;
 }
 
-<<<<<<< HEAD
-
 small {
   color: #64648C;
 }
@@ -92,7 +90,6 @@ textarea {
   width: 40%; /* Reduce the width by 20% */
 }
 
-=======
 .training-info {
   position: relative;  
 }
@@ -100,4 +97,4 @@ textarea {
 .lock-icon {
   position: "absolute",
 }
->>>>>>> ef502a084bcc16e7b6b268be4721bf179dbd4b04
+
