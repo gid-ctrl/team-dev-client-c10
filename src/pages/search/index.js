@@ -72,8 +72,8 @@ function SearchPage () {
                         {results.map(obj => {
                         return (
                             <li>
-                                <div>
-                                    <p></p>
+                                <div className="profile-icon">
+                                    <p>{obj.firstName[0]}{obj.lastName[0]}</p>
                                 </div>
                                 <div>
                                     <h4>{obj.firstName} {obj.lastName}</h4>
