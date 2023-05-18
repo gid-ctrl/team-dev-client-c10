@@ -4,7 +4,7 @@ import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
 
-const CreatePostModal = ({triggerUpdate, setTriggerUpdate}) => {
+const CreatePostModal = ({triggerUpdate, setTriggerUpdate, currentUser}) => {
     // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
 
@@ -31,8 +31,8 @@ const CreatePostModal = ({triggerUpdate, setTriggerUpdate}) => {
     return (
         <>
             <section className="create-post-user-details">
-                <div className="profile-icon"><p>AJ</p></div>
-                <div className="post-user-name"><p>Alex J</p></div>
+                <div className="profile-icon"><p>{currentUser.firstName?.[0]}{currentUser.lastName?.[0]}</p></div>
+                <div className="post-user-name"><p>{currentUser.firstName} {currentUser.lastName?.[0]}</p></div>
             </section>
 
             <section>
