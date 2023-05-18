@@ -5,9 +5,12 @@ import ProfileCircle from "../../components/profileCircle"
 
 export default function MyCohort () {
     
+
+
     return (
         <>
             <main>
+                {/* main section  */}
                 <Card>
 
                     <h4>My Cohort</h4>
@@ -58,18 +61,41 @@ export default function MyCohort () {
                     </div>
                 </Card>
             </main>
+            {/* right side teacher bar */}
             <aside>
                 <Card>
-                    <h4>Teachers</h4>
+                    <div class="teacher-bar">
+                        <h4>Teachers</h4>
+                        <section className="post-details ">
+                        <ProfileCircle />
+
+                    <div class="teacher-info">
+                        <span>Software Development, Cohort 10</span>
+                        <p>Software Development</p>
+                    </div>
+
+                     <div className="edit-icon">
+                        <p>...</p>
+                    </div>
+                    </section>
+                    {/* teacher two */}
                     <section className="post-details user-display">
                         <ProfileCircle />
+
+                    <div class="teacher-info">
                         <span>Software Development, Cohort 10</span>
-                        <div className="edit-icon">
-                            <p>...</p>
-                        </div>
-                        
+                        <p>Software Development</p>
+                    </div>
+
+                     <div className="edit-icon">
+                        <p>...</p>
+                    </div>
                     </section>
+
+                    </div>
                 </Card>
+
+                {/* right side excercise bar */}
                 <Card>
                     <h4>My Exercise</h4>
                 </Card>
