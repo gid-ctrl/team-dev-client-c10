@@ -16,7 +16,7 @@ const Posts = ({triggerUpdate, setTriggerUpdate}) => {
 
     return (
         <>
-            {posts.map(post => {
+            {/* {posts.map(post => {
                     return <Post
                         key={post.id}
                         name={`${post.author.firstName} ${post.author.lastName}`}
@@ -26,7 +26,7 @@ const Posts = ({triggerUpdate, setTriggerUpdate}) => {
                         id={post.id}
                         setTriggerUpdate={setTriggerUpdate}
                     />
-            })}
+            })} */}
         </>
     )
 }

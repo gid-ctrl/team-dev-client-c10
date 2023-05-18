@@ -42,10 +42,17 @@ const AuthProvider = ({ children }) => {
 	};
 
     const handleRegister = async (email, password) => {
-        const res = await register(email, password)
+        const res = register(email, password)
+		.then(res=> {
+		console.log(res)
+		if (res.status === "fail"){
+			throw new Error(res.data.error)
+		}
 		setToken(res.data.token)
-
         navigate("/verification")
+		})
+		return res
+		
     }
 
     const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
