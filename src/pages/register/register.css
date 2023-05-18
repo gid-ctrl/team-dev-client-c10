@@ -7,3 +7,10 @@
 	gap: 24px;
 	margin-bottom: 40px;
 }
+
+.email-error-message,
+.passw-error-message {
+	color: rgb(220, 8, 8);
+	margin-top: -15px;
+	
+}
