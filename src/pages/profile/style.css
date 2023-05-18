@@ -33,3 +33,10 @@
   height: 50px;
 }
 
+.training-info {
+  position: relative;  
+}
+
+.lock-icon {
+  position: "absolute",
+}
