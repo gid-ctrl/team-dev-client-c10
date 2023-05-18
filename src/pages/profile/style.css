@@ -26,7 +26,7 @@
 
 .info-grid {
   display: grid;
-  grid-template-rows: 90px repeat(90px, auto-fill)
+  /* grid-template-rows: 90px repeat(90px, auto-fill) */
 }
 
 .textarea-small {
@@ -37,13 +37,13 @@ small {
   color: #64648C;
 }
 
-.contact-info {
+.training-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.contact-info-content {
+_ {
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: 10px; /* Adjust the gap between rows as needed */
@@ -90,7 +90,7 @@ textarea {
   width: 40%; /* Reduce the width by 20% */
 }
 
-.training-info {
+.training-info, .password-field {
   position: relative;  
   display: grid;
   align-items: center;
@@ -100,6 +100,12 @@ textarea {
   position: absolute;
   align-items: center;
   right: 0px;
+}
+
+.eye-icon {
+  position: absolute;
+  align-items: center;
+  right: 7px;
 }
 
 
