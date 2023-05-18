@@ -14,6 +14,8 @@ const Posts = ({triggerUpdate, setTriggerUpdate}) => {
         }
     }, [triggerUpdate])
 
+    
+
     return (
         <>
             {posts.map(post => {
