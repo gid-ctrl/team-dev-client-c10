@@ -57,5 +57,7 @@ export {
     getPosts,
     register,
     createProfile,
-    get
+    get,
+    patch,
+    post
 }

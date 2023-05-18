@@ -13,6 +13,7 @@ const Dashboard = ({ name, userInitials }) => {
   const [searchVal, setSearchVal] = useState("");
   const [users, setUsers] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const [triggerUpdate, setTriggerUpdate] = useState(false)
 
   useEffect(() => {
     get("users").then((response) => {
@@ -20,6 +21,7 @@ const Dashboard = ({ name, userInitials }) => {
       setUsers(response.data.users);
     });
   }, []);
+
 
   const onChange = (e) => {
     const searchVal = e.target.value;
@@ -30,13 +32,13 @@ const Dashboard = ({ name, userInitials }) => {
 
   // Use the useModal hook to get the openModal and setModal functions
   const { openModal, setModal } = useModal();
+	// Create a function to run on user interaction
+	const showModal = () => {
+		// Use setModal to set the header of the modal and the component the modal should render
+		setModal("Create a post", <CreatePostModal triggerUpdate = {triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />); // CreatePostModal is just a standard React component, nothing special
 
   // Create a function to run on user interaction
-  const showModal = () => {
-    // Use setModal to set the header of the modal and the component the modal should render
-    setModal("Create a post", <CreatePostModal />); // CreatePostModal is just a standard React component, nothing special
-
-    // Open the modal!
+ 
     openModal();
   };
   const filteredUsers = users.filter(
@@ -49,7 +51,10 @@ const Dashboard = ({ name, userInitials }) => {
   );
 
   console.log("filtered users", filteredUsers, filteredUsers.length);
+				
 
+        
+  
   return (
     <>
       <main>
@@ -62,7 +67,7 @@ const Dashboard = ({ name, userInitials }) => {
           </div>
         </Card>
 
-        <Posts />
+        <Posts triggerUpdate={triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />
       </main>
 
       <aside>
