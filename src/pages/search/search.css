@@ -62,8 +62,22 @@ h1 {
     font-weight: 400;
 }
 
-.button {
+.searchparent > div {
     position: relative;
-    left: 1240px;
-    top: 263px
+}
+
+.button {
+    position: absolute;
+    top: 1px;
+    right: -60px;
+}
+
+#search-more {
+    padding: 0;
+    display: grid;
+    justify-content: center;
+    background-color:#F0F5FA;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
 }
