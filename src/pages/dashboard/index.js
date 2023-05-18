@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "../../assets/icons/searchIcon";
 import Button from "../../components/button";
 import Card from "../../components/card";
@@ -6,11 +6,15 @@ import CreatePostModal from "../../components/createPostModal";
 import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
+import jwt_decode from "jwt-decode"
+import { get } from "../../service/apiClient";
+
 import "./style.css";
 
 const Dashboard = () => {
 	const [searchVal, setSearchVal] = useState('');
 	const [triggerUpdate, setTriggerUpdate] = useState(false)
+	const [currentUser, setCurrentUser] = useState()
 	const onChange = (e) => {
 		setSearchVal(e.target.value);
 	};
@@ -27,6 +31,17 @@ const Dashboard = () => {
 		openModal();
 	};
 
+	useEffect(() => {
+		const token = localStorage.getItem('token');
+
+		const fetchData = async () => {
+			const { userId } = jwt_decode(token)
+			const res = await get(`users/${userId}`)
+			setCurrentUser(res.data.user)
+		}
+		fetchData()
+	  }, []);
+	  
 	return (
 		<>
 			<main>
