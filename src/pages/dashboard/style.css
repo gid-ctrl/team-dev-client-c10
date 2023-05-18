@@ -22,8 +22,9 @@ aside {
 
 .nameSearch {
     display: grid;
-    grid-template-columns: 70px auto;
+    grid-template-columns: 70px auto auto;
     padding-top: 10px;
+ 
     
 }
 
@@ -48,3 +49,14 @@ aside {
 .role {
     font-size: 13px;
 }
+
+.line {
+    border-bottom: 2px solid #E6EBF5;
+    margin-top: 5px;
+
+  }
+
+  .edit-icon {
+    display: grid;
+    justify-self: right;
+  }
