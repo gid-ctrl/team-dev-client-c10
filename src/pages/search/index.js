@@ -4,8 +4,6 @@ import SearchIcon from "../../assets/icons/searchIcon";
 import "./search.css";
 import BackButton from "../../components/backbutton"
 import { getUsers } from "../../service/apiClient"
-import SearchResults from "../../components/searchResults"
-
 
 function SearchPage () {
     // create a state hook that will store the fetched data.
@@ -61,7 +59,6 @@ function SearchPage () {
                     value={formData}
                     onChange={onChange}
                     name={'searchusers'}
-                    label={'Search Results'}
                     type="text"
                     icon={<SearchIcon />}/>
                     </form>
@@ -72,67 +69,25 @@ function SearchPage () {
                 <div className="resultslist">
                 <p>People</p>
                     <ul>
-                        <li>
-                            <div>
-                                <img className="userpicture" src="https://cdn.discordapp.com/attachments/878744167507951619/1087346433885224991/image.png" alt="" height="55px"></img>
-                            </div>
-                            <div>
-                                <h4>Kate Baker</h4>
-                                <p>Software Developer, Cohort 3</p>
-                            </div>
-                            <div className="profiles">Profile</div>
-                            <div className="profiles">. . .</div>
-                        </li>
-                        <li> 
-                            <div>
-                                <img className="userpicture" src="https://cdn.discordapp.com/attachments/878744167507951619/1087346433885224991/image.png" alt="" height="55px"></img>
-                            </div>
-                            <div>
-                                <h4>Kate Baker</h4>
-                                <p>Software Developer, Cohort 3</p>
-                            </div>
-                            <div className="profiles">Profile</div>
-                            <div className="profiles">. . .</div>
-                        </li>
-
-                        <li> 
-                            <div>
-                                <img className="userpicture" src="https://cdn.discordapp.com/attachments/878744167507951619/1087346433885224991/image.png" alt="" height="55px"></img>
-                            </div>
-                            <div>
-                                <h4>Kate Baker</h4>
-                                <p>Software Developer, Cohort 3</p>
-                            </div>
-                            <div className="profiles">Profile</div>
-                            <div className="profiles">. . .</div>
-                        </li>
-                        <li> 
-                            <div>
-                                <img className="userpicture" src="https://cdn.discordapp.com/attachments/878744167507951619/1087346433885224991/image.png" alt="" height="55px"></img>
-                            </div>
-                            <div>
-                                <h4>Kate Baker</h4>
-                                <p>Software Developer, Cohort 3</p>
-                            </div>
-                            <div className="profiles">Profile</div>
-                            <div className="profiles">. . .</div>
-                        </li>
-                        <li> 
-                            <div>
-                                <img className="userpicture" src="https://cdn.discordapp.com/attachments/878744167507951619/1087346433885224991/image.png" alt="" height="55px"></img>
-                            </div>
-                            <div>
-                                <h4>Kate Baker</h4>
-                                <p>Software Developer, Cohort 3</p>
-                            </div>
-                            <div className="profiles">Profile</div>
-                            <div className="profiles">. . .</div>
-                        </li>
-
+                        {results.map(obj => {
+                        return (
+                            <li>
+                                <div>
+                                    <p></p>
+                                </div>
+                                <div>
+                                    <h4>{obj.firstName} {obj.lastName}</h4>
+                                <p>{obj.role}</p>
+                                </div>
+                                <div className="profiles">Profile</div>
+                                <div className="profiles">. . .</div>
+                            </li>
+            )
+            
+        })}                            
                     </ul>
                 </div>
             </section>
-            <SearchResults />
         </div>
         </>
 
