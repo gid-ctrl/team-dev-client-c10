@@ -74,7 +74,7 @@ function SearchPage () {
                     type="text"
                     icon={<SearchIcon />}/>
 
-                    <button>
+                    <button className="button">
                         X
                     </button>
                     
