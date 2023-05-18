@@ -62,8 +62,8 @@ h1 {
     font-weight: 400;
 }
 
-button {
-    position: absolute;
+.button {
+    position: relative;
     left: 1240px;
     top: 263px
 }
