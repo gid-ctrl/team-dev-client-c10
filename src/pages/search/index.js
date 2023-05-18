@@ -127,7 +127,7 @@ function SearchPage () {
                                 <Link to='/' className="profiles">Profile</Link>
                                 {/* Requires link to profile page */}
                                 <button id="search-more" onClick={clickShowMore} onFocus={focusShowMore} onBlur={blurShowMore}>...</button>
-                                {showMore && <div><Link to='/' className="profiles">Profile</Link></div>}
+                                {showMore && <div className="showmore"><Link to='/' className="profiles">Profile</Link></div>}
                             </li>
             )
             
