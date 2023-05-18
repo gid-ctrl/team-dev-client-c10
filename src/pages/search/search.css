@@ -1,0 +1,52 @@
+.parent {
+    padding-left: 100px;
+    
+}
+
+h1 {
+    padding: 30px;
+}
+
+.searchparent {
+    padding: 50px;
+    background-color: white;
+
+}
+
+
+.searchbar {
+ padding: 20px  
+}
+
+
+.resultsparent {
+    margin-top: 20px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 100% auto;
+}
+
+.profiles {
+    justify-self:  center;
+    text-align: center;
+}
+
+.resultslist > ul > li {
+    display: grid;
+    grid-template-columns: 100px 1fr 100px 75px auto;
+    align-items:  center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+}
+
+.userpicture {
+    border-radius: 35px;
+    margin-left: 22px;
+    margin-top: 5px
+}
+
+.resultslist > p {
+    padding-left: 20px;
+    padding-top: 20px
+}
