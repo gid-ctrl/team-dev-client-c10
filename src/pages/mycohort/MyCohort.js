@@ -1,8 +1,17 @@
 import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
+import { useEffect } from "react";
+// import { get } from "../../service/apiClient";
 
 export default function MyCohort() {
+  const cohortId = 1;
+
+  const endpoint = `${process.env.REACT_APP_C10}/cohorts/${cohortId}/users`;
+  console.log("endpoint", endpoint);
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <main>
