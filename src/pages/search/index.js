@@ -56,10 +56,14 @@ function SearchPage () {
     
     }
 
-    const clickShowMore = () => {
-        setShowMore(!showMore)
+    const focusShowMore = () => {
+        setShowMore(true)
     }
 
+    const blurShowMore = () => {
+        setShowMore(false)
+    }
+    
 
     return (
         <>
@@ -118,11 +122,9 @@ function SearchPage () {
                                 </div>
                                 <Link to='/' className="profiles">Profile</Link>
                                 {/* Requires link to profile page */}
-                                <div className="edit-icon">
-                                    <p onClick={clickShowMore}>
-                                        ...
-                                    </p>
-                                </div>
+                                <button className="edit-icon" onFocus={focusShowMore} onBlur={blurShowMore}>
+                                    ...
+                                </button>
                                 {showMore && <div><Link to='/' className="profiles">Profile</Link></div>}
                             </li>
             )
