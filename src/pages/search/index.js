@@ -77,7 +77,12 @@ function SearchPage () {
                                 </div>
                                 <div>
                                     <h4>{obj.firstName} {obj.lastName}</h4>
-                                <p>{obj.role}</p>
+
+                                    {obj.cohortId !== null
+                                        ? <p>{obj.role}, Cohort {obj.cohortId}</p>
+                                        : <p>{obj.role}</p>
+                                    }
+                                
                                 </div>
                                 <div className="profiles">Profile</div>
                                 <div className="profiles">. . .</div>
