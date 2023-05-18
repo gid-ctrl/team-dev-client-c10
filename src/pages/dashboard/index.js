@@ -8,6 +8,7 @@ import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
 import "./style.css";
 import { get } from "../../service/apiClient";
+import { Link } from "react-router-dom";
 
 const Dashboard = ({ name, userInitials }) => {
   const [searchVal, setSearchVal] = useState("");
@@ -87,7 +88,7 @@ const Dashboard = ({ name, userInitials }) => {
                         <br />
 
                         <p>No users Found</p>
-                        <Button text={"Edit"} />
+                        <Link to={'/search'}><Button text={"Edit"} /></Link>
                       </>
                     );
                   } else if (filteredUsers.length >= 2) {
@@ -120,7 +121,7 @@ const Dashboard = ({ name, userInitials }) => {
                             )}
                           </div>
                         ))}
-                        <Button text={"See all results"}></Button>
+                        <Link to={'/search'}><Button text={"See all results"}></Button></Link>
                       </>
                     );
                   } else {
