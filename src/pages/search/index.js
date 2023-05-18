@@ -21,7 +21,7 @@ function SearchPage () {
         getUsers().then(setResults)
     }, [])
     
-   
+
     
     // create the onChange event listener that will log the text being entered in the field.
     const onChange = (event) => {
@@ -37,13 +37,25 @@ function SearchPage () {
             return object.fullName.includes(event.target.value.toLowerCase())
             
         })
+        console.log(filtered)
         
         setResults(filtered)
         
     }
+
+    const onSubmit = (event) => {
+        event.preventDefault()
+        getUsers().then(setUsers)
+        getUsers().then(setResults)
+        setFormData('')
     
 
-   
+
+    
+    }
+
+
+
 
     return (
         <>
@@ -53,14 +65,31 @@ function SearchPage () {
             <h1>Search Results</h1>
             <section className="searchparent">
                 <div className="">
-                    <form onSubmit={(e) => e.preventDefault()}>
+                    {formData.length !== 0 
+                    ? (<form onSubmit={onSubmit}>
                     <TextInput
                     value={formData}
                     onChange={onChange}
                     name={'searchusers'}
                     type="text"
                     icon={<SearchIcon />}/>
-                    </form>
+
+                    <button>
+                        X
+                    </button>
+                    
+                    </form>) : (
+                        <form onSubmit={onSubmit}>
+                        <TextInput
+                        value={formData}
+                        onChange={onChange}
+                        name={'searchusers'}
+                        type="text"
+                        icon={<SearchIcon />}/>
+                        
+                        </form>
+                    )}
+
                 </div>
             </section>
 
