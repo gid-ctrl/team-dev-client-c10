@@ -17,7 +17,6 @@ const Dashboard = ({ name, userInitials }) => {
 
   useEffect(() => {
     get("users").then((response) => {
-      console.log("test", response);
       setUsers(response.data.users);
     });
   }, []);
@@ -27,7 +26,6 @@ const Dashboard = ({ name, userInitials }) => {
     const searchVal = e.target.value;
     setSearchVal(searchVal);
     setShowResults(true);
-    console.log(searchVal);
   };
 
   // Use the useModal hook to get the openModal and setModal functions
@@ -49,11 +47,7 @@ const Dashboard = ({ name, userInitials }) => {
         .toLowerCase()
         .includes(searchVal.toLowerCase())
   );
-
-  console.log("filtered users", filteredUsers, filteredUsers.length);
-				
-
-        
+    
   
   return (
     <>
