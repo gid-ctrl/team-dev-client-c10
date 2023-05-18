@@ -4,6 +4,7 @@ import SearchIcon from "../../assets/icons/searchIcon";
 import "./search.css";
 import BackButton from "../../components/backbutton"
 import { getUsers } from "../../service/apiClient"
+import SearchResults from "../../components/searchResults"
 
 
 function SearchPage () {
@@ -131,6 +132,7 @@ function SearchPage () {
                     </ul>
                 </div>
             </section>
+            <SearchResults />
         </div>
         </>
 
