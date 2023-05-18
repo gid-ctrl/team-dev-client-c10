@@ -92,9 +92,23 @@ textarea {
 
 .training-info {
   position: relative;  
+  display: grid;
+  align-items: center;
 }
 
 .lock-icon {
-  position: "absolute",
+  position: absolute;
+  align-items: center;
+  right: 0px;
 }
 
+
+.padding-title {
+  padding-top: 5px;
+
+}
+
+.padding-field-name {
+  padding-top: 16px;
+  padding-bottom: 7px;
+}
