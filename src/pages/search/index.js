@@ -111,6 +111,7 @@ function SearchPage () {
                     <ul>
                         {results.map((obj, index) => {
                         return (
+                            <>
                             <li key={index}>
                                 <div className="profile-icon search-picture">
                                     <p>{obj.firstName[0]}{obj.lastName[0]}</p>
@@ -126,9 +127,18 @@ function SearchPage () {
                                 </div>
                                 <Link to='/' className="profiles">Profile</Link>
                                 {/* Requires link to profile page */}
+
+
+
+                                {/* Consider moving this piece of code outside of the list */}
                                 <button id="search-more" onClick={clickShowMore} onFocus={focusShowMore} onBlur={blurShowMore}>...</button>
                                 {showMore && <div className="showmore"><Link to='/' className="profiles">Profile</Link></div>}
+                                {/* Consider moving this piece of code outside of the list */}
+                                    
+
+
                             </li>
+                            </>
             )
             
         })}                            
