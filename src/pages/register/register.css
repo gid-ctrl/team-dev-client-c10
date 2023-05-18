@@ -1,6 +1,7 @@
 .register-form {
 	margin-bottom: 32px;
 }
+
 .register-form form {
 	display: grid;
 	grid-template-rows: repeat(2, auto);
@@ -8,9 +9,9 @@
 	margin-bottom: 40px;
 }
 
-.email-error-message,
-.passw-error-message {
+.error-message,
+.error-message {
 	color: rgb(220, 8, 8);
 	margin-top: -15px;
-	
+
 }
