@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import Post from "../post";
 import { getPosts } from "../../service/apiClient";
 
-const Posts = () => {
+const Posts = ({triggerUpdate, setTriggerUpdate}) => {
     const [posts, setPosts] = useState([])
-
+   
     useEffect(() => {
-        getPosts().then(setPosts)
-    }, [])
+        if (triggerUpdate) {
+            getPosts().then(setPosts)
+            setTriggerUpdate(false)
+        } else {
+            getPosts().then(setPosts)
+        }
+    }, [triggerUpdate])
 
     return (
         <>
@@ -18,6 +23,8 @@ const Posts = () => {
                         date={post.createdAt}
                         content={post.content}
                         comments={post.comments}
+                        id={post.id}
+                        setTriggerUpdate={setTriggerUpdate}
                     />
             })}
         </>

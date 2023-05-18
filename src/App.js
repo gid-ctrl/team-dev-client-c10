@@ -10,6 +10,13 @@ import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
 import Navigation from "./components/navigation";
 import ViewProfile from "./pages/profile"
+import Button from "./components/button";
+import Card from "./components/card";
+import Comment from "./components/comment";
+import CredentialsCard from "./components/credentials";
+import SocialLinks from "./components/socialLinks";
+import Header from "./components/header";
+import MyCohort from "./pages/mycohort/MyCohort";
 
 const App = () => {
 	return (
@@ -42,7 +49,13 @@ const App = () => {
                             path="MyCohort"
                             element={ 
                                 <ProtectedRoute>
-                                    <p>to do</p>
+                                    {/* <Card children="child"/> */}
+                                    {/* <Button text="hello"/> */}
+                                    {/* <Comment name="jimbo" content="hello" /> */}
+                                    {/* <CredentialsCard/> */}
+                                    {/* <SocialLinks/> */}
+                                    {/* <Header/> */}
+                                    <MyCohort/>
                                 </ProtectedRoute>
                             }
                         />
