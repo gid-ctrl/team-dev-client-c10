@@ -10,6 +10,7 @@ import jwt_decode from "jwt-decode"
 import { get } from "../../service/apiClient";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import "../../styles/_buttons.css"
 
 import "./style.css";
 
@@ -84,6 +85,7 @@ const Dashboard = ({ name, userInitials }) => {
               value={searchVal}
               name="Search"
               onChange={onChange}
+              placeholder='Search for people'
             />
 
             <br />
@@ -98,8 +100,13 @@ const Dashboard = ({ name, userInitials }) => {
                         <hr className="line" />
                         <br />
 
-                        <p>No users Found</p>
-                        <Link to={'/search'}><Button text={"Edit"} /></Link>
+                        <p>Sorry, no results found.</p>
+                        <p>Try changing your search term.</p>
+                        <br/>
+                     
+                          <Link to={'/search'}><Button text={"Edit"} classes="button offwhite" />
+                          </Link>
+                        
                       </>
                     );
                   } else if (filteredUsers.length >= 2) {
@@ -113,17 +120,18 @@ const Dashboard = ({ name, userInitials }) => {
                             {user.firstName.length !== 0 && (
                               <>
                                 <div className="profile-icon" id="align">
+               
                                   {user.firstName?.[0]}
                                   {user.lastName?.[0]}
                                 </div>
-                                <div className="name-tag-role">
-                                  <p id="searched-name">
+                                <div className="post-user-name">
+                                  <p>
                                     {user.firstName} {user.lastName}
                                   </p>
-                                  <div className="role">
+                                  <small>
                                     {user.role[0]}
                                     {user.role.toLowerCase().slice(1)}
-                                  </div>
+                                  </small>
                                 </div>
                                 <div className="edit-icon">
                                   <p>...</p>
@@ -132,7 +140,8 @@ const Dashboard = ({ name, userInitials }) => {
                             )}
                           </div>
                         ))}
-                        <Link to={'/search'}><Button text={"See all results"}></Button></Link>
+                        <br/>
+                        <Link to={'/search'}><Button text={"See all results"} classes="button offwhite"></Button></Link>
                       </>
                     );
                   } else {
