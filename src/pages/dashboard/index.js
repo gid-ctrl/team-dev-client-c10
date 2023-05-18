@@ -6,14 +6,19 @@ import CreatePostModal from "../../components/createPostModal";
 import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
-import "./style.css";
+import jwt_decode from "jwt-decode"
 import { get } from "../../service/apiClient";
+import useAuth from "../../hooks/useAuth";
+
+import "./style.css";
 
 const Dashboard = ({ name, userInitials }) => {
-  const [searchVal, setSearchVal] = useState("");
-  const [users, setUsers] = useState([]);
-  const [showResults, setShowResults] = useState(false);
-  const [triggerUpdate, setTriggerUpdate] = useState(false)
+	const [searchVal, setSearchVal] = useState('');
+	const [triggerUpdate, setTriggerUpdate] = useState(false)
+	const [users, setUsers] = useState([]);
+	const [currentUser, setCurrentUser] = useState()
+	const [showResults, setShowResults] = useState(false);
+	const { token } = useAuth()
 
   useEffect(() => {
     get("users").then((response) => {
@@ -21,6 +26,14 @@ const Dashboard = ({ name, userInitials }) => {
     });
   }, []);
 
+  useEffect(() => {
+	const fetchData = async () => {
+		const { userId } = jwt_decode(token)
+		const res = await get(`users/${userId}`)
+		setCurrentUser(res.data.user)
+	}
+	fetchData()
+  }, [token, setCurrentUser]);    
 
   const onChange = (e) => {
     const searchVal = e.target.value;
@@ -47,20 +60,18 @@ const Dashboard = ({ name, userInitials }) => {
         .toLowerCase()
         .includes(searchVal.toLowerCase())
   );
-    
   
-  return (
-    <>
-      <main>
-        <Card>
-          <div className="create-post-input">
-            <div className="profile-icon">
-              <p>AJ</p>
-            </div>
-            <Button text="What's on your mind?" onClick={showModal} />
-          </div>
-        </Card>
-
+	return (
+		<>
+			<main>
+				<Card>
+					<div className="create-post-input">
+						<div className="profile-icon">
+							<p>AJ</p>
+						</div>
+						<Button text="What's on your mind?" onClick={showModal} />
+					</div>
+				</Card>
         <Posts triggerUpdate={triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />
       </main>
 
