@@ -1,6 +1,7 @@
 const ArrowBackIcon = () => {
 	return (
 		<svg 
+            className="backarrow"
             width="24" 
             height="24" 
             viewBox="0 0 24 24" 

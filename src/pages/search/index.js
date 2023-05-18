@@ -68,18 +68,18 @@ function SearchPage () {
                 <div className="resultslist">
                 <p>People</p>
                     <ul>
-                        {results.map(obj => {
+                        {results.map((obj, index) => {
                         return (
-                            <li>
-                                <div className="profile-icon">
+                            <li key={index}>
+                                <div className="profile-icon search-picture">
                                     <p>{obj.firstName[0]}{obj.lastName[0]}</p>
                                 </div>
                                 <div>
                                     <h4>{obj.firstName} {obj.lastName}</h4>
 
                                     {obj.cohortId !== null
-                                        ? <p>{obj.role}, Cohort {obj.cohortId}</p>
-                                        : <p>{obj.role}</p>
+                                        ? <p className="extrainfo">{obj.role}, Cohort {obj.cohortId}</p>
+                                        : <p className="extrainfo">{obj.role}</p>
                                     }
                                 
                                 </div>

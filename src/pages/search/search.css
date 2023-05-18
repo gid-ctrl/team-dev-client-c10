@@ -1,6 +1,5 @@
 .parent {
-    padding-left: 100px;
-    
+    padding-left: 100px;  
 }
 
 h1 {
@@ -10,14 +9,11 @@ h1 {
 .searchparent {
     padding: 50px;
     background-color: white;
-
 }
-
 
 .searchbar {
  padding: 20px  
 }
-
 
 .resultsparent {
     margin-top: 20px;
@@ -37,7 +33,6 @@ h1 {
     align-items:  center;
     padding-top: 25px;
     padding-bottom: 25px;
-
 }
 
 .userpicture {
@@ -49,4 +44,21 @@ h1 {
 .resultslist > p {
     padding-left: 20px;
     padding-top: 20px
+}
+
+.search-picture  {
+    margin-left: 20px;
+}
+
+.backarrow {
+    position: absolute;
+    left: 220px;
+    top: 142px;
+}
+
+.extrainfo {
+    font-size: 15px;
+    color: #64648c;
+    font-weight: 400;
+
 }
