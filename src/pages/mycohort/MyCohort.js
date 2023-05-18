@@ -60,20 +60,67 @@ export default function MyCohort() {
                 <p>...</p>
               </div>
             </section>
+
+            <section className="post-details user-display">
+              <ProfileCircle initials="K9" />
+              <p>Joe Bloggs</p>
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
+
+            <section className="post-details user-display">
+              <ProfileCircle initials="K9" />
+              <p>Joe Bloggs</p>
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
+
+            <section className="post-details user-display">
+              <ProfileCircle initials="K9" />
+              <p>Joe Bloggs</p>
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
           </div>
         </Card>
       </main>
+      {/* right side teacher bar */}
       <aside>
         <Card>
-          <h4>Teachers</h4>
-          <section className="post-details user-display">
-            <ProfileCircle />
-            <span>Software Development, Cohort 10</span>
-            <div className="edit-icon">
-              <p>...</p>
-            </div>
-          </section>
+          <div class="teacher-bar">
+            <h4>Teachers</h4>
+            <section className="post-details ">
+              <ProfileCircle />
+
+              <div class="teacher-info">
+                <span>Software Development, Cohort 10</span>
+                <p>Software Development</p>
+              </div>
+
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
+            {/* teacher two */}
+            <section className="post-details user-display">
+              <ProfileCircle />
+
+              <div class="teacher-info">
+                <span>Software Development, Cohort 10</span>
+                <p>Software Development</p>
+              </div>
+
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
+          </div>
         </Card>
+
+        {/* right side excercise bar */}
         <Card>
           <h4>My Exercise</h4>
           <div className="myexercises">
