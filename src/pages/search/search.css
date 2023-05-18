@@ -60,5 +60,10 @@ h1 {
     font-size: 15px;
     color: #64648c;
     font-weight: 400;
+}
 
+button {
+    position: absolute;
+    left: 1240px;
+    top: 263px
 }
