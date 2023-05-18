@@ -3,6 +3,7 @@ import Card from "../../components/card";
 import TextInput from "../../components/form/textInput";
 import "./style.css";
 import "../../styles/index.css"
+import LockIcon from "../../assets/icons/locIcon";
 
 const hrStyle = {
   backgroundColor: "black",
@@ -45,6 +46,22 @@ const ViewProfile = () => {
               <br/>
                 <h4>Training info</h4>
               <div className="training-info-content info-grid">
+              <p>Role*</p>
+              <div className = "training-info">
+                <textarea rows="1" cols="40" className="textarea-small"></textarea>
+                <div className="lock-icon"><LockIcon /></div>
+              </div>
+                
+                <p>Specialism*</p>
+                <textarea rows="" cols="40" className="textarea-small"></textarea>
+
+                <p>Cohort*</p>
+                <textarea rows="" cols="40" className="textarea-small"></textarea>
+                <p>Start Date*</p>
+                <textarea rows="" cols="40" className="textarea-small"></textarea>
+
+                <p>End Date*</p>
+                <textarea rows="" cols="40" className="textarea-small"></textarea>
               </div>
             </div>
 
