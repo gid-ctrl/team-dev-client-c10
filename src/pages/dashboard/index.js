@@ -26,6 +26,14 @@ const Dashboard = ({ name, userInitials }) => {
     });
   }, []);
 
+  useEffect(() => {
+	const fetchData = async () => {
+		const { userId } = jwt_decode(token)
+		const res = await get(`users/${userId}`)
+		setCurrentUser(res.data.user)
+	}
+	fetchData()
+  }, [token, setCurrentUser]);    
 
   const onChange = (e) => {
     const searchVal = e.target.value;
@@ -52,15 +60,6 @@ const Dashboard = ({ name, userInitials }) => {
         .toLowerCase()
         .includes(searchVal.toLowerCase())
   );
-
-  useEffect(() => {
-	const fetchData = async () => {
-		const { userId } = jwt_decode(token)
-		const res = await get(`users/${userId}`)
-		setCurrentUser(res.data.user)
-	}
-	fetchData()
-  }, []);    
   
 	return (
 		<>
