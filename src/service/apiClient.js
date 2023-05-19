@@ -59,6 +59,5 @@ export {
     createProfile,
     get,
     patch,
-    post,
-    get
+    post
 }
