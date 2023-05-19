@@ -5,17 +5,27 @@ import "./style.css";
 import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
 
-const hrStyle = {
-  backgroundColor: "#e6ebf5",
-  height: 1,
-};
-
 const ViewProfile = () => {
   const navigate = useNavigate();
+  const [userId, setUserId] = useState();
+  const { token } = useAuth();
 
   const handleClick = () => {
     navigate("/profile/1/edit");
   };
+
+  // get the user's profile info
+
+  // 1. make a request to the server, using the id of the profile of the
+  //    page which is being viewed
+  // 2. store this user's information to the state
+  // 3. display the information on the page
+
+  useEffect(() => {
+    const { userId } = jwt_decode(token);
+    setUserId(userId);
+  }, [token]);
+
   return (
     <>
       <main>
@@ -34,7 +44,7 @@ const ViewProfile = () => {
 
           <div className="main-info-grid">
             <div className="basic-info">
-              <hr style={hrStyle} />
+              <hr class="hr-line" />
               <br />
               <div className="basic-info-content info-grid">
                 <h4 className="padding-title">Basic info</h4>
@@ -81,7 +91,7 @@ const ViewProfile = () => {
             </div>
 
             <div className="training-info">
-              <hr style={hrStyle} />
+              <hr class="hr-line" />
               <br />
               <h4 className="padding-title">Training info</h4>
               <div className="training-info-content info-grid">
@@ -158,7 +168,7 @@ const ViewProfile = () => {
             </div>
 
             <div className="contact-info">
-              <hr style={hrStyle} />
+              <hr class="hr-line" />
               <div className="contact-info-content info-grid">
                 <h4 className="padding-title">Contact info</h4>
                 <div className="padding-top"></div>
@@ -215,7 +225,7 @@ const ViewProfile = () => {
 
             <div className="bio">
               <div className="bio-content">
-                <hr style={hrStyle} />
+                <hr class="hr-line" />
                 <h4>Bio</h4>
                 <div className="padding-top"></div>
                 <small>Bio</small>
@@ -225,7 +235,6 @@ const ViewProfile = () => {
                 ></textarea>
                 <small>0/300</small>
               </div>
-
               <div class="button-container">
                 <button
                   type="button"

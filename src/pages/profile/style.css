@@ -1,13 +1,18 @@
-/* :root { */
-/*     --color-blue: #000046; */
-/*     --color-blue1: #64648c; */
-/*     --color-blue2: #96a0be; */
-/*     --color-blue5: #e6ebf5; */
-/*     --color-blue7: #f5faff; */
-/*     --color-green: #64dc78; */
-/*     --color-offwhite: #f0f5fa; */
-/*     --color-lightgrey: #f5f5f5; */
-/* } */
+:root { 
+    --color-blue: #000046;
+    --color-blue1: #64648c; 
+    --color-blue2: #96a0be; 
+    --color-blue5: #e6ebf5; 
+    --color-blue7: #f5faff; 
+    --color-green: #64dc78; 
+    --color-offwhite: #f0f5fa; 
+    --color-lightgrey: #f5f5f5; 
+}
+
+.hr-line {
+  background-color: "#e6ebf5";
+  height: 1;
+}
 
 .profile-container {
   display: grid;

@@ -50,12 +50,6 @@ const App = () => {
               path="MyCohort"
               element={
                 <ProtectedRoute>
-                  {/* <Card children="child"/> */}
-                  {/* <Button text="hello"/> */}
-                  {/* <Comment name="jimbo" content="hello" /> */}
-                  {/* <CredentialsCard/> */}
-                  {/* <SocialLinks/> */}
-                  {/* <Header/> */}
                   <MyCohort />
                 </ProtectedRoute>
               }

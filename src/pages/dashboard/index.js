@@ -12,11 +12,13 @@ import useAuth from "../../hooks/useAuth";
 
 import "./style.css";
 
-const Dashboard = ({ name, userInitials }) => {
+const Dashboard = () => {
 	const [searchVal, setSearchVal] = useState('');
 	const [triggerUpdate, setTriggerUpdate] = useState(false)
 	const [users, setUsers] = useState([]);
-	const [currentUser, setCurrentUser] = useState()
+	const [currentUser, setCurrentUser] = useState({})
+	const [userInitials, setUserInitials] = useState("")
+	const [userName, setUserName] = useState("")
 	const [showResults, setShowResults] = useState(false);
 	const { token } = useAuth()
 
@@ -30,10 +32,13 @@ const Dashboard = ({ name, userInitials }) => {
 	const fetchData = async () => {
 		const { userId } = jwt_decode(token)
 		const res = await get(`users/${userId}`)
-		setCurrentUser(res.data.user)
+		const user = res.data.user
+		setCurrentUser(user)
+		setUserName(`${user.firstName} ${user.lastName?.[0]}`)
+		setUserInitials(`${user.firstName?.[0]}${user.lastName?.[0]}`)
 	}
 	fetchData()
-  }, [token, setCurrentUser]);    
+  }, [token, setCurrentUser]);
 
   const onChange = (e) => {
     const searchVal = e.target.value;
@@ -46,7 +51,7 @@ const Dashboard = ({ name, userInitials }) => {
 	// Create a function to run on user interaction
 	const showModal = () => {
 		// Use setModal to set the header of the modal and the component the modal should render
-		setModal("Create a post", <CreatePostModal triggerUpdate = {triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />); // CreatePostModal is just a standard React component, nothing special
+		setModal("Create a post", <CreatePostModal triggerUpdate = {triggerUpdate} setTriggerUpdate = {setTriggerUpdate} userName = {userName} userInitials = {userInitials} />); // CreatePostModal is just a standard React component, nothing special
 
   // Create a function to run on user interaction
  
@@ -67,7 +72,7 @@ const Dashboard = ({ name, userInitials }) => {
 				<Card>
 					<div className="create-post-input">
 						<div className="profile-icon">
-							<p>AJ</p>
+							<p>{userInitials}</p>
 						</div>
 						<Button text="What's on your mind?" onClick={showModal} />
 					</div>
