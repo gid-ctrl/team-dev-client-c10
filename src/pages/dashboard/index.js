@@ -77,8 +77,6 @@ const Dashboard = () => {
   }, [])
 
 
-
-
   // Use the useModal hook to get the openModal and setModal functions
   const { openModal, setModal } = useModal();
 	// Create a function to run on user interaction
