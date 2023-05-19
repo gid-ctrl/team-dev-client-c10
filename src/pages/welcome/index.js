@@ -17,11 +17,13 @@ const Welcome = () => {
 
 	const onChange = (event) => {
 		const { name, value } = event.target;
+		console.log('name, value', name, value)
 
 		setProfile({
 			...profile,
 			[name]: value,
 		});
+		console.log('profile', profile)
 	};
 
 	const onComplete = () => {

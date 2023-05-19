@@ -14,6 +14,9 @@ const Stepper = ({ header, children, onComplete }) => {
     }
 
     const onNextClick = () => {
+        if (currentStep === 0) {
+            console.log('first page done')
+        }
         if (currentStep === children.length-1) {
             onComplete()
             return
