@@ -1,4 +1,4 @@
-import { Route, useNavigate } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Card from "../../components/card";
 import TextInput from "../../components/form/textInput";
 import "./style.css";
@@ -6,16 +6,11 @@ import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
 
 const hrStyle = {
-  backgroundColor: "#e6ebf5",
+  backgroundColor: "e6ebf5",
   height: 1,
 };
 
-const ViewProfile = () => {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate("/profile/1/edit");
-  };
+const EditProfile = () => {
   return (
     <>
       <main>
@@ -226,11 +221,7 @@ const ViewProfile = () => {
               </div>
 
               <div class="button-container">
-                <button
-                  type="button"
-                  class="button offwhite"
-                  onClick={handleClick}
-                >
+                <button type="button" class="button offwhite">
                   Edit
                 </button>
               </div>
@@ -242,4 +233,4 @@ const ViewProfile = () => {
   );
 };
 
-export default ViewProfile;
+export default EditProfile;
