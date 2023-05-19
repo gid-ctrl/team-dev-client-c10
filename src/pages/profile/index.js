@@ -17,13 +17,13 @@ const hrStyle = {
 };
 
 const ViewProfile = () => {
-<<<<<<< HEAD
+
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate("/profile/1/edit");
   };
-=======
+
   const [ userId, setUserId ] = useState()
 
 	const { token } = useAuth();
@@ -39,7 +39,6 @@ const ViewProfile = () => {
   // getUserInfo()
 
 
->>>>>>> a48846de3cea947e68359d4c4774710d95d32b96
   return (
     <>
       <main>
@@ -238,15 +237,11 @@ const ViewProfile = () => {
               </div>
 
               <div class="button-container">
-<<<<<<< HEAD
                 <button
                   type="button"
                   class="button offwhite"
                   onClick={handleClick}
                 >
-=======
-                <button onClick={() => console.log(userId)} type="button" class="button offwhite">
->>>>>>> a48846de3cea947e68359d4c4774710d95d32b96
                   Edit
                 </button>
               </div>
