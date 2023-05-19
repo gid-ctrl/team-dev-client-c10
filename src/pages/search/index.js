@@ -64,10 +64,10 @@ function SearchPage () {
     }, [])
     
     const handleClickOutside = (e) => {
-        if (!ref.current.contains(e.target)) {
-            setShowMore(-1)
+        if (ref.current !== null && !ref.current.contains(e.target)) {
+                setShowMore(-1)
+            }
         }
-    }
 
     return (
         <>
