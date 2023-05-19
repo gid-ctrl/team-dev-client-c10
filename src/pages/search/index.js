@@ -5,6 +5,7 @@ import "./search.css";
 import BackButton from "../../components/backbutton"
 import { getUsers } from "../../service/apiClient"
 import { Link } from "react-router-dom";
+import CrossBlackIcon from "../../assets/icons/crossBlackIcon";
 
 function SearchPage () {
     // create a state hook that will store the fetched data.
@@ -87,8 +88,9 @@ function SearchPage () {
                     icon={<SearchIcon />}/>
 
                     <button className="button">
-                        X
+                        <CrossBlackIcon/>
                     </button>
+
                     
                     </form>) : (
                         <form onSubmit={onSubmit}>
@@ -134,9 +136,9 @@ function SearchPage () {
                                 <button id="search-more" onClick={clickShowMore} onFocus={focusShowMore} onBlur={blurShowMore}>...</button>
                                 {showMore && <div className="showmore"><Link to='/' className="profiles">Profile</Link></div>}
                                 {/* Consider moving this piece of code outside of the list */}
+
+                        
                                     
-
-
                             </li>
                             </>
             )
