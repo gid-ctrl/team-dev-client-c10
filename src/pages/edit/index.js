@@ -5,11 +5,6 @@ import "./style.css";
 import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
 
-const hrStyle = {
-  backgroundColor: "e6ebf5",
-  height: 1,
-};
-
 const EditProfile = () => {
   return (
     <>
@@ -28,7 +23,7 @@ const EditProfile = () => {
 
           <div className="main-info-grid">
             <div className="basic-info">
-              <hr style={hrStyle} />
+           <hr class="hr-line" />
               <br />
               <div className="basic-info-content info-grid">
                 <h4 className="padding-title">Basic info</h4>
@@ -75,7 +70,7 @@ const EditProfile = () => {
             </div>
 
             <div className="training-info">
-              <hr style={hrStyle} />
+           <hr class="hr-line" />
               <br />
               <h4 className="padding-title">Training info</h4>
               <div className="training-info-content info-grid">
@@ -152,7 +147,7 @@ const EditProfile = () => {
             </div>
 
             <div className="contact-info">
-              <hr style={hrStyle} />
+           <hr class="hr-line" />
               <div className="contact-info-content info-grid">
                 <h4 className="padding-title">Contact info</h4>
                 <div className="padding-top"></div>
@@ -209,7 +204,7 @@ const EditProfile = () => {
 
             <div className="bio">
               <div className="bio-content">
-                <hr style={hrStyle} />
+             <hr class="hr-line" />
                 <h4>Bio</h4>
                 <div className="padding-top"></div>
                 <small>Bio</small>
