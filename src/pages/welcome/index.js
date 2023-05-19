@@ -8,6 +8,8 @@ import "./style.css";
 const Welcome = () => {
 	const { onCreateProfile } = useAuth();
 
+	const [validForm, setValidForm] = useState(false)
+
 	const [profile, setProfile] = useState({
 		firstName: "",
 		lastName: "",
@@ -17,13 +19,10 @@ const Welcome = () => {
 
 	const onChange = (event) => {
 		const { name, value } = event.target;
-		console.log('name, value', name, value)
-
 		setProfile({
 			...profile,
 			[name]: value,
 		});
-		console.log('profile', profile)
 	};
 
 	const onComplete = () => {

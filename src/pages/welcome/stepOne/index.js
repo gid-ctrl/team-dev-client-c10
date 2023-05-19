@@ -2,31 +2,44 @@ import Form from "../../../components/form";
 import TextInput from "../../../components/form/textInput";
 import { useState } from "react";
 
-const StepOne = ({ data, setData }) => {
-  const [requiredInput, setRequiredInput] = useState();
+const StepOne = ({ data, setData, setValidForm }) => {
+  const [requiredFirstName, setRequiredFirstName] = useState(false);
+  const [requiredLastName, setRequiredLastName] = useState(false);
 
-  const onChange = (e) => {
+  console.log("reqFirst 1", requiredFirstName);
+  console.log("reqLast 1", requiredLastName);
 
-    console.log("e.target", e.target);
-    console.log("name", e.target.name);
-    console.log("value", e.target.value);
-
+  //function valid first name
+  // return boolean if valid
+  const checkValidFirstName = (e) => {
     const { name, value } = e.target;
-
-    if (name === "firstName") {
-      if (value === "") {
-        setRequiredInput("First name is required");
-      }
-    } else if (name === "lastName") {
-      if (value === "") {
-        setRequiredInput("Last name is required");
-      }
-    } else {
-      setRequiredInput("");
+    if (name === "firstName" && value.length !== 0) {
+      setRequiredFirstName(true);
     }
-    setData({ ...FormData, [name]: value });
   };
 
+  //function val last name
+  // return boolean if valid
+  const checkValidLastName = (e) => {
+    const { name, value } = e.target;
+    if (name === "lastName" && value.length !== 0) {
+      setRequiredLastName(true);
+    }
+  };
+
+  // has to be first && last -valid
+  // if yes then setFormvalid to true
+  const checkValidBothNames = () => {
+    checkValidFirstName();
+    checkValidLastName();
+    if (requiredFirstName && requiredLastName) {
+      setValidForm(true);
+    }
+  };
+
+  console.log("data", data);
+  console.log("reqFirst 2", requiredFirstName);
+  console.log("reqLast 2", requiredLastName);
   return (
     <>
       <div className="welcome-formheader">
@@ -35,21 +48,21 @@ const StepOne = ({ data, setData }) => {
       <Form className="welcome-form">
         <div className="welcome-form-inputs">
           <TextInput
-            onChange={onChange}
+            onChange={setData}
             value={data.firstName}
             name="firstName"
             label={"First name *"}
-            // required={required}
+            required
           />
-          <span className="error-message">{requiredInput}</span>
+          {/* <span className="error-message">{requiredInput}</span> */}
           <TextInput
-            onChange={onChange}
+            onChange={setData}
             value={data.lastName}
             name="lastName"
             label={"Last name *"}
-            // required={required}
+            required
           />
-          <span className="error-message">{requiredInput}</span>
+          {/* <span className="error-message">{requiredInput}</span> */}
           <TextInput
             onChange={setData}
             value={data.githubUsername}
