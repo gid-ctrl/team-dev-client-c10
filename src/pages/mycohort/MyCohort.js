@@ -1,19 +1,30 @@
 import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
-import { useEffect } from "react";
-// import { get } from "../../service/apiClient";
+import { useState, useEffect } from "react";
+import { get } from "../../service/apiClient";
+
+const initialState = { id: "", courseId: null, users: [] };
 
 export default function MyCohort() {
-  const cohortId = 1;
+  const [cohorts, setCohorts] = useState(initialState);
 
-  const endpoint = `${process.env.REACT_APP_C10}/cohorts/${cohortId}/users`;
-  console.log("endpoint", endpoint);
+  const endpoint = `cohorts/1/users`;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    get(endpoint).then((data) => {
+      console.log("cohortsData", cohorts.data.users[0]);
+      return setCohorts(data);
+    });
+  }, []);
+
+  // console.log("cohorts", cohorts);
+  // console.log("cohortsData", cohorts.data.users[0]);
+  // console.log("cohortData", cohorts.data.users);
 
   return (
     <>
+      {console.log("cohortsData", cohorts.data.users[0])}
       <main>
         <Card>
           <h4>My Cohort</h4>
@@ -60,42 +71,17 @@ export default function MyCohort() {
                 <p>...</p>
               </div>
             </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
           </div>
         </Card>
       </main>
-      {/* right side teacher bar */}
       <aside>
         <Card>
-          <div class="teacher-bar">
+          <div className="teacher-bar">
             <h4>Teachers</h4>
             <section className="post-details ">
               <ProfileCircle />
 
-              <div class="teacher-info">
+              <div className="teacher-info">
                 <span>Software Development, Cohort 10</span>
                 <p>Software Development</p>
               </div>
@@ -104,11 +90,10 @@ export default function MyCohort() {
                 <p>...</p>
               </div>
             </section>
-            {/* teacher two */}
             <section className="post-details user-display">
               <ProfileCircle />
 
-              <div class="teacher-info">
+              <div className="teacher-info">
                 <span>Software Development, Cohort 10</span>
                 <p>Software Development</p>
               </div>
@@ -119,8 +104,6 @@ export default function MyCohort() {
             </section>
           </div>
         </Card>
-
-        {/* right side excercise bar */}
         <Card>
           <h4>My Exercise</h4>
           <div className="myexercises">
