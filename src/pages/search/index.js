@@ -12,7 +12,7 @@ function SearchPage () {
     const [formData, setFormData] = useState('')
     const [users, setUsers] = useState([])
     const [results, setResults] = useState([])
-    const [showMore, setShowMore] = useState(false)
+    const [showMore, setShowMore] = useState(-1)
     
 
     useEffect(() => {
@@ -57,16 +57,20 @@ function SearchPage () {
     
     }
 
-    const clickShowMore = () => {
-        setShowMore(!showMore)
+    
+    const clickShowMore = (index) => {
+        
+        if (showMore === index) {
+            setShowMore(-1)
+        } else {
+            setShowMore(index)
+        }
     }
 
-    const focusShowMore = () => {
-        setShowMore(true)
-    }
-
-    const blurShowMore = () => {
-        setShowMore(false)
+    const blurShowMore = (event) => {
+        console.log(event)
+        event.preventDefault()
+        setShowMore(-1)
     }
     
 
@@ -112,9 +116,10 @@ function SearchPage () {
                 <p>People</p>
                     <ul>
                         {results.map((obj, index) => {
+                           
                         return (
                             <>
-                            <li key={index}>
+                            <li key={index} >
                                 <div className="profile-icon search-picture">
                                     <p>{obj.firstName[0]}{obj.lastName[0]}</p>
                                 </div>
@@ -132,13 +137,14 @@ function SearchPage () {
 
 
 
-                                {/* Consider moving this piece of code outside of the list */}
-                                <button id="search-more" onClick={clickShowMore} onFocus={focusShowMore} onBlur={blurShowMore}>...</button>
-                                {showMore && <div className="showmore"><Link to='/' className="profiles">Profile</Link></div>}
+                                    
+
+
                                 {/* Consider moving this piece of code outside of the list */}
 
-                        
-                                    
+                                <button id="search-more" onClick={() => clickShowMore(index)} onBlur={blurShowMore}>...</button>
+                                {showMore === index && (<div className="showmore" ><Link to='/' className="profiles">Profile</Link></div>)}
+                                {/* Consider moving this piece of code outside of the list */}
                             </li>
                             </>
             )
