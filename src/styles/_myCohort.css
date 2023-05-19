@@ -1,37 +1,57 @@
-.soft-ware-dev {
-    display: grid;
+.soft-ware-dev{
+    display:grid;
     grid-template-columns: 73px 1fr;
     border-top: 1px solid var(--color-blue5);
     border-bottom: 1px solid var(--color-blue5);
-    padding: 10px 0;
+    padding: 10px 0; 
     margin: 10px 0;
-    align-items: center;
+
 }
 
-.soft-ware-dev span {
+.soft-ware-dev span{
     font-weight: bolder;
 }
 
-.soft-ware-dev>div>p {
+.soft-ware-dev > div > p{
     font-size: smaller;
     color: grey;
-    padding-top: 5px;
+    padding-top:10px
 }
 
-.user-display {
-    display: grid;
-    padding: 10px 0;
+.user-display{
+    display:grid;
+    padding: 10px 0; 
     margin: 10px 0;
     align-items: center;
 }
 
-.user-display-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 48%));
-    gap: 4%
+.user-display-grid{
+     display:grid;
+     grid-template-columns: repeat(auto-fit, minmax(300px, 48%));
+     gap: 4%
+}
+
+.teacher-bar > h4{
+    padding-bottom: 20px;
+    margin: 10px;
+    border-bottom: 1px solid var(--color-blue5);
+}
+
+
+.teacher-info > p {
+    font-size: smaller;
+    color: grey;
+}
+
+.teacher-info > span {
+    font-weight: bolder;
 }
 
 .myexercises {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 40%));
+}
+
+.myexcercises > button{
+    background-color: grey;
 }

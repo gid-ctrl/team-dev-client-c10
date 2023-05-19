@@ -1,16 +1,38 @@
 import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 // import { get } from "../../service/apiClient";
 
 export default function MyCohort() {
-  const cohortId = 1;
+  const [cohorts, setCohorts] = useState([]);
 
-  const endpoint = `${process.env.REACT_APP_C10}/cohorts/${cohortId}/users`;
-  console.log("endpoint", endpoint);
+  const endpoint = `cohorts/1/users`;
 
-  useEffect(() => {}, []);
+  // async function get(endpoint, auth = true) {
+  //   return await request("GET", endpoint, null, auth);
+  // }
+
+  // useEffect(() => {
+  //   const returnedData = get(endpoint);
+  //   console.log(returnedData);
+  // });
+
+  // useEffect(() => {
+  //   const getCohorts = async () => {
+  //     const receivedCohort = await fetch(endpoint);
+  //     const cohortData = await receivedCohort.json();
+  //     console.log("cohortData", cohortData);
+  //     setCohorts(cohortData);
+  //   };
+  //   getCohorts();
+  // }, []);
+
+  // const newData = cohorts.map((data) => {
+  //   return console.log(data);;
+  // });
+
+  // console.log(newData);
 
   return (
     <>
@@ -65,14 +87,33 @@ export default function MyCohort() {
       </main>
       <aside>
         <Card>
-          <h4>Teachers</h4>
-          <section className="post-details user-display">
-            <ProfileCircle />
-            <span>Software Development, Cohort 10</span>
-            <div className="edit-icon">
-              <p>...</p>
-            </div>
-          </section>
+          <div className="teacher-bar">
+            <h4>Teachers</h4>
+            <section className="post-details ">
+              <ProfileCircle />
+
+              <div className="teacher-info">
+                <span>Software Development, Cohort 10</span>
+                <p>Software Development</p>
+              </div>
+
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
+            <section className="post-details user-display">
+              <ProfileCircle />
+
+              <div className="teacher-info">
+                <span>Software Development, Cohort 10</span>
+                <p>Software Development</p>
+              </div>
+
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
+          </div>
         </Card>
         <Card>
           <h4>My Exercise</h4>
