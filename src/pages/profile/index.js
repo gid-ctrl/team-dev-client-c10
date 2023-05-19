@@ -15,11 +15,12 @@ const ViewProfile = () => {
   const navigate = useNavigate();
   const [ userId, setUserId ] = useState()
 	const { token } = useAuth();
+  const urlEndpoint = process.env.REACT_APP_API_URL
 
   const handleClick = () => {
     navigate("/profile/1/edit");
   };
-
+ 
   // get the user's profile info
 
     // 1. make a request to the server, using the id of the profile of the
@@ -29,9 +30,16 @@ const ViewProfile = () => {
     
 
   useEffect(() => {
-      const { userId } = jwt_decode(token)
+    async function getUserInfo() {
+      const { userId } = await jwt_decode(token)
       setUserId(userId)
+      const userInfo = await get(`users/${userId}`)
+      console.log(userInfo)
+    }
+
+    getUserInfo()
   }, [token]);
+
 
   return (
     <>
