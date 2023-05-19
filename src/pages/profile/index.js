@@ -17,6 +17,10 @@ const hrStyle = {
 };
 
 const ViewProfile = () => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 636205cb9a9efda1de33ef90cf2bfb835d0e6e4f
   const navigate = useNavigate();
   const [ userId, setUserId ] = useState()
 	const { token } = useAuth();
@@ -24,6 +28,18 @@ const ViewProfile = () => {
   const handleClick = () => {
     navigate("/profile/1/edit");
   };
+<<<<<<< HEAD
+=======
+
+  const [ userId, setUserId ] = useState()
+
+	const { token } = useAuth();
+
+  useEffect(() => {
+      const { userId } = jwt_decode(token)
+      setUserId(userId)
+  }, [token]);
+>>>>>>> 636205cb9a9efda1de33ef90cf2bfb835d0e6e4f
 
   const getUserInfo = async (userId) => {
     get()
