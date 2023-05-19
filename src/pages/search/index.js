@@ -113,7 +113,6 @@ function SearchPage () {
                         {results.map((obj, index) => {
                            
                         return (
-                            <>
                             <li key={index} >
                                 <div className="profile-icon search-picture">
                                     <p>{obj.firstName[0]}{obj.lastName[0]}</p>
@@ -133,7 +132,6 @@ function SearchPage () {
                                 <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
                                 {showMore === index && (<div className="showmore" ref={ref}><Link to='/' className="profiles">Profile</Link></div>)}
                             </li>
-                            </>
             )
             
         })}                            
