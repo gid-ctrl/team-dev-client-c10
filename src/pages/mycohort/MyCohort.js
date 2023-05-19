@@ -2,37 +2,26 @@ import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
 import { useState, useEffect } from "react";
-// import { get } from "../../service/apiClient";
+import { get } from "../../service/apiClient";
+
+const initialState = { id: "", courseId: null, users: [] };
 
 export default function MyCohort() {
-  const [cohorts, setCohorts] = useState([]);
+  const [cohorts, setCohorts] = useState(initialState);
 
   const endpoint = `cohorts/1/users`;
 
-  // async function get(endpoint, auth = true) {
-  //   return await request("GET", endpoint, null, auth);
-  // }
+  useEffect(() => {
+    get(endpoint).then((data) => {
+      return setCohorts(data);
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   const returnedData = get(endpoint);
-  //   console.log(returnedData);
-  // });
+  console.log("cohortsData", cohorts.data);
 
-  // useEffect(() => {
-  //   const getCohorts = async () => {
-  //     const receivedCohort = await fetch(endpoint);
-  //     const cohortData = await receivedCohort.json();
-  //     console.log("cohortData", cohortData);
-  //     setCohorts(cohortData);
-  //   };
-  //   getCohorts();
-  // }, []);
-
-  // const newData = cohorts.map((data) => {
-  //   return console.log(data);;
-  // });
-
-  // console.log(newData);
+  // console.log("cohorts", cohorts);
+  // console.log("cohortsData", cohorts.data.users[0]);
+  // console.log("cohortData", cohorts.data.users);
 
   return (
     <>
