@@ -60,5 +60,4 @@ export {
     get,
     patch,
     post,
-    get
 }
