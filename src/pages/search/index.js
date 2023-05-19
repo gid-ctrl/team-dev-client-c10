@@ -1,5 +1,5 @@
 import TextInput from "../../components/form/textInput";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import SearchIcon from "../../assets/icons/searchIcon";
 import "./search.css";
 import BackButton from "../../components/backbutton"
@@ -12,7 +12,7 @@ function SearchPage () {
     const [users, setUsers] = useState([])
     const [results, setResults] = useState([])
     const [showMore, setShowMore] = useState(-1)
-    
+    const ref = useRef(null)
 
     useEffect(() => {
         getUsers().then(setUsers)
@@ -22,13 +22,10 @@ function SearchPage () {
     useEffect(() => {
         getUsers().then(setResults)
     }, [])
-    
-
-    
+       
     // create the onChange event listener that will log the text being entered in the field.
     const onChange = (event) => {
-        
-        
+           
         setFormData(event.target.value)
         
         const filtered = users.map(object => {
@@ -50,15 +47,10 @@ function SearchPage () {
         getUsers().then(setUsers)
         getUsers().then(setResults)
         setFormData('')
-    
-
-
-    
     }
 
     
     const clickShowMore = (index) => {
-        
         if (showMore === index) {
             setShowMore(-1)
         } else {
@@ -66,12 +58,15 @@ function SearchPage () {
         }
     }
 
-    const blurShowMore = (event) => {
-        console.log(event)
-        event.preventDefault()
-        setShowMore(-1)
-    }
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside, true)
+    }, [])
     
+    const handleClickOutside = (e) => {
+        if (!ref.current.contains(e.target)) {
+            setShowMore(-1)
+        }
+    }
 
     return (
         <>
@@ -133,16 +128,8 @@ function SearchPage () {
                                 <Link to='/' className="profiles">Profile</Link>
                                 {/* Requires link to profile page */}
 
-
-
-                                    
-
-
-                                {/* Consider moving this piece of code outside of the list */}
-
-                                <button id="search-more" onClick={() => clickShowMore(index)} onBlur={blurShowMore}>...</button>
-                                {showMore === index && (<div className="showmore" ><Link to='/' className="profiles">Profile</Link></div>)}
-                                {/* Consider moving this piece of code outside of the list */}
+                                <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
+                                {showMore === index && (<div className="showmore" ref={ref}><Link to='/' className="profiles">Profile</Link></div>)}
                             </li>
                             </>
             )
