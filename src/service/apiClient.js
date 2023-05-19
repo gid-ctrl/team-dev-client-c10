@@ -57,6 +57,7 @@ async function request(method, endpoint, data, auth = true) {
 }
 
 export { login, getPosts, register, createProfile, get, patch, post };
+
 export {
     login,
     getPosts,

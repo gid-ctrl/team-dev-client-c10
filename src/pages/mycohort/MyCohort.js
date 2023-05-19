@@ -2,6 +2,26 @@ import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
 import { useState, useEffect } from "react";
+import { get } from "../../service/apiClient";
+
+const initialState = { id: "", courseId: null, users: [] };
+
+export default function MyCohort() {
+  const [cohorts, setCohorts] = useState(initialState);
+
+  const endpoint = `cohorts/1/users`;
+
+  useEffect(() => {
+    get(endpoint).then((data) => {
+      return setCohorts(data);
+    });
+  }, []);
+
+  console.log("cohortsData", cohorts.data);
+
+  // console.log("cohorts", cohorts);
+  // console.log("cohortsData", cohorts.data.users[0]);
+  // console.log("cohortData", cohorts.data.users);
 // import { get } from "../../service/apiClient";
 
 export default function MyCohort() {
@@ -117,6 +137,7 @@ export default function MyCohort() {
             <h4>Teachers</h4>
             <section className="post-details ">
               <ProfileCircle />
+
 
               <div className="teacher-info">
               <div class="teacher-info">
