@@ -17,29 +17,24 @@ const hrStyle = {
 };
 
 const ViewProfile = () => {
-<<<<<<< HEAD
   const navigate = useNavigate();
+  const [ userId, setUserId ] = useState()
+	const { token } = useAuth();
 
   const handleClick = () => {
     navigate("/profile/1/edit");
   };
-=======
-  const [ userId, setUserId ] = useState()
-
-	const { token } = useAuth();
-
-  useEffect(() => {
-      const { userId } = jwt_decode(token)
-      setUserId(userId)
-  }, [token]);
 
   const getUserInfo = async (userId) => {
     get()
   }
   // getUserInfo()
 
+  useEffect(() => {
+      const { userId } = jwt_decode(token)
+      setUserId(userId)
+  }, [token]);
 
->>>>>>> a48846de3cea947e68359d4c4774710d95d32b96
   return (
     <>
       <main>
@@ -236,17 +231,12 @@ const ViewProfile = () => {
                 ></textarea>
                 <small>0/300</small>
               </div>
-
               <div class="button-container">
-<<<<<<< HEAD
                 <button
                   type="button"
                   class="button offwhite"
                   onClick={handleClick}
                 >
-=======
-                <button onClick={() => console.log(userId)} type="button" class="button offwhite">
->>>>>>> a48846de3cea947e68359d4c4774710d95d32b96
                   Edit
                 </button>
               </div>
