@@ -22,6 +22,37 @@ export default function MyCohort() {
   // console.log("cohorts", cohorts);
   // console.log("cohortsData", cohorts.data.users[0]);
   // console.log("cohortData", cohorts.data.users);
+// import { get } from "../../service/apiClient";
+
+export default function MyCohort() {
+  const [cohorts, setCohorts] = useState([]);
+
+  const endpoint = `cohorts/1/users`;
+
+  // async function get(endpoint, auth = true) {
+  //   return await request("GET", endpoint, null, auth);
+  // }
+
+  // useEffect(() => {
+  //   const returnedData = get(endpoint);
+  //   console.log(returnedData);
+  // });
+
+  // useEffect(() => {
+  //   const getCohorts = async () => {
+  //     const receivedCohort = await fetch(endpoint);
+  //     const cohortData = await receivedCohort.json();
+  //     console.log("cohortData", cohortData);
+  //     setCohorts(cohortData);
+  //   };
+  //   getCohorts();
+  // }, []);
+
+  // const newData = cohorts.map((data) => {
+  //   return console.log(data);;
+  // });
+
+  // console.log(newData);
 
   return (
     <>
