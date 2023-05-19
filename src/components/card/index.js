@@ -1,8 +1,8 @@
 import './style.css'
 
-const Card = ({ children, boxShadow = false, id, onFocus }) => {
+const Card = ({ children, boxShadow = false, id}) => {
     return (
-        <div onFocus={onFocus} className={`card ${boxShadow && 'card-shadow'}`}  id={id}>
+        <div className={`card ${boxShadow && 'card-shadow'}`}  id={id}>
             {children}
         </div>
     )
