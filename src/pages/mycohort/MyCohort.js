@@ -13,49 +13,18 @@ export default function MyCohort() {
 
   useEffect(() => {
     get(endpoint).then((data) => {
+      console.log("cohortsData", cohorts.data.users[0]);
       return setCohorts(data);
     });
   }, []);
 
-  console.log("cohortsData", cohorts.data);
-
   // console.log("cohorts", cohorts);
   // console.log("cohortsData", cohorts.data.users[0]);
   // console.log("cohortData", cohorts.data.users);
-// import { get } from "../../service/apiClient";
-
-export default function MyCohort() {
-  const [cohorts, setCohorts] = useState([]);
-
-  const endpoint = `cohorts/1/users`;
-
-  // async function get(endpoint, auth = true) {
-  //   return await request("GET", endpoint, null, auth);
-  // }
-
-  // useEffect(() => {
-  //   const returnedData = get(endpoint);
-  //   console.log(returnedData);
-  // });
-
-  // useEffect(() => {
-  //   const getCohorts = async () => {
-  //     const receivedCohort = await fetch(endpoint);
-  //     const cohortData = await receivedCohort.json();
-  //     console.log("cohortData", cohortData);
-  //     setCohorts(cohortData);
-  //   };
-  //   getCohorts();
-  // }, []);
-
-  // const newData = cohorts.map((data) => {
-  //   return console.log(data);;
-  // });
-
-  // console.log(newData);
 
   return (
     <>
+      {console.log("cohortsData", cohorts.data.users[0])}
       <main>
         <Card>
           <h4>My Cohort</h4>
@@ -102,45 +71,17 @@ export default function MyCohort() {
                 <p>...</p>
               </div>
             </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
           </div>
         </Card>
       </main>
-      {/* right side teacher bar */}
       <aside>
         <Card>
           <div className="teacher-bar">
-          <div class="teacher-bar">
             <h4>Teachers</h4>
             <section className="post-details ">
               <ProfileCircle />
 
-
               <div className="teacher-info">
-              <div class="teacher-info">
                 <span>Software Development, Cohort 10</span>
                 <p>Software Development</p>
               </div>
@@ -153,11 +94,6 @@ export default function MyCohort() {
               <ProfileCircle />
 
               <div className="teacher-info">
-            {/* teacher two */}
-            <section className="post-details user-display">
-              <ProfileCircle />
-
-              <div class="teacher-info">
                 <span>Software Development, Cohort 10</span>
                 <p>Software Development</p>
               </div>
@@ -168,8 +104,6 @@ export default function MyCohort() {
             </section>
           </div>
         </Card>
-
-        {/* right side excercise bar */}
         <Card>
           <h4>My Exercise</h4>
           <div className="myexercises">
