@@ -87,9 +87,10 @@ const Dashboard = ({ name, userInitials }) => {
               onChange={onChange}
               placeholder='Search for people'
             />
-
             <br />
-
+            </form>
+            </Card>
+            <Card>
             {showResults && (
               <div className="dropdown">
                 {(() => {
@@ -99,17 +100,15 @@ const Dashboard = ({ name, userInitials }) => {
                         <h5>People</h5>
                         <hr className="line" />
                         <br />
-
                         <p>Sorry, no results found.</p>
                         <p>Try changing your search term.</p>
-                        <br/>
-                     
-                          <Link to={'/search'}><Button text={"Edit"} classes="button offwhite" />
+                        <br/>                     
+                          <Link to={'/search'}><Button text={"Edit search"} classes="button offwhite" />
                           </Link>
                         
                       </>
                     );
-                  } else if (filteredUsers.length >= 2) {
+                  } else if (filteredUsers.length >= 10) {
                     return (
                       <>
                         <h5>People</h5>
@@ -180,7 +179,7 @@ const Dashboard = ({ name, userInitials }) => {
                 })()}
               </div>
             )}
-          </form>
+    
         </Card>
         <Card>
           <h4>My Cohort</h4>
