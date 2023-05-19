@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import "../../styles/_buttons.css"
 import "./style.css";
+import ProfileCircle from "../../components/profileCircle"
+// import ProfileCircle from "../profileCircle"
 
 
 const Dashboard = () => {
@@ -60,15 +62,17 @@ const Dashboard = () => {
     setId('')
 
   };
-
-  const handleFormBlur = (e) => {
-    const isClickedInsideForm = e.currentTarget.contains(e.relatedTarget);
-    if (isClickedInsideForm) {
-      return;
+  
+  const handleFormMouseDown = (e) => {
+    if (!e.target.closest('form')) {
+      setIsFormFocused(false);
+      setShowResults(false);
     }
-    setIsFormFocused(false);
-    setShowResults(false);
-  };
+  }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleFormMouseDown);
+  }, [])
 
 
 
@@ -91,6 +95,7 @@ const Dashboard = () => {
         .toLowerCase()
         .includes(searchVal.toLowerCase())
   );
+
   
 	return (
 		<>
@@ -110,8 +115,9 @@ const Dashboard = () => {
         <Card>
           <form 
           onSubmit={(e) => e.preventDefault()} 
-          onBlur={handleFormBlur}
-          onFocus={handleFormFocus}>
+          onMouseDown={handleFormMouseDown}
+          onFocus={handleFormFocus}
+          >
             <TextInput
               icon={<SearchIcon />}
               value={searchVal}
@@ -139,7 +145,7 @@ const Dashboard = () => {
                            
                          </>
                        );
-                     } else if (filteredUsers.length >= 10) {
+                     } else if (filteredUsers.length >= 2) {
                        return (
                          <>
                            <h5>People</h5>
@@ -149,12 +155,8 @@ const Dashboard = () => {
                              <div className="nameSearch" key={user.id}>
                                {user.firstName.length !== 0 && (
                                  <>
-                                   <div className="profile-icon" id="align">
-                  
-                                     {user.firstName?.[0]}
-                                     {user.lastName?.[0]}
-                                   </div>
-                                   <div className="post-user-name">
+                                <ProfileCircle id="search-element" initials= {`${user.firstName?.[0]}${user.lastName?.[0]}`} />
+                                   <div id="post-user-name">
                                      <p>
                                        {user.firstName} {user.lastName}
                                      </p>
@@ -166,6 +168,7 @@ const Dashboard = () => {
                                    <div className="edit-icon">
                                      <p>...</p>
                                    </div>
+                                  
                                  </>
                                )}
                              </div>
@@ -184,10 +187,7 @@ const Dashboard = () => {
                              <div className="nameSearch" key={user.id}>
                                {user.firstName.length !== 0 && (
                                  <>
-                                   <div className="profile-icon" id="align">
-                                     {user.firstName?.[0]}
-                                     {user.lastName?.[0]}
-                                   </div>
+                                 <ProfileCircle id="search-element" initials= {`${user.firstName?.[0]}${user.lastName?.[0]}`} />
                                    <div className="name-tag-role">
                                      <p id="searched-name">
                                        {user.firstName} {user.lastName}
