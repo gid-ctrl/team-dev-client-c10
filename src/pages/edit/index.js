@@ -4,9 +4,10 @@ import TextInput from "../../components/form/textInput";
 import "./style.css";
 import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
+import InputTextCounter from "../../components/InputTextCounter/InputTextCounter";
 
 const hrStyle = {
-  backgroundColor: "e6ebf5",
+  backgroundColor: "#e6ebf5",
   height: 1,
 };
 
@@ -15,14 +16,15 @@ const EditProfile = () => {
     <>
       <main>
         <h2>Profile</h2>
+        <br />
         <Card>
           <div className="profile-container">
             <div className="profile-icon">
               <p>AJ</p>
             </div>
             <div className="profile-summary">
-              <h3>Full name</h3>
-              <p>Title</p>
+              <h3>Alex Walker</h3>
+              <p>Software Developer</p>
             </div>
           </div>
 
@@ -46,7 +48,6 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Alex"
-                disabled
               ></textarea>
               <small className="padding-field-name">Last Name*</small>
               <textarea
@@ -54,7 +55,6 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Walker"
-                disabled
               ></textarea>
               <small className="padding-field-name">Username*</small>
               <textarea
@@ -62,7 +62,6 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Alex Walker"
-                disabled
               ></textarea>
               <small className="padding-field-name">GitHub Username*</small>
               <textarea
@@ -70,7 +69,6 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="alex-walker"
-                disabled
               ></textarea>
             </div>
 
@@ -161,7 +159,6 @@ const EditProfile = () => {
                   cols="40"
                   className="textarea-small"
                   placeholder="alex.walker@boolean.co.uk"
-                  disabled
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Mobile*</small>
@@ -169,7 +166,6 @@ const EditProfile = () => {
                   cols="40"
                   className="textarea-small"
                   placeholder="07890 123456"
-                  disabled
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Password*</small>
@@ -222,7 +218,10 @@ const EditProfile = () => {
 
               <div class="button-container">
                 <button type="button" class="button offwhite">
-                  Edit
+                  Cancel
+                </button>
+                <button type="button" class="button blue">
+                  Save
                 </button>
               </div>
             </div>
