@@ -32,7 +32,6 @@ const Dashboard = () => {
   useEffect(() => {
     get("users").then((response) => {
       setUsers(response.data.users);
-      console.log('test', users);
     });
   }, []);
 
@@ -70,7 +69,6 @@ const Dashboard = () => {
     }
 
   }
-
 
   useEffect(() => {
     document.addEventListener('mousedown', handleFormMouseDown);
@@ -116,7 +114,6 @@ const Dashboard = () => {
         <Card>
           <form 
           onSubmit={(e) => e.preventDefault()} 
-          // onBlur={handleFormBlur}
           onMouseDown={handleFormMouseDown}
           onFocus={handleFormFocus}
           >
