@@ -1,62 +1,19 @@
-import { useState } from "react";
-import Stepper from "../../../components/stepper";
-import useAuth from "../../../hooks/useAuth";
-import StepOne from "../stepOne";
-import StepTwo from "./stepTwo";
-import "./style.css";
+import Form from "../../../components/form";
 
-const Welcome = () => {
-  const { onCreateProfile } = useAuth();
-
-  const [profile, setProfile] = useState({
-    firstName: "",
-    lastName: "",
-    githubUsername: "",
-    bio: "",
-  });
-
-  const onChange = (event) => {
-    const { name, value } = event.target;
-
-    setProfile({
-      ...profile,
-      [name]: value,
-    });
-  };
-
-  const onComplete = () => {
-    onCreateProfile(
-      profile.firstName,
-      profile.lastName,
-      profile.githubUsername,
-      profile.bio
-    );
-  };
-
+const StepFour = ({ data, setData }) => {
   return (
-    <main className="welcome">
-      <div className="welcome-titleblock">
-        <h1 className="h2">Welcome to Cohort Manager</h1>
-        <p className="text-blue1">Create your profile to get started</p>
+    <>
+      <div className="welcome-formheader">
+        <h3>Bio</h3>
       </div>
-
-      <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
-        <StepOne data={profile} setData={onChange} />
-        <StepTwo data={profile} setData={onChange} />
-      </Stepper>
-    </main>
+      <Form className="welcome-form">
+        <div className="welcome-form-inputs">
+          <textarea name="bio" value={data.bio} onChange={setData}></textarea>
+          <p className="text-blue1">* Required</p>
+        </div>
+      </Form>
+    </>
   );
 };
 
-const WelcomeHeader = () => {
-  return (
-    <div className="welcome-cardheader">
-      <h2>Create Profile</h2>
-      <p className="text-blue1">
-        Tell us about yourself to create your profile
-      </p>
-    </div>
-  );
-};
-
-export default Welcome;
+export default StepFour;
