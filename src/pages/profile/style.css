@@ -9,6 +9,11 @@
     --color-lightgrey: #f5f5f5; 
 }
 
+.hr-line {
+  background-color: "#e6ebf5";
+  height: 1;
+}
+
 .profile-container {
   display: grid;
   grid-template-columns: 70px 1fr;

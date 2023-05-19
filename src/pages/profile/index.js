@@ -11,11 +11,6 @@ import { useEffect, useState } from 'react'
 import { get } from '../../service/apiClient'
 
 
-const hrStyle = {
-  backgroundColor: "#e6ebf5",
-  height: 1,
-};
-
 const ViewProfile = () => {
   const navigate = useNavigate();
   const [ userId, setUserId ] = useState()
@@ -47,7 +42,7 @@ const ViewProfile = () => {
 
           <div className="main-info-grid">
             <div className="basic-info">
-              <hr style={hrStyle} />
+              <hr class="hr-line" />
               <br />
               <div className="basic-info-content info-grid">
                 <h4 className="padding-title">Basic info</h4>
@@ -94,7 +89,7 @@ const ViewProfile = () => {
             </div>
 
             <div className="training-info">
-              <hr style={hrStyle} />
+              <hr class="hr-line" />
               <br />
               <h4 className="padding-title">Training info</h4>
               <div className="training-info-content info-grid">
@@ -171,7 +166,7 @@ const ViewProfile = () => {
             </div>
 
             <div className="contact-info">
-              <hr style={hrStyle} />
+              <hr class="hr-line" />
               <div className="contact-info-content info-grid">
                 <h4 className="padding-title">Contact info</h4>
                 <div className="padding-top"></div>
@@ -216,7 +211,7 @@ const ViewProfile = () => {
 
             <div className="bio">
               <div className="bio-content">
-                <hr style={hrStyle} />
+                <hr class="hr-line" />
                 <h4>Bio</h4>
                 <div className="padding-top"></div>
                 <small>Bio</small>
