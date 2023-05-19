@@ -71,17 +71,45 @@ export default function MyCohort() {
                 <p>...</p>
               </div>
             </section>
+
+            <section className="post-details user-display">
+              <ProfileCircle initials="K9" />
+              <p>Joe Bloggs</p>
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
+
+            <section className="post-details user-display">
+              <ProfileCircle initials="K9" />
+              <p>Joe Bloggs</p>
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
+
+            <section className="post-details user-display">
+              <ProfileCircle initials="K9" />
+              <p>Joe Bloggs</p>
+              <div className="edit-icon">
+                <p>...</p>
+              </div>
+            </section>
           </div>
         </Card>
       </main>
+      {/* right side teacher bar */}
       <aside>
         <Card>
           <div className="teacher-bar">
+          <div class="teacher-bar">
             <h4>Teachers</h4>
             <section className="post-details ">
               <ProfileCircle />
 
+
               <div className="teacher-info">
+              <div class="teacher-info">
                 <span>Software Development, Cohort 10</span>
                 <p>Software Development</p>
               </div>
@@ -94,6 +122,11 @@ export default function MyCohort() {
               <ProfileCircle />
 
               <div className="teacher-info">
+            {/* teacher two */}
+            <section className="post-details user-display">
+              <ProfileCircle />
+
+              <div class="teacher-info">
                 <span>Software Development, Cohort 10</span>
                 <p>Software Development</p>
               </div>
@@ -104,6 +137,8 @@ export default function MyCohort() {
             </section>
           </div>
         </Card>
+
+        {/* right side excercise bar */}
         <Card>
           <h4>My Exercise</h4>
           <div className="myexercises">
