@@ -25,11 +25,6 @@ const ViewProfile = () => {
     navigate("/profile/1/edit");
   };
 
-  const getUserInfo = async (userId) => {
-    get()
-  }
-  // getUserInfo()
-
   useEffect(() => {
       const { userId } = jwt_decode(token)
       setUserId(userId)
