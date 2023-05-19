@@ -6,6 +6,7 @@ import BackButton from "../../components/backbutton"
 import { getUsers } from "../../service/apiClient"
 import { Link } from "react-router-dom";
 import CrossBlackIcon from "../../assets/icons/crossBlackIcon";
+import ProfileIcon from "../../assets/icons/profileIcon";
 
 function SearchPage () {
     // create a state hook that will store the fetched data.
@@ -37,8 +38,6 @@ function SearchPage () {
             return object.fullName.includes(event.target.value.toLowerCase())
             
         })
-        console.log(filtered)
-        
         setResults(filtered)
         
     }
@@ -126,11 +125,11 @@ function SearchPage () {
                                     }
                                 
                                 </div>
-                                <Link to='/' className="profiles">Profile</Link>
+                                <Link to={`/profile/${obj.id}`} className="profiles">Profile</Link>
                                 {/* Requires link to profile page */}
 
                                 <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
-                                {showMore === index && (<div className="showmore" ref={ref}><Link to='/' className="profiles">Profile</Link></div>)}
+                                {showMore === index && (<div className="showmore" ref={ref}><Link to={`/profile/${obj.id}`} className="profiles"><ProfileIcon />Profile</Link></div>)}
                             </li>
             )
             
