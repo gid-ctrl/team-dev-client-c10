@@ -20,6 +20,14 @@ const ViewProfile = () => {
     navigate("/profile/1/edit");
   };
 
+  // get the user's profile info
+
+    // 1. make a request to the server, using the id of the profile of the
+    //    page which is being viewed 
+    // 2. store this user's information to the state
+    // 3. display the information on the page
+    
+
   useEffect(() => {
       const { userId } = jwt_decode(token)
       setUserId(userId)
