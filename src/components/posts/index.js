@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import Post from "../post";
 import { getPosts } from "../../service/apiClient";
 
-const Posts = ({triggerUpdate, setTriggerUpdate}) => {
+const Posts = ({triggerUpdate, setTriggerUpdate, currentUserName, currentUserInitials}) => {
     const [posts, setPosts] = useState([])
-   
+       
     useEffect(() => {
         if (triggerUpdate) {
             getPosts().then(setPosts)
@@ -22,9 +22,10 @@ const Posts = ({triggerUpdate, setTriggerUpdate}) => {
                         name={`${post.author.firstName} ${post.author.lastName}`}
                         date={post.createdAt}
                         content={post.content}
-                        comments={post.comments}
                         id={post.id}
                         setTriggerUpdate={setTriggerUpdate}
+                        currentUserName={currentUserName}
+                        currentUserInitials={currentUserInitials}
                     />
             })}
         </>

@@ -48,3 +48,16 @@
 .post-interactions-container p {
     text-align: right;
 }
+
+.post-interactions-button {
+    display: grid;
+    width: min-content;
+    grid-template-columns: repeat(2,auto);
+    grid-gap: 10px;
+}
+
+.post-add-comment {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-gap: 10px;
+}
