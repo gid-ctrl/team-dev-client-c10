@@ -13,13 +13,25 @@ export default function MyCohort() {
 
   const endpoint = `users`;
 
+  function RandomColor() {
+    // get random index value
+    const randomIndex = Math.floor(Math.random() * colors.length);
+
+    // get random item
+    const item = colors[randomIndex];
+
+    return item;
+  }
+  const colors = ["#e76f51", "#f4a261", "#e9c46a", "#2a9d8f"];
+  const result = RandomColor();
+  console.log("random color:", result);
+
   useEffect(() => {
-    get(endpoint)
-    .then(item => {
-        setCohorts(item.data.users)
-    })
-}, []);
-console.log('cohorts: ', cohorts)
+    get(endpoint).then((item) => {
+      setCohorts(item.data.users);
+    });
+  }, []);
+  console.log("cohorts: ", cohorts);
   return (
     <>
       <main>
@@ -28,6 +40,7 @@ console.log('cohorts: ', cohorts)
 
           <div className="soft-ware-dev">
             <ProfileCircle
+              style={{ backgroundColor: result }}
               initials={<SquareBracketsIcon color="white" scale="scale(1.4)" />}
             />
             <div>
@@ -37,12 +50,17 @@ console.log('cohorts: ', cohorts)
           </div>
 
           <div className="user-display-grid">
-            {
-                cohorts.map((item, index) => {
-                    if(item.role === 'STUDENT'){
-                    return <Username key={index} firstName={item.firstName} lastName={item.lastName}/>}
-                })
-            }
+            {cohorts.map((item, index) => {
+              if (item.role === "STUDENT") {
+                return (
+                  <Username
+                    key={index}
+                    firstName={item.firstName}
+                    lastName={item.lastName}
+                  />
+                );
+              }
+            })}
           </div>
         </Card>
       </main>
@@ -50,25 +68,34 @@ console.log('cohorts: ', cohorts)
         <Card>
           <div className="teacher-bar">
             <h4>Teachers</h4>
-            {
-                cohorts.map((item, index) => {
-                    if(item.role === 'TEACHER'){
-                    return <Teacher key={index} bio={item.bio} firstName={item.firstName} lastName={item.lastName}/>}
-                })
-            }
+            {cohorts.map((item, index) => {
+              if (item.role === "TEACHER") {
+                return (
+                  <Teacher
+                    key={index}
+                    bio={item.bio}
+                    firstName={item.firstName}
+                    lastName={item.lastName}
+                  />
+                );
+              }
+            })}
           </div>
         </Card>
         <Card>
-          <h4>My Exercise</h4>
-          <div className="myexercises">
-            <div>Modules:</div>
-            <div>2/7 completed</div>
-            <div>Units:</div>
-            <div>4/10 completed</div>
-            <div>Exercises:</div>
-            <div>34/58 completed</div>
-          </div>
-          <button>See Exercises</button>
+          <section className="exercise-tab">
+            <h3>My Exercise</h3>
+            <div className="myexercises">
+              <p>Modules:</p>
+              <p>2/7 completed</p>
+              <p>Units:</p>
+              <p>4/10 completed</p>
+              <p>Exercises:</p>
+              <p>34/58 completed</p>
+            </div>
+            <br />
+            <button className="excercise-button">See Exercises</button>
+          </section>
         </Card>
       </aside>
     </>
