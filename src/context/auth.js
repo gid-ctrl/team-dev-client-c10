@@ -11,11 +11,12 @@ const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
 	const navigate = useNavigate()
-	const location = useLocation()
+	
 	const [token, setToken] = useState(null)
   const [userId, setUserId] = useState(null)
 
     useEffect(() => {
+
       const storedToken = localStorage.getItem('token')
 
       if (storedToken && !token) {
@@ -26,7 +27,8 @@ const AuthProvider = ({ children }) => {
         const decoded = jwt_decode(token)
         setUserId(decoded.userId)
       }
-    }, [location.pathname, navigate, token])
+    }, [navigate, token])
+
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)

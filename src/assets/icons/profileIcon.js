@@ -1,4 +1,5 @@
 const ProfileIcon = ({ colour = "#64648C", background = "transparent" }) => {
+
   return (
     <svg
       width="41"
@@ -18,6 +19,7 @@ const ProfileIcon = ({ colour = "#64648C", background = "transparent" }) => {
       />
     </svg>
   );
+
 };
 
 export default ProfileIcon;

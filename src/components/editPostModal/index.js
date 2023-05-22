@@ -5,8 +5,10 @@ import Button from '../button'
 import { patch } from '../../service/apiClient'
 
 
+
 // passing current post ID and message content through props
 const EditPostModal = ({ id, content, setTriggerUpdate, name, userInitials}) => {
+
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
     const [text, setText] = useState(content)
@@ -16,7 +18,7 @@ const EditPostModal = ({ id, content, setTriggerUpdate, name, userInitials}) => 
     }
 
     const onSubmit = () => {
-        // sends patch request to update current message with edited message
+   
         patch(`posts/${id}`, {
             'content': text
         }).then(() => {
