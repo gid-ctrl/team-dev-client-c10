@@ -9,7 +9,7 @@ import CrossBlackIcon from "../../assets/icons/crossBlackIcon";
 import ProfileIcon from "../../assets/icons/profileIcon";
 
 function SearchPage () {
-    // create a state hook that will store the fetched data.
+    
     const [formData, setFormData] = useState('')
     const [users, setUsers] = useState([])
     const [results, setResults] = useState([])
@@ -17,15 +17,20 @@ function SearchPage () {
     const ref = useRef(null)
 
     useEffect(() => {
-        getUsers().then(setUsers)
+        getUsers()
+        .then(data => {
+            setUsers(data)
+            setResults(data)
+        })
         
     }, [])
    
     useEffect(() => {
-        getUsers().then(setResults)
+        document.addEventListener("click", handleClickOutside, true)
     }, [])
+   
        
-    // create the onChange event listener that will log the text being entered in the field.
+
     const onChange = (event) => {
            
         setFormData(event.target.value)
@@ -44,8 +49,11 @@ function SearchPage () {
 
     const onSubmit = (event) => {
         event.preventDefault()
-        getUsers().then(setUsers)
-        getUsers().then(setResults)
+        getUsers()
+        .then(data => {
+            setUsers(data)
+            setResults(data)
+        })
         setFormData('')
     }
 
@@ -58,9 +66,7 @@ function SearchPage () {
         }
     }
 
-    useEffect(() => {
-        document.addEventListener("click", handleClickOutside, true)
-    }, [])
+    
     
     const handleClickOutside = (e) => {
         if (ref.current !== null && !ref.current.contains(e.target)) {
