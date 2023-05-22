@@ -77,7 +77,7 @@ const Dashboard = () => {
 						<Button text="What's on your mind?" onClick={showModal} />
 					</div>
 				</Card>
-        <Posts triggerUpdate={triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />
+        <Posts triggerUpdate={triggerUpdate} setTriggerUpdate = {setTriggerUpdate} currentUser={currentUser}/>
       </main>
 
       <aside>
