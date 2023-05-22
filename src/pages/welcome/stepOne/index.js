@@ -6,40 +6,39 @@ const StepOne = ({ data, setData, setValidForm }) => {
   const [requiredFirstName, setRequiredFirstName] = useState(false);
   const [requiredLastName, setRequiredLastName] = useState(false);
 
-  console.log("reqFirst 1", requiredFirstName);
-  console.log("reqLast 1", requiredLastName);
-
-  //function valid first name
-  // return boolean if valid
   const checkValidFirstName = (e) => {
     const { name, value } = e.target;
     if (name === "firstName" && value.length !== 0) {
       setRequiredFirstName(true);
+    } else if (name === "firstName" && value.length === 0) {
+      setRequiredFirstName(false);
     }
   };
 
-  //function val last name
-  // return boolean if valid
   const checkValidLastName = (e) => {
     const { name, value } = e.target;
     if (name === "lastName" && value.length !== 0) {
       setRequiredLastName(true);
+    } else if (name === "lastName" && value.length === 0) {
+      setRequiredLastName(false);
     }
   };
 
-  // has to be first && last -valid
-  // if yes then setFormvalid to true
   const checkValidBothNames = () => {
-    checkValidFirstName();
-    checkValidLastName();
     if (requiredFirstName && requiredLastName) {
       setValidForm(true);
+    } else {
+      setValidForm(false);
     }
   };
 
-  console.log("data", data);
-  console.log("reqFirst 2", requiredFirstName);
-  console.log("reqLast 2", requiredLastName);
+  const handleInput = (e) => {
+    setData(e);
+    checkValidFirstName(e);
+    checkValidLastName(e);
+  };
+  checkValidBothNames();
+
   return (
     <>
       <div className="welcome-formheader">
@@ -48,21 +47,19 @@ const StepOne = ({ data, setData, setValidForm }) => {
       <Form className="welcome-form">
         <div className="welcome-form-inputs">
           <TextInput
-            onChange={setData}
+            onChange={handleInput}
             value={data.firstName}
             name="firstName"
             label={"First name *"}
             required
           />
-          {/* <span className="error-message">{requiredInput}</span> */}
           <TextInput
-            onChange={setData}
+            onChange={handleInput}
             value={data.lastName}
             name="lastName"
             label={"Last name *"}
             required
           />
-          {/* <span className="error-message">{requiredInput}</span> */}
           <TextInput
             onChange={setData}
             value={data.githubUsername}

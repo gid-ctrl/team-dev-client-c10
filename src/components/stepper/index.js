@@ -4,9 +4,8 @@ import Button from "../button";
 import "./style.css";
 import { useState } from "react";
 
-const Stepper = ({ header, children, onComplete }) => {
+const Stepper = ({ header, children, onComplete, validForm, setValidForm }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [validForm, setValidForm] = useState(false);
 
   const onBackClick = () => {
     if (currentStep > 0) {
@@ -16,13 +15,11 @@ const Stepper = ({ header, children, onComplete }) => {
 
   const onNextClick = () => {
     if (currentStep === 0) {
-      console.log("first page done");
     }
     if (currentStep === children.length - 1) {
       onComplete();
       return;
     }
-
     setCurrentStep(currentStep + 1);
   };
 
