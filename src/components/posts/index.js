@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Post from "../post";
 import { getPosts } from "../../service/apiClient";
 
-const Posts = ({triggerUpdate, setTriggerUpdate}) => {
+const Posts = ({triggerUpdate, setTriggerUpdate, currentUser}) => {
     const [posts, setPosts] = useState([])
    
     useEffect(() => {
@@ -25,6 +25,7 @@ const Posts = ({triggerUpdate, setTriggerUpdate}) => {
                         comments={post.comments}
                         id={post.id}
                         setTriggerUpdate={setTriggerUpdate}
+                        currentUserName={`${currentUser.firstName} ${currentUser.lastName}`}
                     />
             })}
         </>
