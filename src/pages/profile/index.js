@@ -13,8 +13,7 @@ import { get } from '../../service/apiClient'
 
 const ViewProfile = () => {
   const navigate = useNavigate();
-  const [ userId, setUserId ] = useState()
-	const { token } = useAuth();
+	const { userId } = useAuth();
   const [user, setUser] = useState({})
   const [userInitials, setUserInitials] = useState(``)
 
@@ -25,14 +24,13 @@ const ViewProfile = () => {
 
   useEffect(() => {
     async function getUserInfo() {
-      const { userId } = await jwt_decode(token)
-      setUserId(userId)
       const userInfo = await get(`users/${userId}`)
       setUser(userInfo.data.user)
       setUserInitials(getInitailsFromUser(userInfo.data.user))
+      console.log(userInfo)
     }
     getUserInfo()
-  }, [token]);
+  }, [userId]);
 
   const userDisplayName = (user) => {
     return `${user.firstName} ${user.lastName}`

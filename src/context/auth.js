@@ -13,15 +13,20 @@ const AuthProvider = ({ children }) => {
 	const navigate = useNavigate()
 	const location = useLocation()
 	const [token, setToken] = useState(null)
+  const [userId, setUserId] = useState(null)
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('token')
+      const storedToken = localStorage.getItem('token')
 
-        if (storedToken && !token) {
-            setToken(storedToken)
-            navigate("/")
-        }
-    }, [location.pathname])
+      if (storedToken && !token) {
+          setToken(storedToken)
+          navigate("/")
+      }
+      if (token) {
+        const decoded = jwt_decode(token)
+        setUserId(decoded.userId)
+      }
+    }, [location.pathname, navigate, token])
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)
@@ -59,6 +64,7 @@ const AuthProvider = ({ children }) => {
 
 	const value = {
 		token,
+    userId,
 		onLogin: handleLogin,
 		onLogout: handleLogout,
         onRegister: handleRegister,
