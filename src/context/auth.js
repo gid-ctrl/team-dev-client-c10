@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
 
         if (storedToken && !token) {
             setToken(storedToken)
+			console.log(storedToken)
             navigate("/")
         }
     }, [location.pathname])
@@ -36,6 +37,19 @@ const AuthProvider = ({ children }) => {
 		navigate("/")
 	};
 
+	const handleFirstLogin = async (email, password) => {
+		const res = await login(email, password)
+
+        if (!res.data.token) {
+            return navigate("/login")
+        }
+
+        localStorage.setItem('token', res.data.token)
+
+		setToken(res.data.token)
+		navigate("/verification")
+	};
+
 	const handleLogout = () => {
         localStorage.removeItem('token')
 		setToken(null)
@@ -44,12 +58,13 @@ const AuthProvider = ({ children }) => {
     const handleRegister = async (email, password) => {
         const res = register(email, password)
 		.then(res=> {
-		console.log(res)
+			
 		if (res.status === "fail"){
 			throw new Error(res.data.error)
 		}
 		setToken(res.data.token)
-        navigate("/verification")
+		navigate("/verification")
+
 		})
 		return res
 		
@@ -67,6 +82,7 @@ const AuthProvider = ({ children }) => {
 	const value = {
 		token,
 		onLogin: handleLogin,
+		onFirstLogin: handleFirstLogin,
 		onLogout: handleLogout,
         onRegister: handleRegister,
         onCreateProfile: handleCreateProfile

@@ -1,62 +1,63 @@
-import { useState } from 'react'
-import Button from '../../components/button'
-import TextInput from '../../components/form/textInput'
-import useAuth from '../../hooks/useAuth'
-import CredentialsCard from '../../components/credentials'
-import './register.css'
-
+import { useState } from 'react';
+import Button from '../../components/button';
+import TextInput from '../../components/form/textInput';
+import useAuth from '../../hooks/useAuth';
+import CredentialsCard from '../../components/credentials';
+import './register.css';
 
 const Register = () => {
-  const { onRegister } = useAuth()
-  const [formData, setFormData] = useState({ email: '', password: '' })
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-  const [registrationError, setRegistrationError] = useState('')
+  const { onRegister, onFirstLogin } = useAuth();
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [registrationError, setRegistrationError] = useState('');
 
   const validateEmail = (email) => {
     const emailRegex =
-      /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/
-    return emailRegex.test(email)
-  }
+      /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/;
+    return emailRegex.test(email);
+  };
 
   const validatePassword = (password) => {
     const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-    return passwordRegex.test(password)
-  }
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+  };
 
   const onChange = (e) => {
-    const { name, value } = e.target
-
-    console.log('printing', name, value)
+    const { name, value } = e.target;
     if (name === 'email') {
       if (value === '') {
-        setEmailError('Email address is required')
+        setEmailError('Email address is required');
       } else if (!validateEmail(value)) {
-        setEmailError('Invalid email address')
+        setEmailError('Invalid email address');
       } else {
-        setEmailError('')
+        setEmailError('');
       }
     } else if (name === 'password') {
       if (value === '') {
-        setPasswordError('Password is required')
+        setPasswordError('Password is required');
       } else if (!validatePassword(value)) {
         setPasswordError(
           'Password must contain at least eight characters, including at least one capital letter, one number and one special character'
-        )
+        );
       } else {
-        setPasswordError('')
+        setPasswordError('');
       }
     }
-    setFormData({ ...formData, [name]: value })
-  }
+    setFormData({ ...formData, [name]: value });
+  };
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    onRegister(formData.email, formData.password).catch((error) => {
-      setRegistrationError('Email address already in use, please log in.')
-    })
-  }
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData.email, formData.password);
+    try {
+      await onRegister(formData.email, formData.password);
+      await onFirstLogin(formData.email, formData.password);
+    } catch (error) {
+      setRegistrationError('Email address already in use, please log in.');
+    }
+  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -98,7 +99,7 @@ const Register = () => {
         </CredentialsCard>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
