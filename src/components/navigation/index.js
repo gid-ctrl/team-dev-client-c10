@@ -35,6 +35,10 @@ const Navigation = () => {
             <p>Cohort</p>
           </NavLink>
         </li>
+
+
+         {/* Please use the link below to reach student search */}
+         {/* <li><NavLink to='/search'><CohortIcon /><p>Team 3 Search</p></NavLink></li> */}
       </ul>
     </nav>
   );
