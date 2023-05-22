@@ -6,21 +6,21 @@ import CreatePostModal from "../../components/createPostModal";
 import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
-import jwt_decode from "jwt-decode"
+import jwt_decode from "jwt-decode";
 import { get } from "../../service/apiClient";
 import useAuth from "../../hooks/useAuth";
 
 import "./style.css";
 
 const Dashboard = () => {
-	const [searchVal, setSearchVal] = useState('');
-	const [triggerUpdate, setTriggerUpdate] = useState(false)
-	const [users, setUsers] = useState([]);
-	const [currentUser, setCurrentUser] = useState({})
-	const [userInitials, setUserInitials] = useState("")
-	const [userName, setUserName] = useState("")
-	const [showResults, setShowResults] = useState(false);
-	const { token } = useAuth()
+  const [searchVal, setSearchVal] = useState("");
+  const [triggerUpdate, setTriggerUpdate] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
+  const [userInitials, setUserInitials] = useState("");
+  const [userName, setUserName] = useState("");
+  const [showResults, setShowResults] = useState(false);
+  const { token } = useAuth();
 
   useEffect(() => {
     get("users").then((response) => {
@@ -29,15 +29,15 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-	const fetchData = async () => {
-		const { userId } = jwt_decode(token)
-		const res = await get(`users/${userId}`)
-		const user = res.data.user
-		setCurrentUser(user)
-		setUserName(`${user.firstName} ${user.lastName?.[0]}`)
-		setUserInitials(`${user.firstName?.[0]}${user.lastName?.[0]}`)
-	}
-	fetchData()
+    const fetchData = async () => {
+      const { userId } = jwt_decode(token);
+      const res = await get(`users/${userId}`);
+      const user = res.data.user;
+      setCurrentUser(user);
+      setUserName(`${user.firstName} ${user.lastName?.[0]}`);
+      setUserInitials(`${user.firstName?.[0]}${user.lastName?.[0]}`);
+    };
+    fetchData();
   }, [token, setCurrentUser]);
 
   const onChange = (e) => {
@@ -48,13 +48,21 @@ const Dashboard = () => {
 
   // Use the useModal hook to get the openModal and setModal functions
   const { openModal, setModal } = useModal();
-	// Create a function to run on user interaction
-	const showModal = () => {
-		// Use setModal to set the header of the modal and the component the modal should render
-		setModal("Create a post", <CreatePostModal triggerUpdate = {triggerUpdate} setTriggerUpdate = {setTriggerUpdate} userName = {userName} userInitials = {userInitials} />); // CreatePostModal is just a standard React component, nothing special
-
   // Create a function to run on user interaction
- 
+  const showModal = () => {
+    // Use setModal to set the header of the modal and the component the modal should render
+    setModal(
+      "Create a post",
+      <CreatePostModal
+        triggerUpdate={triggerUpdate}
+        setTriggerUpdate={setTriggerUpdate}
+        userName={userName}
+        userInitials={userInitials}
+      />
+    ); // CreatePostModal is just a standard React component, nothing special
+
+    // Create a function to run on user interaction
+
     openModal();
   };
   const filteredUsers = users.filter(
@@ -65,19 +73,22 @@ const Dashboard = () => {
         .toLowerCase()
         .includes(searchVal.toLowerCase())
   );
-  
-	return (
-		<>
-			<main>
-				<Card>
-					<div className="create-post-input">
-						<div className="profile-icon">
-							<p>{userInitials}</p>
-						</div>
-						<Button text="What's on your mind?" onClick={showModal} />
-					</div>
-				</Card>
-        <Posts triggerUpdate={triggerUpdate} setTriggerUpdate = {setTriggerUpdate} />
+
+  return (
+    <>
+      <main>
+        <Card>
+          <div className="create-post-input">
+            <div className="profile-icon">
+              <p>{userInitials}</p>
+            </div>
+            <Button text="What's on your mind?" onClick={showModal} />
+          </div>
+        </Card>
+        <Posts
+          triggerUpdate={triggerUpdate}
+          setTriggerUpdate={setTriggerUpdate}
+        />
       </main>
 
       <aside>

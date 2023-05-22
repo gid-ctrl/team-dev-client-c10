@@ -2,33 +2,35 @@ import { useEffect, useState } from "react";
 import Post from "../post";
 import { getPosts } from "../../service/apiClient";
 
-const Posts = ({triggerUpdate, setTriggerUpdate}) => {
-    const [posts, setPosts] = useState([])
-   
-    useEffect(() => {
-        if (triggerUpdate) {
-            getPosts().then(setPosts)
-            setTriggerUpdate(false)
-        } else {
-            getPosts().then(setPosts)
-        }
-    }, [triggerUpdate])
+const Posts = ({ triggerUpdate, setTriggerUpdate }) => {
+  const [posts, setPosts] = useState([]);
 
-    return (
-        <>
-            {posts.map(post => {
-                    return <Post
-                        key={post.id}
-                        name={`${post.author.firstName} ${post.author.lastName}`}
-                        date={post.createdAt}
-                        content={post.content}
-                        comments={post.comments}
-                        id={post.id}
-                        setTriggerUpdate={setTriggerUpdate}
-                    />
-            })}
-        </>
-    )
-}
+  useEffect(() => {
+    if (triggerUpdate) {
+      getPosts().then(setPosts);
+      setTriggerUpdate(false);
+    } else {
+      getPosts().then(setPosts);
+    }
+  }, [triggerUpdate]);
 
-export default Posts
+  return (
+    <>
+      {posts.map((post) => {
+        return (
+          <Post
+            key={post.id}
+            name={`${post.author.firstName} ${post.author.lastName}`}
+            date={post.createdAt}
+            content={post.content}
+            comments={post.comments}
+            id={post.id}
+            setTriggerUpdate={setTriggerUpdate}
+          />
+        );
+      })}
+    </>
+  );
+};
+
+export default Posts;
