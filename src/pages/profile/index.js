@@ -13,17 +13,37 @@ import { get } from '../../service/apiClient'
 
 const ViewProfile = () => {
   const navigate = useNavigate();
-  const [ userId, setUserId ] = useState()
-	const { token } = useAuth();
+	const { userId } = useAuth();
+  const [user, setUser] = useState({})
+  const [userInitials, setUserInitials] = useState(``)
 
   const handleClick = () => {
     navigate("/profile/1/edit");
   };
+ 
 
   useEffect(() => {
-      const { userId } = jwt_decode(token)
-      setUserId(userId)
-  }, [token]);
+    async function getUserInfo() {
+      const userInfo = await get(`users/${userId}`)
+      setUser(userInfo.data.user)
+      setUserInitials(getInitailsFromUser(userInfo.data.user))
+    }
+    getUserInfo()
+  }, [userId]);
+
+  const userDisplayName = (user) => {
+    return `${user.firstName} ${user.lastName}`
+  }
+
+  const cohortDisplayName = (cohortId) => {
+    return `Cohort ${cohortId}`
+  }
+
+  const getInitailsFromUser = (user) => {
+    const firstInital = user.firstName.slice(0, 1)
+    const lastInital = user.lastName.slice(0, 1)
+    return `${firstInital}${lastInital}`
+  }
 
   return (
     <>
@@ -32,11 +52,11 @@ const ViewProfile = () => {
         <Card>
           <div className="profile-container">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>{userInitials}</p>
             </div>
             <div className="profile-summary">
-              <h3>Full name</h3>
-              <p>Title</p>
+              <h3>{userDisplayName(user)}</h3>
+              <p>Software Developer</p>
             </div>
           </div>
 
@@ -49,7 +69,7 @@ const ViewProfile = () => {
                 <br />
                 <p>Photo</p>
                 <div className="profile-icon">
-                  <p>AJ</p>
+                  <p>{userInitials}</p>
                   <TextInput />
                 </div>
               </div>
@@ -61,6 +81,7 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Alex"
                 disabled
+                value={user.firstName}
               ></textarea>
               <small className="padding-field-name">Last Name*</small>
               <textarea
@@ -69,6 +90,8 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Walker"
                 disabled
+                value={user.lastName}
+
               ></textarea>
               <small className="padding-field-name">Username*</small>
               <textarea
@@ -77,6 +100,8 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Alex Walker"
                 disabled
+                value={userDisplayName(user)}
+
               ></textarea>
               <small className="padding-field-name">GitHub Username*</small>
               <textarea
@@ -85,6 +110,8 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="alex-walker"
                 disabled
+                value={user.githubUrl}
+
               ></textarea>
             </div>
 
@@ -101,6 +128,7 @@ const ViewProfile = () => {
                     className="textarea-small"
                     placeholder="Student"
                     disabled
+                    value={user.role}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -129,6 +157,7 @@ const ViewProfile = () => {
                     className="textarea-small"
                     placeholder="Cohort 4"
                     disabled
+                    value={cohortDisplayName(user.cohortId)}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -176,6 +205,8 @@ const ViewProfile = () => {
                   className="textarea-small"
                   placeholder="alex.walker@boolean.co.uk"
                   disabled
+                  value={user.email}
+
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Mobile*</small>
@@ -218,6 +249,8 @@ const ViewProfile = () => {
                 <textarea
                   placeholder="Tell us about yourself, your professional and educational highlights to date..."
                   spellCheck="false"
+                  value={user.bio}
+
                 ></textarea>
                 <small>0/300</small>
               </div>
