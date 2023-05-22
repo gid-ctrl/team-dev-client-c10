@@ -1,0 +1,104 @@
+.soft-ware-dev {
+    display: grid;
+    grid-template-columns: 73px 1fr;
+    border-top: 1px solid var(--color-blue5);
+    border-bottom: 1px solid var(--color-blue5);
+    padding: 10px 0;
+    margin: 10px 0;
+
+}
+
+.soft-ware-dev span {
+    font-weight: bolder;
+}
+
+.soft-ware-dev>div>p {
+
+    font-size: smaller;
+    color: grey;
+    padding-top: 10px
+}
+
+.user-display {
+    display: grid;
+    padding: 10px 0;
+    margin: 10px 0;
+    align-items: center;
+}
+
+.teacher-bar>h4 {
+    padding-bottom: 20px;
+    margin: 10px;
+    border-bottom: 1px solid var(--color-blue5);
+}
+
+.soft-ware-dev>div>p {
+    font-size: smaller;
+    color: grey;
+    padding-top: 10px
+}
+
+.user-display {
+    display: grid;
+    padding: 10px 0;
+    margin: 10px 0;
+    align-items: center;
+}
+
+.user-display-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 48%));
+    gap: 4%
+}
+
+.teacher-bar>h4 {
+    padding-bottom: 20px;
+    margin: 10px;
+    border-bottom: 1px solid var(--color-blue5);
+}
+
+
+.teacher-info>p {
+    font-size: smaller;
+    color: grey;
+}
+
+.teacher-info>span {
+    font-weight: bolder;
+
+}
+
+.user-display-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 48%));
+    gap: 4%
+}
+
+.myexercises {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 40%));
+}
+
+.myexcercises>button {
+    background-color: grey;
+}
+
+.myexercises {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 40%));
+}
+
+.excercise-button {
+    background-color: rgb(240, 245, 250);
+    opacity: 0.5;
+}
+
+.myexercises>p {
+    padding-top: 10px;
+    color: rgba(44, 43, 43, 0.664);
+}
+
+.exercise-tab>h3 {
+    border-bottom: 1px solid var(--color-blue5);
+    padding: 10px;
+}
