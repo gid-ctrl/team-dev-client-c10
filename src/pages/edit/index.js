@@ -10,20 +10,21 @@ const EditProfile = () => {
     <>
       <main>
         <h2>Profile</h2>
+        <br />
         <Card>
           <div className="profile-container">
             <div className="profile-icon">
               <p>AJ</p>
             </div>
             <div className="profile-summary">
-              <h3>Full name</h3>
-              <p>Title</p>
+              <h3>Alex Walker</h3>
+              <p>Software Developer</p>
             </div>
           </div>
 
           <div className="main-info-grid">
             <div className="basic-info">
-           <hr class="hr-line" />
+              <hr class="hr-line" />
               <br />
               <div className="basic-info-content info-grid">
                 <h4 className="padding-title">Basic info</h4>
@@ -41,7 +42,6 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Alex"
-                disabled
               ></textarea>
               <small className="padding-field-name">Last Name*</small>
               <textarea
@@ -49,7 +49,6 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Walker"
-                disabled
               ></textarea>
               <small className="padding-field-name">Username*</small>
               <textarea
@@ -57,7 +56,6 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Alex Walker"
-                disabled
               ></textarea>
               <small className="padding-field-name">GitHub Username*</small>
               <textarea
@@ -65,12 +63,11 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="alex-walker"
-                disabled
               ></textarea>
             </div>
 
             <div className="training-info">
-           <hr class="hr-line" />
+              <hr class="hr-line" />
               <br />
               <h4 className="padding-title">Training info</h4>
               <div className="training-info-content info-grid">
@@ -147,7 +144,7 @@ const EditProfile = () => {
             </div>
 
             <div className="contact-info">
-           <hr class="hr-line" />
+              <hr class="hr-line" />
               <div className="contact-info-content info-grid">
                 <h4 className="padding-title">Contact info</h4>
                 <div className="padding-top"></div>
@@ -156,7 +153,6 @@ const EditProfile = () => {
                   cols="40"
                   className="textarea-small"
                   placeholder="alex.walker@boolean.co.uk"
-                  disabled
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Mobile*</small>
@@ -164,7 +160,6 @@ const EditProfile = () => {
                   cols="40"
                   className="textarea-small"
                   placeholder="07890 123456"
-                  disabled
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Password*</small>
@@ -204,7 +199,7 @@ const EditProfile = () => {
 
             <div className="bio">
               <div className="bio-content">
-             <hr class="hr-line" />
+                <hr class="hr-line" />
                 <h4>Bio</h4>
                 <div className="padding-top"></div>
                 <small>Bio</small>
@@ -217,7 +212,10 @@ const EditProfile = () => {
 
               <div class="button-container">
                 <button type="button" class="button offwhite">
-                  Edit
+                  Cancel
+                </button>
+                <button type="button" class="button blue">
+                  Save
                 </button>
               </div>
             </div>
