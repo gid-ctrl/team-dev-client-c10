@@ -19,3 +19,53 @@ aside {
     max-width: 100% !important;
     background-color: var(--color-blue5);
 }
+
+.nameSearch {
+    display: grid;
+    grid-template-columns: 70px auto auto;
+    padding-top: 10px;
+ 
+    
+}
+
+.name-tag-role {
+    display: grid;
+    grid-template-rows: 20px 10px;
+    row-gap: 5px;
+}
+
+#searched-name {
+    display: grid;
+    align-items: center;
+    padding-top: 5px;
+}
+
+#align {
+    display: grid;
+    align-items: center;
+ 
+}
+
+.role {
+    font-size: 13px;
+}
+
+.line {
+    border-bottom: 2px solid #e6ebf5;
+    margin-top: 5px;
+
+  }
+
+  .edit-icon {
+    display: grid;
+    justify-self: right;
+  }
+
+  .edit {
+    line-height: 2.5;
+    background-color: #e6ebf5;
+    font-size: 7px;
+    padding-top: 5px;
+
+  }
+

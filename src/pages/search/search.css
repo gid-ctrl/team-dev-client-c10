@@ -1,0 +1,125 @@
+.parent {
+    padding-left: 100px;  
+}
+
+h1 {
+    padding: 30px;
+}
+
+.searchparent {
+    padding: 50px;
+    background-color: white;
+}
+
+.searchbar {
+ padding: 20px  
+}
+
+.resultsparent {
+    margin-top: 20px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 100% auto;
+}
+
+.profiles {
+    justify-self:  center;
+    text-align: center;
+    text-decoration: none;
+}
+
+.resultslist > ul > li {
+    display: grid;
+    grid-template-columns: 100px 1fr 100px 75px auto;
+    align-items:  center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.userpicture {
+    border-radius: 35px;
+    margin-left: 22px;
+    margin-top: 5px
+}
+
+.resultslist > p {
+    padding-left: 20px;
+    padding-top: 20px
+}
+
+.search-picture  {
+    margin-left: 20px;
+}
+
+.backarrow {
+    position: absolute;
+    left: 220px;
+    top: 142px;
+}
+
+.extrainfo {
+    font-size: 15px;
+    color: #64648c;
+    font-weight: 400;
+}
+
+.searchparent > div {
+    position: relative;
+}
+
+.clearbutton {
+    padding: 5px;
+    line-height: 28px;
+    position: absolute;
+    border-radius: 20px;
+    height:50%;
+    top: 15px;
+    right: 15px;
+    background: #D9D9D9;
+}
+
+#search-more {
+    padding: 0;
+    display: grid;
+    justify-content: center;
+    background-color:#F0F5FA;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+li {
+    position: relative;
+}
+
+.showmore {
+    position: absolute;
+    background-color: white;
+    right: -100px;
+    top: 60px;
+    height: 60px ;
+    width: 150px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px rgb(179, 179, 179);
+    text-align: center;
+    padding-top: 10px;
+    justify-content: center;
+    align-content: center;
+}
+
+.dropprofiles {
+    text-decoration: none;
+    position: relative
+}
+
+.dropicon {
+    position: absolute;
+    right: 20px;
+    top: 5px
+}
+
+.droptext {
+    position: absolute;
+    right: -40px;
+    top: 12px
+}
