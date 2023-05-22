@@ -85,7 +85,7 @@ function SearchPage () {
                     type="text"
                     icon={<SearchIcon />}/>
 
-                    <button className="button">
+                    <button className="clearbutton">
                         <CrossBlackIcon/>
                     </button>
 
