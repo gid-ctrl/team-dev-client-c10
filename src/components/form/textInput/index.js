@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TextInput = ({ value, onChange, name, label, icon, type = "text" }) => {
+const TextInput = ({ value, onChange, name, label, icon, type = "text", placeholder, onFocus, onActive, onFocusOut}) => {
 	const [input, setInput] = useState("");
 	const [showpassword, setShowpassword] = useState(false);
 	if (type === "password") {
@@ -41,7 +41,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = "text" }) => {
 		return (
 			<div className="inputwrapper">
 				{label && <label htmlFor={name}>{label}</label>}
-				<input type={type} name={name} value={value} onChange={onChange} className={icon && 'input-has-icon'} />
+				<input placeholder={placeholder} type={type} name={name} value={value} onChange={onChange} onFocus={onFocus} onActive={onActive} onFocusOut={onFocusOut} className={icon && 'input-has-icon'} />
                 {icon && <span className="input-icon">{icon}</span>}
 			</div>
 		);

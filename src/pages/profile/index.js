@@ -27,7 +27,6 @@ const ViewProfile = () => {
       const userInfo = await get(`users/${userId}`)
       setUser(userInfo.data.user)
       setUserInitials(getInitailsFromUser(userInfo.data.user))
-      console.log(userInfo)
     }
     getUserInfo()
   }, [userId]);
