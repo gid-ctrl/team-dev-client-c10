@@ -68,6 +68,7 @@ export {
     register,
     createProfile,
     patch,
-    post
+    post,
+    get
 }
 
