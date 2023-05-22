@@ -4,27 +4,29 @@ import ProfileCircle from "../../components/profileCircle";
 import { useState, useEffect } from "react";
 import { get } from "../../service/apiClient";
 
-const initialState = { id: "", courseId: null, users: [] };
-
 export default function MyCohort() {
-  const [cohorts, setCohorts] = useState(initialState);
+  const [cohorts, setCohorts] = useState([]);
 
-  const endpoint = `cohorts/1/users`;
+  // 1. Create a bunch of users using the sign-up form
+  // 2. Use this route in insomnia to get a list of all users so you can get all of their ID's: https://supreme-bassoon-7v7v8r2.pages.github.io/#tag/user/operation/getAllUsers
+  // 3. Use the login route in insomnia using the teacher login details to get a teacher auth token: https://supreme-bassoon-7v7v8r2.pages.github.io/#tag/user/operation/loginUser
+  // 4. Use this update user route on every user you created and assign their cohortId to 1, put the teacher's auth token in the Authorization header: https://supreme-bassoon-7v7v8r2.pages.github.io/#tag/user/operation/userUpdate
+
+  // That will make sure all of your new users are assigned to cohort 1
+
+  // const endpoint = `cohorts/1/users`;
+  const endpoint = "users";
 
   useEffect(() => {
-    get(endpoint).then((data) => {
-      console.log("cohortsData", cohorts.data.users[0]);
-      return setCohorts(data);
+    get(endpoint).then((response) => {
+      return setCohorts(response.data.users);
     });
   }, []);
 
-  // console.log("cohorts", cohorts);
-  // console.log("cohortsData", cohorts.data.users[0]);
-  // console.log("cohortData", cohorts.data.users);
+  console.log("cohortsData", cohorts);
 
   return (
     <>
-      {console.log("cohortsData", cohorts.data.users[0])}
       <main>
         <Card>
           <h4>My Cohort</h4>
