@@ -24,17 +24,17 @@ const Post = ({
   const [isLiked, setIsLiked] = useState(false);
   const [like, setLike] = useState(likes);
 
-  const showModal = () => {
-    setModal(
-      "Edit post",
-      <EditPostModal
-        id={id}
-        content={content}
-        setTriggerUpdate={setTriggerUpdate}
-      />
-    );
-    openModal();
-  };
+    const showModal = () => {
+        setModal('Edit post', 
+        <EditPostModal 
+            id={id} 
+            content={content} 
+            setTriggerUpdate={setTriggerUpdate}
+            name={name}
+            userInitials={userInitials}
+        />)
+        openModal()
+    }
 
   const handleClick = () => {
     setIsLiked((prevIsLiked) => !prevIsLiked);

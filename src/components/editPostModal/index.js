@@ -6,7 +6,7 @@ import { patch } from '../../service/apiClient'
 
 
 // passing current post ID and message content through props
-const EditPostModal = ({ id, content, setTriggerUpdate}) => {
+const EditPostModal = ({ id, content, setTriggerUpdate, name, userInitials}) => {
     const { closeModal } = useModal()
     const [message, setMessage] = useState(null)
     const [text, setText] = useState(content)
@@ -36,8 +36,8 @@ const EditPostModal = ({ id, content, setTriggerUpdate}) => {
     return (
         <>
             <section className="create-post-user-details">
-                <div className="profile-icon"><p>AJ</p></div>
-                <div className="post-user-name"><p>Alex J</p></div>
+                <div className="profile-icon"><p>{userInitials}</p></div>
+                <div className="post-user-name"><p>{name}</p></div>
             </section>
 
             <section>
