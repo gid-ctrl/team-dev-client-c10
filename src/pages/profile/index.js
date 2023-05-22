@@ -16,6 +16,7 @@ const ViewProfile = () => {
   const [ userId, setUserId ] = useState()
 	const { token } = useAuth();
   const urlEndpoint = process.env.REACT_APP_API_URL
+  const [user, setUser] = useState({})
 
   const handleClick = () => {
     navigate("/profile/1/edit");
@@ -23,19 +24,31 @@ const ViewProfile = () => {
  
   // get the user's profile info
 
-    // 1. make a request to the server, using the id of the profile of the
-    //    page which is being viewed 
-    // 2. store this user's information to the state
-    // 3. display the information on the page
+  //   1. make a request to the server, using the id of the profile of the
+  //      page which is being viewed 
+  //   2. store this user's information to the state
+  //   3. display the information on the page
     
+
+  // edit page
+  // do we need user state in Edit page as well? If so, remove it from here and put it into App.js, then pass it as props to both components.
+
+
+
 
   useEffect(() => {
     async function getUserInfo() {
       const { userId } = await jwt_decode(token)
       setUserId(userId)
       const userInfo = await get(`users/${userId}`)
-      console.log(userInfo)
+      console.log(`userinfo is`,userInfo)
+
+      console.log(`userinfo.data is`,userInfo.data)
+
+      setUser(userInfo.data.user)
+     
     }
+    
 
     getUserInfo()
   }, [token]);
@@ -51,7 +64,7 @@ const ViewProfile = () => {
               <p>AJ</p>
             </div>
             <div className="profile-summary">
-              <h3>Full name</h3>
+              <h3>{user.firstName}</h3>
               <p>Title</p>
             </div>
           </div>
@@ -77,6 +90,7 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Alex"
                 disabled
+                value={user.firstName}
               ></textarea>
               <small className="padding-field-name">Last Name*</small>
               <textarea
@@ -85,6 +99,8 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Walker"
                 disabled
+                value={user.lastName}
+
               ></textarea>
               <small className="padding-field-name">Username*</small>
               <textarea
@@ -93,6 +109,8 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Alex Walker"
                 disabled
+                value={user.firstName + ' ' + user.lastName}
+
               ></textarea>
               <small className="padding-field-name">GitHub Username*</small>
               <textarea
@@ -101,6 +119,8 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="alex-walker"
                 disabled
+                value={user.githubUrl}
+
               ></textarea>
             </div>
 
@@ -117,6 +137,7 @@ const ViewProfile = () => {
                     className="textarea-small"
                     placeholder="Student"
                     disabled
+                    value={user.role}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -131,6 +152,7 @@ const ViewProfile = () => {
                     className="textarea-small"
                     placeholder="Software Developer"
                     disabled
+                    // value={"hardcoded value???"}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -145,6 +167,7 @@ const ViewProfile = () => {
                     className="textarea-small"
                     placeholder="Cohort 4"
                     disabled
+                    value={`Cohort ` + user.cohortId}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -192,6 +215,8 @@ const ViewProfile = () => {
                   className="textarea-small"
                   placeholder="alex.walker@boolean.co.uk"
                   disabled
+                  value={user.email}
+
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Mobile*</small>
@@ -234,6 +259,8 @@ const ViewProfile = () => {
                 <textarea
                   placeholder="Tell us about yourself, your professional and educational highlights to date..."
                   spellCheck="false"
+                  value={user.bio}
+
                 ></textarea>
                 <small>0/300</small>
               </div>
