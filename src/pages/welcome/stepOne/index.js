@@ -37,6 +37,7 @@ const StepOne = ({ data, setData, setValidForm }) => {
     checkValidFirstName(e);
     checkValidLastName(e);
   };
+
   checkValidBothNames();
 
   return (
