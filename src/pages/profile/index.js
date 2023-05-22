@@ -15,7 +15,6 @@ const ViewProfile = () => {
   const navigate = useNavigate();
   const [ userId, setUserId ] = useState()
 	const { token } = useAuth();
-  const urlEndpoint = process.env.REACT_APP_API_URL
   const [user, setUser] = useState({})
 
   const handleClick = () => {
