@@ -22,34 +22,14 @@ const ViewProfile = () => {
     navigate("/profile/1/edit");
   };
  
-  // get the user's profile info
-
-  //   1. make a request to the server, using the id of the profile of the
-  //      page which is being viewed 
-  //   2. store this user's information to the state
-  //   3. display the information on the page
-    
-
-  // edit page
-  // do we need user state in Edit page as well? If so, remove it from here and put it into App.js, then pass it as props to both components.
-
-
-
 
   useEffect(() => {
     async function getUserInfo() {
       const { userId } = await jwt_decode(token)
       setUserId(userId)
       const userInfo = await get(`users/${userId}`)
-      console.log(`userinfo is`,userInfo)
-
-      console.log(`userinfo.data is`,userInfo.data)
-
       setUser(userInfo.data.user)
-     
     }
-    
-
     getUserInfo()
   }, [token]);
 
