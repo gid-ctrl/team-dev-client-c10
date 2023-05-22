@@ -9,7 +9,8 @@ const Like = () => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       x="0px"
       y="0px"
-      width={'20px'}
+   width="40px"
+        height="40px"
       viewBox="0 0 122.88 107.68"
       style={{ enableBackground: 'new 0 0 122.88 107.68' }}
       xmlSpace="preserve"

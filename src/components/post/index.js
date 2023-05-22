@@ -1,15 +1,32 @@
 import Like from "../../assets/icons/like"
+import LikeRed from "../../assets/icons/likeRed"
 import useModal from "../../hooks/useModal"
 import Card from "../card"
 import Comment from "../comment"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
 import "./style.css"
+import {useState} from 'react' 
 
 const Post = ({ name, date, content, comments = [], likes = 0, id, setTriggerUpdate, currentUserName}) => {
     const { openModal, setModal } = useModal()
 
     const userInitials = name.match(/\b(\w)/g)
+
+    const [isHovered, setIsHovered] = useState(false);
+    const [changeLike, setChangeLike] = useState(false);
+
+    const handleMouseEnter = () => {
+      setIsHovered(true);
+    };
+  
+    const handleMouseLeave = () => {
+      setIsHovered(false);
+    };
+
+    const handleClick = () => {
+        setChangeLike(true)
+    }
 
     const showModal = () => {
         setModal('Edit post', 
@@ -43,10 +60,18 @@ const Post = ({ name, date, content, comments = [], likes = 0, id, setTriggerUpd
                 </section>
 
                 <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>
-                    <div className="post-interactions">
-                        <div><Like/> Like</div>
-                        <div>Comment</div>
-                    </div>
+                <button className="post-interactions-button like"
+                 onMouseEnter={handleMouseEnter}
+                 onMouseLeave={handleMouseLeave}
+                 onClick={handleClick}>
+                {isHovered ? <LikeRed /> : <Like />}
+                            <p>Like</p>
+                </button>
+
+                <button className="post-interactions-button">
+                            <Like />
+                            <p>Like</p>
+                </button>
 
                     <p>{!likes && 'Be the first to like this'}</p>
                     

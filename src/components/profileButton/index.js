@@ -11,11 +11,9 @@ const ProfileButton = ({ initials, id }) => {
   return (
     <div className="profile-circle" id={id} onClick={() => setIsMenuVisible(!isMenuVisible)}>
       {isMenuVisible && <CascadingMenu id={id} />}
-      <NavLink to={`/profile/${id}`}>
       <div className="profile-icon">
         <p>{initials}</p>
       </div>
-      </NavLink>
     </div>
   );
 };
@@ -24,9 +22,7 @@ const CascadingMenu = ({ id }) => {
   return (
     <Menu className="profile-circle-menu">
       {console.log('user id', id)}
-      <NavLink to={`/profile/${id}`}>
-        <MenuItem icon={<ProfileIcon />} text='Profile' />
-      </NavLink>
+        <MenuItem icon={<ProfileIcon />} text='Profile' linkTo={`/profile/${id}`} />
     </Menu>
   );
 };
