@@ -131,7 +131,6 @@ const ViewProfile = () => {
                     className="textarea-small"
                     placeholder="Software Developer"
                     disabled
-                    // value={"hardcoded value???"}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
