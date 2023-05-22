@@ -11,7 +11,7 @@ const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
 	const navigate = useNavigate()
-	const location = useLocation()
+	
 	const [token, setToken] = useState(null)
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
             setToken(storedToken)
             navigate("/")
         }
-    }, [location.pathname])
+    }, [navigate, token])
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)

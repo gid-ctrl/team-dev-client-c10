@@ -12,7 +12,7 @@ const Posts = ({triggerUpdate, setTriggerUpdate}) => {
         } else {
             getPosts().then(setPosts)
         }
-    }, [triggerUpdate])
+    }, [setTriggerUpdate, triggerUpdate])
 
     
 
