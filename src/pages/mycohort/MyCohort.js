@@ -3,8 +3,8 @@ import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
 import { useState, useEffect } from "react";
 import { get } from "../../service/apiClient";
-import Username from "./Username";
-import Teacher from "./Teacher";
+import Students from "./Students";
+import Teachers from "./Teachers";
 
 // const initialState = { id: "", courseId: null, users: [] };
 
@@ -40,7 +40,7 @@ console.log('cohorts: ', cohorts)
             {
                 cohorts.map((item, index) => {
                     if(item.role === 'STUDENT'){
-                    return <Username key={index} firstName={item.firstName} lastName={item.lastName}/>}
+                    return <Students key={index} firstName={item.firstName} lastName={item.lastName}/>}
                 })
             }
           </div>
@@ -53,7 +53,7 @@ console.log('cohorts: ', cohorts)
             {
                 cohorts.map((item, index) => {
                     if(item.role === 'TEACHER'){
-                    return <Teacher key={index} bio={item.bio} firstName={item.firstName} lastName={item.lastName}/>}
+                    return <Teachers key={index} bio={item.bio} firstName={item.firstName} lastName={item.lastName}/>}
                 })
             }
           </div>
