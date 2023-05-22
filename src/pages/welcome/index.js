@@ -34,11 +34,6 @@ const Welcome = () => {
     );
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(console.log("hello"));
-  };
-
   return (
     <main className="welcome">
       <div className="welcome-titleblock">
@@ -49,7 +44,7 @@ const Welcome = () => {
       <Stepper header={<WelcomeHeader />} onComplete={onComplete}>
         <StepOne data={profile} setData={onChange} />
         <StepTwo data={profile} setData={onChange} />
-        <StepFour data={profile} setData={onSubmit} />
+        <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>
   );

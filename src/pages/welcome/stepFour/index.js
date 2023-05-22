@@ -3,7 +3,6 @@ import Form from "../../../components/form";
 const StepFour = ({ data, setData }) => {
   console.log("bio:", data.bio);
 
-  
   return (
     <>
       <div className="welcome-formheader">
