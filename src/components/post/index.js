@@ -5,7 +5,7 @@ import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
 import "./style.css"
 
-const Post = ({ name, date, content, comments = [], likes = 0, id, setTriggerUpdate}) => {
+const Post = ({ name, date, content, comments = [], likes = 0, id, setTriggerUpdate, currentUserName}) => {
     const { openModal, setModal } = useModal()
 
     const userInitials = name.match(/\b(\w)/g)
@@ -30,10 +30,11 @@ const Post = ({ name, date, content, comments = [], likes = 0, id, setTriggerUpd
                         <p>{name}</p>
                         <small>{date}</small>
                     </div>
-                    
-                    <div className="edit-icon">
-                        <p onClick={showModal}>...</p>
-                    </div>
+                    {name === currentUserName &&
+                        <div className="edit-icon">
+                            <p onClick={showModal}>...</p>
+                        </div>
+                    }
                 </section>
 
                 <section className="post-content">
