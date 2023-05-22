@@ -7,7 +7,6 @@ import LockIcon from "../../assets/icons/locIcon";
 import { get } from "../../service/apiClient";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import jwt_decode from "jwt-decode";
 
 const EditProfile = () => {
   const { userId } = useAuth();
@@ -19,7 +18,6 @@ const EditProfile = () => {
       const userInfo = await get(`users/${userId}`);
       setUser(userInfo.data.user);
       setUserInitials(getInitailsFromUser(userInfo.data.user));
-      console.log(userInfo);
     }
     getUserInfo();
   }, [userId]);
