@@ -18,7 +18,9 @@ const Navigation = () => {
                 <li><NavLink to='/'><HomeIcon colour="#000046" /><p>Home</p></NavLink></li>
                 <li><NavLink to='/'><ProfileIcon /><p>Profile</p></NavLink></li>
                 <li><NavLink to='/MyCohort'><CohortIcon /><p>Cohort</p></NavLink></li>
-                <li><NavLink to='/search'><CohortIcon /><p>Team 3 Search</p></NavLink></li>
+
+                {/* Please use the link below to reach student search */}
+                {/* <li><NavLink to='/search'><CohortIcon /><p>Team 3 Search</p></NavLink></li> */}
             </ul>
         </nav>
     )
