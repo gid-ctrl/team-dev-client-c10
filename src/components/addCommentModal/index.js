@@ -4,7 +4,7 @@ import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
 
-const AddCommentModal = ({setTriggerUpdate, currentUserName, currentUserInitials, id}) => {
+const AddCommentModal = ({setTriggerUpdate, currentUserName, currentUserInitials, id, setUpdateComments}) => {
     // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
 
@@ -20,6 +20,7 @@ const AddCommentModal = ({setTriggerUpdate, currentUserName, currentUserInitials
         post(`posts/${id}/comments`, {"content": text})
         .then(() => {
             setTriggerUpdate(true)
+            setUpdateComments(true)
         })
 
         setTimeout(() => {
@@ -27,6 +28,7 @@ const AddCommentModal = ({setTriggerUpdate, currentUserName, currentUserInitials
             closeModal()
         }, 2000)
     }
+
 
     return (
         <>
@@ -52,5 +54,4 @@ const AddCommentModal = ({setTriggerUpdate, currentUserName, currentUserInitials
         </>
     )
 }
-
 export default AddCommentModal

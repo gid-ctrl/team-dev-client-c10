@@ -13,9 +13,9 @@ import { get } from "../../service/apiClient"
 
 const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUserName, currentUserInitials}) => {
     const { openModal, setModal } = useModal()
-    const [comments, setComments] = useState([])
     const [showComments, setShowComments] = useState(false)
     const [postComments, setPostComments] = useState([])
+    const [updateComments, setUpdateComments] = useState(false)
 
 
     const userInitials = name.match(/\b(\w)/g)
@@ -37,36 +37,49 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
             id={id}
             currentUserName={currentUserName}
             currentUserInitials={currentUserInitials}
+            setUpdateComments={setUpdateComments}
         />)
         openModal()
         }
 
-    const findComments = async (Id, userId, text, tempArray) => {
-        const res = await get(`users/${userId}`)
-        const name = `${res.data.user.firstName} ${res.data.user.lastName}`
-        const initials = `${res.data.user.firstName?.[0]}${res.data.user.lastName?.[0]}`
-        const newComment = {
-            "id": Id,
-            "name": name,
-            "initials": initials,
-            "text": text
+    const findComments = async () => {
+          const tempArray = [];
+          const res = await get(`posts/${id}/comments`);
+          const tempComments = res.data.comments;
+          await Promise.all(
+            tempComments.map(async (comment) => {
+              const userId = comment.userId;
+              const commentRes = await get(`users/${userId}`);
+              const name = `${commentRes.data.user.firstName} ${commentRes.data.user.lastName}`;
+              const initials = `${commentRes.data.user.firstName?.[0]}${commentRes.data.user.lastName?.[0]}`;
+              const newComment = {
+                id: comment.id,
+                name: name,
+                initials: initials,
+                text: comment.content,
+              };
+              tempArray.push(newComment);
+            })
+          );
+          setPostComments(tempArray.reverse());
+      };
+      
+      const fetchComments = async () => {
+        if (postComments.length === 0 || updateComments) {
+            await findComments();
+            setShowComments(true)
+        } else {
+            setShowComments(!showComments)
         }
-        tempArray.push(newComment)
-    }
+      };
 
-    const fetchComments = async () => {
-        if (postComments.length === 0) {
-            const tempArray = []
-            const res = await get(`posts/${id}/comments`)
-            const tempComments = res.data.comments
-            await Promise.all(tempComments.map(async (comment) => {
-                const text = comment.content;
-                await findComments(comment.id, comment.userId, text, tempArray);
-              }));
-            setPostComments(tempArray.reverse())
+      useEffect(() => {
+        if (updateComments) {
+            fetchComments()
+            setUpdateComments(false)
         }
-        setShowComments(!showComments)
-    }
+      },[updateComments])
+      
     
     return (
         <Card>
