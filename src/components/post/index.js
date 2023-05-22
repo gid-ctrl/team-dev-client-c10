@@ -81,10 +81,10 @@ const Post = ({
 
           <button className="post-interactions-button">
             <Like />
-            <p>Like</p>
+            <p>Comment</p>
           </button>
 
-          <p>{!like && "Be the first to like this"}</p>
+          <p>{(!like && "Be the first to like this") || like} </p>
         </section>
 
         <section>
