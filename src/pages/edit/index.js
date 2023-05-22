@@ -46,7 +46,7 @@ const EditProfile = () => {
         <Card>
           <div className="profile-container">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>{userInitials}</p>
             </div>
             <div className="profile-summary">
               <h3>{userDisplayName(user)}</h3>
