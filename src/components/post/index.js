@@ -43,9 +43,9 @@ const Post = ({
 
   let likeIcon = null;
   if (isLiked) {
-    likeIcon = <LikeRed />;
+    likeIcon = <LikeRed className='post-interactions'/>;
   } else {
-    likeIcon = <Like />;
+    likeIcon = <Like className='post-interactions'/>;
   }
 
   return (
@@ -74,14 +74,14 @@ const Post = ({
             comments.length ? "border-bottom" : null
           }`}
         >
-          <button className="post-interactions-button like" onClick={handleClick}>
+          <button className="post-interactions" onClick={handleClick}>
             {likeIcon}
             <p>Like</p>
           </button>
 
-          <button className="post-interactions-button">
+          <button className="post-interactions">
             <Like />
-            <p>Comment</p>
+            <p> Comment</p>
           </button>
 
           <p>{(!like && "Be the first to like this") || like} </p>
