@@ -6,6 +6,7 @@ const ModalProvider = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [modalComponent, setModalComponent] = useState(null)
     const [modalHeader, setModalHeader] = useState(null)
+    // const [modalSearch, setModalSearch] = useState(null)
 
     const openModal = () => {
         setIsOpen(true)

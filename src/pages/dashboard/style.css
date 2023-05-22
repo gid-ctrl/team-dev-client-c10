@@ -51,7 +51,7 @@ aside {
 }
 
 .line {
-    border-bottom: 2px solid #E6EBF5;
+    border-bottom: 2px solid #e6ebf5;
     margin-top: 5px;
 
   }
@@ -59,4 +59,16 @@ aside {
   .edit-icon {
     display: grid;
     justify-self: right;
+  }
+
+  .edit {
+    line-height: 2.5;
+    background-color: #e6ebf5;
+    font-size: 7px;
+    padding-top: 5px;
+
+  }
+
+  .hidden {
+    display: none;
   }
