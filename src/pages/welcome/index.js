@@ -34,6 +34,8 @@ const Welcome = () => {
     );
   };
 
+  console.log("data", profile);
+
   return (
     <main className="welcome">
       <div className="welcome-titleblock">
