@@ -50,7 +50,6 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.email, formData.password);
     try {
       await onRegister(formData.email, formData.password);
       await onLogin(formData.email, formData.password, "/verification");
