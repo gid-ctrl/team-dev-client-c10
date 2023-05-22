@@ -62,14 +62,14 @@ const AuthProvider = ({ children }) => {
         navigate('/')
     }
 
-	const value = {
-		token,
+  const value = {
+    token,
     userId,
-		onLogin: handleLogin,
-		onLogout: handleLogout,
-        onRegister: handleRegister,
-        onCreateProfile: handleCreateProfile
-	};
+    onLogin: handleLogin,
+    onLogout: handleLogout,
+    onRegister: handleRegister,
+    onCreateProfile: handleCreateProfile
+  };
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 };
