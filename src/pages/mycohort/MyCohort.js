@@ -20,7 +20,6 @@ export default function MyCohort() {
     })
 }, []);
 console.log('cohorts: ', cohorts)
-
   return (
     <>
       <main>
