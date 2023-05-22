@@ -10,6 +10,7 @@ import ProfileIcon from "../../assets/icons/profileIcon";
 
 function SearchPage () {
     
+    
     const [formData, setFormData] = useState('')
     const [users, setUsers] = useState([])
     const [results, setResults] = useState([])
