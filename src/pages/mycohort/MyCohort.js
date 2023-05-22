@@ -12,26 +12,14 @@ export default function MyCohort() {
   const [cohorts, setCohorts] = useState([]);
 
   const endpoint = `users`;
-
-  function RandomColor() {
-    // get random index value
-    const randomIndex = Math.floor(Math.random() * colors.length);
-
-    // get random item
-    const item = colors[randomIndex];
-
-    return item;
-  }
-  const colors = ["#e76f51", "#f4a261", "#e9c46a", "#2a9d8f"];
-  const result = RandomColor();
-  console.log("random color:", result);
+  const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
   useEffect(() => {
     get(endpoint).then((item) => {
       setCohorts(item.data.users);
     });
   }, []);
-  console.log("cohorts: ", cohorts);
+
   return (
     <>
       <main>
@@ -39,8 +27,7 @@ export default function MyCohort() {
           <h4>My Cohort</h4>
 
           <div className="soft-ware-dev">
-            <ProfileCircle
-              style={{ backgroundColor: result }}
+            <ProfileCircle newColor={randomColor}
               initials={<SquareBracketsIcon color="white" scale="scale(1.4)" />}
             />
             <div>
@@ -50,7 +37,6 @@ export default function MyCohort() {
           </div>
 
           <div className="user-display-grid">
-<<<<<< push-rename
             {
                 cohorts.map((item, index) => {
                     if(item.role === 'STUDENT'){
