@@ -16,6 +16,7 @@ const ViewProfile = () => {
   const [ userId, setUserId ] = useState()
 	const { token } = useAuth();
   const [user, setUser] = useState({})
+  const [userInitials, setUserInitials] = useState(``)
 
   const handleClick = () => {
     navigate("/profile/1/edit");
@@ -28,10 +29,24 @@ const ViewProfile = () => {
       setUserId(userId)
       const userInfo = await get(`users/${userId}`)
       setUser(userInfo.data.user)
+      setUserInitials(getInitailsFromUser(userInfo.data.user))
     }
     getUserInfo()
   }, [token]);
 
+  const userDisplayName = (user) => {
+    return `${user.firstName} ${user.lastName}`
+  }
+
+  const cohortDisplayName = (cohortId) => {
+    return `Cohort ${cohortId}`
+  }
+
+  const getInitailsFromUser = (user) => {
+    const firstInital = user.firstName.slice(0, 1)
+    const lastInital = user.lastName.slice(0, 1)
+    return `${firstInital}${lastInital}`
+  }
 
   return (
     <>
@@ -40,11 +55,11 @@ const ViewProfile = () => {
         <Card>
           <div className="profile-container">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>{userInitials}</p>
             </div>
             <div className="profile-summary">
-              <h3>{user.firstName}</h3>
-              <p>Title</p>
+              <h3>{userDisplayName(user)}</h3>
+              <p>Software Developer</p>
             </div>
           </div>
 
@@ -57,7 +72,7 @@ const ViewProfile = () => {
                 <br />
                 <p>Photo</p>
                 <div className="profile-icon">
-                  <p>AJ</p>
+                  <p>{userInitials}</p>
                   <TextInput />
                 </div>
               </div>
@@ -88,7 +103,7 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Alex Walker"
                 disabled
-                value={user.firstName + ' ' + user.lastName}
+                value={userDisplayName(user)}
 
               ></textarea>
               <small className="padding-field-name">GitHub Username*</small>
@@ -145,7 +160,7 @@ const ViewProfile = () => {
                     className="textarea-small"
                     placeholder="Cohort 4"
                     disabled
-                    value={`Cohort ` + user.cohortId}
+                    value={cohortDisplayName(user.cohortId)}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
