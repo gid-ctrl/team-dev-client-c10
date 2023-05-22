@@ -6,7 +6,7 @@ import ProfileCircle from "../profileCircle"
 import CommentIcon from "../../assets/icons/commentIcon"
 import TextInput from "../form/textInput"
 import CommentButton from "../commentButton"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "./style.css"
 import AddCommentModal from "../addCommentModal"
 import { get } from "../../service/apiClient"
@@ -14,9 +14,12 @@ import { get } from "../../service/apiClient"
 const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUserName, currentUserInitials}) => {
     const { openModal, setModal } = useModal()
     const [comments, setComments] = useState([])
+    const [showComments, setShowComments] = useState(false)
+    const [postComments, setPostComments] = useState([])
+
 
     const userInitials = name.match(/\b(\w)/g)
-
+    
     const showModal = () => {
         setModal('Edit post', 
         <EditPostModal 
@@ -38,23 +41,33 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
         openModal()
         }
 
-    const fetchComments = () => {
-        const fetchData = async () => {
+    const findComments = async (Id, userId, text, tempArray) => {
+        const res = await get(`users/${userId}`)
+        const name = `${res.data.user.firstName} ${res.data.user.lastName}`
+        const initials = `${res.data.user.firstName?.[0]}${res.data.user.lastName?.[0]}`
+        const newComment = {
+            "id": Id,
+            "name": name,
+            "initials": initials,
+            "text": text
+        }
+        tempArray.push(newComment)
+    }
+
+    const fetchComments = async () => {
+        if (postComments.length === 0) {
+            const tempArray = []
             const res = await get(`posts/${id}/comments`)
-            setComments(res.data.comments)
+            const tempComments = res.data.comments
+            await Promise.all(tempComments.map(async (comment) => {
+                const text = comment.content;
+                await findComments(comment.id, comment.userId, text, tempArray);
+              }));
+            setPostComments(tempArray.reverse())
         }
-        if (comments.length === 0) {
-            fetchData()
-        } else {
-            setComments([])
-        }
+        setShowComments(!showComments)
     }
-
-    const testFunction = () => {
-        console.log(comments)
-        console.log(comments[0].userId)
-    }
-
+    
     return (
         <Card>
             <article className="post">
@@ -75,9 +88,9 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
                     <p>{content}</p>
                 </section>
 
-                <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>
+                <section className={`post-interactions-container border-top ${postComments.length ? 'border-bottom' : null}`}>
                     <div className="post-interactions">
-                        <div onClick={testFunction} >Like</div>
+                        <div>Like</div>
                         <button className="post-interactions-button" onClick={fetchComments} >
                             <CommentIcon />
                             <p>Comment</p>
@@ -89,12 +102,12 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
                 </section>
 
                 <section>
-                    {comments.map(comment => <Comment
+                    {showComments && postComments.map(comment => <Comment
                         key={comment.id}
                         comment={comment} />)}
                 </section>
 
-                <section className={`create-post-input`}>
+                <section className="create-post-input">
                     <div className="profile-icon">
                         <p>{currentUserInitials}</p>
                     </div>
