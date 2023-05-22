@@ -16,6 +16,8 @@ const Post = ({ name, date, content, comments = [], likes = 0, id, setTriggerUpd
             id={id} 
             content={content} 
             setTriggerUpdate={setTriggerUpdate}
+            name={name}
+            userInitials={userInitials}
         />)
         openModal()
     }
