@@ -3,8 +3,8 @@ import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
 import { useState, useEffect } from "react";
 import { get } from "../../service/apiClient";
-import Username from "./Username";
-import Teacher from "./Teacher";
+import Students from "./Students";
+import Teachers from "./Teachers";
 
 // const initialState = { id: "", courseId: null, users: [] };
 
@@ -50,17 +50,13 @@ export default function MyCohort() {
           </div>
 
           <div className="user-display-grid">
-            {cohorts.map((item, index) => {
-              if (item.role === "STUDENT") {
-                return (
-                  <Username
-                    key={index}
-                    firstName={item.firstName}
-                    lastName={item.lastName}
-                  />
-                );
-              }
-            })}
+<<<<<< push-rename
+            {
+                cohorts.map((item, index) => {
+                    if(item.role === 'STUDENT'){
+                    return <Students key={index} firstName={item.firstName} lastName={item.lastName}/>}
+                })
+            }
           </div>
         </Card>
       </main>
@@ -68,18 +64,13 @@ export default function MyCohort() {
         <Card>
           <div className="teacher-bar">
             <h4>Teachers</h4>
-            {cohorts.map((item, index) => {
-              if (item.role === "TEACHER") {
-                return (
-                  <Teacher
-                    key={index}
-                    bio={item.bio}
-                    firstName={item.firstName}
-                    lastName={item.lastName}
-                  />
-                );
-              }
-            })}
+            {
+                cohorts.map((item, index) => {
+                    if(item.role === 'TEACHER'){
+                    return <Teachers key={index} bio={item.bio} firstName={item.firstName} lastName={item.lastName}/>}
+                })
+            }
+
           </div>
         </Card>
         <Card>
