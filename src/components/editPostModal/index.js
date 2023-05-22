@@ -11,7 +11,6 @@ const EditPostModal = ({ id, content, setTriggerUpdate, name}) => {
     const [message, setMessage] = useState(null)
     const [text, setText] = useState(content)
     const initials = name[0] + name.split(' ')[1][0]
-    console.log('initials', initials)
 
     const onChange = (e) => {
         setText(e.target.value)
