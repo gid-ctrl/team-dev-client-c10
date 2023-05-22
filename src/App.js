@@ -19,11 +19,13 @@ import Header from "./components/header";
 import MyCohort from "./pages/mycohort/MyCohort";
 import EditProfile from "./pages/edit";
 
+
 const App = () => {
   return (
     <>
       <AuthProvider>
         <ModalProvider>
+          
           <Routes>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

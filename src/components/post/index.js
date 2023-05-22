@@ -1,3 +1,4 @@
+import Like from "../../assets/icons/like"
 import useModal from "../../hooks/useModal"
 import Card from "../card"
 import Comment from "../comment"
@@ -42,7 +43,7 @@ const Post = ({ name, date, content, comments = [], likes = 0, id, setTriggerUpd
 
                 <section className={`post-interactions-container border-top ${comments.length ? 'border-bottom' : null}`}>
                     <div className="post-interactions">
-                        <div>Like</div>
+                        <div><Like/> Like</div>
                         <div>Comment</div>
                     </div>
 
