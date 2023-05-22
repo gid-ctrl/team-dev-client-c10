@@ -61,7 +61,8 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
               tempArray.push(newComment);
             })
           );
-          setPostComments(tempArray.reverse());
+          const sortedArray = tempArray.sort((a,b) => a.id - b.id)
+          setPostComments(sortedArray.reverse());
       };
       
       const fetchComments = async () => {
@@ -80,6 +81,9 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
         }
       },[updateComments])
       
+      const testFunction = () => {
+        console.log(postComments)
+      }
     
     return (
         <Card>
@@ -103,7 +107,7 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
 
                 <section className={`post-interactions-container border-top ${postComments.length ? 'border-bottom' : null}`}>
                     <div className="post-interactions">
-                        <div>Like</div>
+                        <div onClick={testFunction} >Like</div>
                         <button className="post-interactions-button" onClick={fetchComments} >
                             <CommentIcon />
                             <p>Comment</p>
