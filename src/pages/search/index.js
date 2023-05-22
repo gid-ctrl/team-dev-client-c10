@@ -129,7 +129,7 @@ function SearchPage () {
                                 {/* Requires link to profile page */}
 
                                 <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
-                                {showMore === index && (<div className="showmore" ref={ref}><Link to={`/profile/${obj.id}`} className="profiles"><ProfileIcon />Profile</Link></div>)}
+                                {showMore === index && (<div className="showmore" ref={ref}><Link to={`/profile/${obj.id}`} className="dropprofiles"><div className="dropicon"><ProfileIcon /></div><div className="droptext">Profile</div></Link></div>)}
                             </li>
             )
             

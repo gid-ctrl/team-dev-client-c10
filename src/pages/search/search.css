@@ -102,5 +102,24 @@ li {
     border-radius: 6px;
     box-shadow: 1px 1px 4px rgb(179, 179, 179);
     text-align: center;
-    padding-top: 20px;
+    padding-top: 10px;
+    justify-content: center;
+    align-content: center;
+}
+
+.dropprofiles {
+    text-decoration: none;
+    position: relative
+}
+
+.dropicon {
+    position: absolute;
+    right: 20px;
+    top: 5px
+}
+
+.droptext {
+    position: absolute;
+    right: -40px;
+    top: 12px
 }
