@@ -4,7 +4,6 @@ import TextInput from "../../components/form/textInput";
 import "./style.css";
 import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
-import InputTextCounter from "../../components/InputTextCounter/InputTextCounter";
 
 const EditProfile = () => {
   return (
