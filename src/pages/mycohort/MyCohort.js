@@ -6,7 +6,7 @@ import { get } from "../../service/apiClient";
 import Students from "./Students";
 import Teachers from "./Teachers";
 
-// const initialState = { id: "", courseId: null, users: [] };
+
 
 export default function MyCohort() {
   const [cohorts, setCohorts] = useState([]);
@@ -14,10 +14,10 @@ export default function MyCohort() {
   const endpoint = `users`;
 
   function RandomColor() {
-    // get random index value
+
     const randomIndex = Math.floor(Math.random() * colors.length);
 
-    // get random item
+
     const item = colors[randomIndex];
 
     return item;
@@ -50,7 +50,7 @@ export default function MyCohort() {
           </div>
 
           <div className="user-display-grid">
-<<<<<< push-rename
+
             {
                 cohorts.map((item, index) => {
                     if(item.role === 'STUDENT'){
