@@ -3,28 +3,25 @@ import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
 import { useState, useEffect } from "react";
 import { get } from "../../service/apiClient";
+import Username from "./Username";
+import Teacher from "./Teacher";
 
-const initialState = { id: "", courseId: null, users: [] };
+// const initialState = { id: "", courseId: null, users: [] };
 
 export default function MyCohort() {
-  const [cohorts, setCohorts] = useState(initialState);
+  const [cohorts, setCohorts] = useState([]);
 
-  const endpoint = `cohorts/1/users`;
+  const endpoint = `users`;
 
   useEffect(() => {
-    get(endpoint).then((data) => {
-      console.log("cohortsData", cohorts.data.users[0]);
-      return setCohorts(data);
-    });
-  }, []);
-
-  // console.log("cohorts", cohorts);
-  // console.log("cohortsData", cohorts.data.users[0]);
-  // console.log("cohortData", cohorts.data.users);
-
+    get(endpoint)
+    .then(item => {
+        setCohorts(item.data.users)
+    })
+}, []);
+console.log('cohorts: ', cohorts)
   return (
     <>
-      {console.log("cohortsData", cohorts.data.users[0])}
       <main>
         <Card>
           <h4>My Cohort</h4>
@@ -35,42 +32,17 @@ export default function MyCohort() {
             />
             <div>
               <span>Software Development, Cohort 10</span>
-              <p>Januart 2023 - June 2023</p>
+              <p>January 2023 - June 2023</p>
             </div>
           </div>
 
           <div className="user-display-grid">
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
+            {
+                cohorts.map((item, index) => {
+                    if(item.role === 'STUDENT'){
+                    return <Username key={index} firstName={item.firstName} lastName={item.lastName}/>}
+                })
+            }
           </div>
         </Card>
       </main>
@@ -78,30 +50,12 @@ export default function MyCohort() {
         <Card>
           <div className="teacher-bar">
             <h4>Teachers</h4>
-            <section className="post-details ">
-              <ProfileCircle />
-
-              <div className="teacher-info">
-                <span>Software Development, Cohort 10</span>
-                <p>Software Development</p>
-              </div>
-
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-            <section className="post-details user-display">
-              <ProfileCircle />
-
-              <div className="teacher-info">
-                <span>Software Development, Cohort 10</span>
-                <p>Software Development</p>
-              </div>
-
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
+            {
+                cohorts.map((item, index) => {
+                    if(item.role === 'TEACHER'){
+                    return <Teacher key={index} bio={item.bio} firstName={item.firstName} lastName={item.lastName}/>}
+                })
+            }
           </div>
         </Card>
         <Card>
