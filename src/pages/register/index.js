@@ -6,7 +6,7 @@ import CredentialsCard from '../../components/credentials';
 import './register.css';
 
 const Register = () => {
-  const { onRegister, onFirstLogin } = useAuth();
+  const { onRegister, onLogin } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -53,7 +53,7 @@ const Register = () => {
     console.log(formData.email, formData.password);
     try {
       await onRegister(formData.email, formData.password);
-      await onFirstLogin(formData.email, formData.password);
+      await onLogin(formData.email, formData.password, "/verification");
     } catch (error) {
       setRegistrationError('Email address already in use, please log in.');
     }

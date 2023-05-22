@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
         }
     }, [location.pathname])
 
-	const handleLogin = async (email, password) => {
+	const handleLogin = async (email, password, successRoute="/") => {
 		const res = await login(email, password)
 
         if (!res.data.token) {
@@ -34,20 +34,7 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem('token', res.data.token)
 
 		setToken(res.data.token)
-		navigate("/")
-	};
-
-	const handleFirstLogin = async (email, password) => {
-		const res = await login(email, password)
-
-        if (!res.data.token) {
-            return navigate("/login")
-        }
-
-        localStorage.setItem('token', res.data.token)
-
-		setToken(res.data.token)
-		navigate("/verification")
+		navigate(successRoute)
 	};
 
 	const handleLogout = () => {
@@ -82,7 +69,6 @@ const AuthProvider = ({ children }) => {
 	const value = {
 		token,
 		onLogin: handleLogin,
-		onFirstLogin: handleFirstLogin,
 		onLogout: handleLogout,
         onRegister: handleRegister,
         onCreateProfile: handleCreateProfile
