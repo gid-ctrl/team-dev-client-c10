@@ -13,7 +13,6 @@ import useAuth from "../../hooks/useAuth";
 import "../../styles/_buttons.css"
 import "./style.css";
 import ProfileCircle from "../../components/profileCircle"
-// import ProfileCircle from "../profileCircle"
 
 
 const Dashboard = () => {
