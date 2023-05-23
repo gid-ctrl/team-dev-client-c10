@@ -1,31 +1,29 @@
-import ProfileCircle from "../profileCircle"
-import "./style.css"
+import ProfileCircle from "../profileCircle";
+import "./style.css";
 
+const CohortStudent = ({ firstName, lastName }) => {
+  if (
+    firstName.length === 0 ||
+    lastName.length === 0 ||
+    !firstName ||
+    !lastName
+  ) {
+    return <></>;
+  }
 
-const CohortStudent = ({firstName, lastName}) => {
+  const userInitials = `${firstName[0]}${lastName[0]}`;
 
-    if(firstName.length === 0 || lastName.length === 0 || 
-        firstName === undefined || lastName === undefined ||
-        firstName === null || lastName === null) {
-            return(
-                <>
-                </>
-            )}
+  return (
+    <div className="user">
+      <span>
+        <ProfileCircle initials={userInitials} />
+      </span>
+      <span>{`${firstName} ${lastName}`}</span>
+      <div className="more-icon">
+        <span className="more-text">...</span>
+      </div>
+    </div>
+  );
+};
 
-        else{
-
-            const userInitials = `${firstName[0]}${lastName[0]}`
-
-            return(
-                <div className="user">
-                    <span><ProfileCircle initials={userInitials} /></span>
-                    <span>{`${firstName} ${lastName}`}</span>
-                    <div className="more-icon">
-                        <span className="more-text">...</span>
-                    </div>
-                </div>
-            )}
-    }   
-        
-
-export default CohortStudent
+export default CohortStudent;
