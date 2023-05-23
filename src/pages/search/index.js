@@ -81,7 +81,7 @@ function SearchPage () {
 
     return (
         <>  
-            <div className="parent">
+            <div className={`parent parent-${userRole}`}>
                 <BackButton />
                 <h1>Search Results</h1>
                 <section className="searchparent">
@@ -116,7 +116,8 @@ function SearchPage () {
 
                 <section className="resultsparent">
                     <div className="resultslist">
-                    <p>People</p>
+                        <p className="results-header">People</p>
+                        <hr  className="hr-search"/>
                         <ul>
                             {results.map((obj, index) => {
                                 return (
@@ -124,7 +125,7 @@ function SearchPage () {
                                         <div className="profile-icon search-picture">
                                             <p>{obj.firstName[0]}{obj.lastName[0]}</p>
                                         </div>
-                                        <div>
+                                        <div className="profile-info">
                                             <h4>{obj.firstName} {obj.lastName}</h4>
 
                                             {obj.cohortId !== null
@@ -132,13 +133,13 @@ function SearchPage () {
                                                 : <p className="extrainfo">{obj.role}</p>
                                             }
                                         </div>
-                                        <button className="sr-button"><Link to={`/profile/${obj.id}`} className="profiles">Profile</Link></button>
+                                        <button className="sr-button profile-btn"><Link to={`/profile/${obj.id}`} className="profiles">Profile</Link></button>
                                         { 
                                             userRole === 'teacher' && (
-                                                <>
+                                                <div className='teacher-buttons'>
                                                     <button className="sr-button">Add note</button>
                                                     <button className="sr-button">Move to cohort</button>
-                                                </>
+                                                </div >
                                             )
                                         }
                                         <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
