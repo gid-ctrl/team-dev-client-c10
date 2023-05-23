@@ -101,7 +101,6 @@ function SearchPage () {
                             <button className="clearbutton">
                                 <CrossBlackIcon/>
                             </button>
-
                             
                             </form>) : (
                                 <form onSubmit={onSubmit}>
@@ -111,7 +110,6 @@ function SearchPage () {
                                 name={'searchusers'}
                                 type="text"
                                 icon={<SearchIcon />}/>
-                                
                                 </form>
                             )}
 
@@ -130,16 +128,14 @@ function SearchPage () {
                                             </div>
                                             <div>
                                                 <h4>{obj.firstName} {obj.lastName}</h4>
-
                                                 {obj.cohortId !== null
                                                     ? <p className="extrainfo">{obj.role}, Cohort {obj.cohortId}</p>
                                                     : <p className="extrainfo">{obj.role}</p>
                                                 }
-                                            
                                             </div>
                                             <Link to={`/profile/${obj.id}`} className="profiles">Profile</Link>
-                                            {/* Requires link to profile page */}
-
+                                            <div>Add Note</div>
+                                            <div>Move to Cohort</div>
                                             <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
                                             {showMore === index && (<div className="showmore" ref={ref}><Link to={`/profile/${obj.id}`} className="dropprofiles"><div className="dropicon"><ProfileIcon /></div><div className="droptext">Profile</div></Link></div>)}
                                         </li>
@@ -168,7 +164,6 @@ function SearchPage () {
                                 <button className="clearbutton">
                                     <CrossBlackIcon/>
                                 </button>
-
                                 
                                 </form>) : (
                                     <form onSubmit={onSubmit}>
@@ -202,11 +197,8 @@ function SearchPage () {
                                                         ? <p className="extrainfo">{obj.role}, Cohort {obj.cohortId}</p>
                                                         : <p className="extrainfo">{obj.role}</p>
                                                     }
-                                                
                                                 </div>
                                                 <Link to={`/profile/${obj.id}`} className="profiles">Profile</Link>
-                                                {/* Requires link to profile page */}
-
                                                 <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
                                                 {showMore === index && (<div className="showmore" ref={ref}><Link to={`/profile/${obj.id}`} className="dropprofiles"><div className="dropicon"><ProfileIcon /></div><div className="droptext">Profile</div></Link></div>)}
                                             </li>
