@@ -50,15 +50,14 @@ const Post = ({
     }}, [currentUserId, liked])
     
   const handleClick = () => {
-    const requestData = { id };
 
     if (isLiked) {
-        deleted(`posts/${id}/like`, requestData).then(() => {
+        deleted(`posts/${id}/like`, {id}).then(() => {
         setIsLiked(false);
         setLike((prevLike) => prevLike - 1);
       });
     } else {
-        post(`posts/${id}/like`, requestData).then(() => {
+        post(`posts/${id}/like`, {id}).then(() => {
         setIsLiked(true);
         setLike((prevLike) => prevLike + 1);
       });
