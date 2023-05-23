@@ -21,7 +21,7 @@ const Welcome = () => {
 		const { name, value } = event.target;
 		setProfile({
 			...profile,
-			[name]: value,
+			[name]: value, 
 		});
 	};
 
