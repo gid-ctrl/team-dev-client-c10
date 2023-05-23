@@ -7,7 +7,9 @@ import Comment from "../comment";
 import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
 import "./style.css";
-import { post, request } from "../../service/apiClient";
+import { post, request, get } from "../../service/apiClient";
+import jwt_decode from "jwt-decode";
+import useAuth from "../../hooks/useAuth";
 
 const Post = ({
   name,
@@ -20,11 +22,18 @@ const Post = ({
   currentUserName
 }) => {
   const { openModal, setModal } = useModal();
-
+  const { token } = useAuth();
+  const { userLogged } = jwt_decode(token);
   const userInitials = name.match(/\b(\w)/g);
   const [isLiked, setIsLiked] = useState(false);
   const [like, setLike] = useState(likes);
 
+
+
+  useEffect(() => {
+   
+    }
+  , [id]);
 
   const showModal = () => {
     setModal(
@@ -46,17 +55,15 @@ const Post = ({
     if (isLiked) {
       request("DELETE", `posts/${id}/like`, requestData).then(() => {
         setIsLiked(false);
-        setLike(prevLike => prevLike - 1);
+        setLike((prevLike) => prevLike - 1);
       });
     } else {
       post(`posts/${id}/like`, requestData).then(() => {
         setIsLiked(true);
-        setLike(prevLike => prevLike + 1);
+        setLike((prevLike) => prevLike + 1);
       });
     }
   };
-
-
 
   return (
     <Card>
@@ -86,7 +93,7 @@ const Post = ({
         >
           <button className="post-interactions" onClick={handleClick}>
           {!isLiked && <Like />}
-        {isLiked && <LikeRed/>}
+          {isLiked && <LikeRed/>}
             <p>Like</p>
           </button>
 
