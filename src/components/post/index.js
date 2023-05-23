@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Like from "../../assets/icons/like";
 import LikeRed from "../../assets/icons/likeRed";
 import useModal from "../../hooks/useModal";
@@ -7,6 +7,7 @@ import Comment from "../comment";
 import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
 import "./style.css";
+import { post, request } from "../../service/apiClient";
 
 const Post = ({
   name,
@@ -16,7 +17,7 @@ const Post = ({
   likes = 0,
   id,
   setTriggerUpdate,
-  currentUserName,
+  currentUserName
 }) => {
   const { openModal, setModal } = useModal();
 
@@ -24,29 +25,38 @@ const Post = ({
   const [isLiked, setIsLiked] = useState(false);
   const [like, setLike] = useState(likes);
 
-    const showModal = () => {
-        setModal('Edit post', 
-        <EditPostModal 
-            id={id} 
-            content={content} 
-            setTriggerUpdate={setTriggerUpdate}
-            name={name}
-            userInitials={userInitials}
-        />)
-        openModal()
-    }
 
-  const handleClick = () => {
-    setIsLiked((prevIsLiked) => !prevIsLiked);
-    setLike((prevLike) => (isLiked ? prevLike - 1 : prevLike + 1));
+  const showModal = () => {
+    setModal(
+      'Edit post',
+      <EditPostModal
+        id={id}
+        content={content}
+        setTriggerUpdate={setTriggerUpdate}
+        name={name}
+        userInitials={userInitials}
+      />
+    );
+    openModal();
   };
 
-  let likeIcon = null;
-  if (isLiked) {
-    likeIcon = <LikeRed className='post-interactions'/>;
-  } else {
-    likeIcon = <Like className='post-interactions'/>;
-  }
+  const handleClick = () => {
+    const requestData = { id };
+
+    if (isLiked) {
+      request("DELETE", `posts/${id}/like`, requestData).then(() => {
+        setIsLiked(false);
+        setLike(prevLike => prevLike - 1);
+      });
+    } else {
+      post(`posts/${id}/like`, requestData).then(() => {
+        setIsLiked(true);
+        setLike(prevLike => prevLike + 1);
+      });
+    }
+  };
+
+
 
   return (
     <Card>
@@ -75,7 +85,8 @@ const Post = ({
           }`}
         >
           <button className="post-interactions" onClick={handleClick}>
-            {likeIcon}
+          {!isLiked && <Like />}
+        {isLiked && <LikeRed/>}
             <p>Like</p>
           </button>
 
