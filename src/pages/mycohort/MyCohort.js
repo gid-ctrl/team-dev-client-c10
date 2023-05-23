@@ -1,16 +1,24 @@
 import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon";
 import Card from "../../components/card";
 import ProfileCircle from "../../components/profileCircle";
-import { useEffect } from "react";
-// import { get } from "../../service/apiClient";
+import { useState, useEffect } from "react";
+import { get } from "../../service/apiClient";
+import Students from "./Students";
+import Teachers from "./Teachers";
+
+
 
 export default function MyCohort() {
-  const cohortId = 1;
+  const [cohorts, setCohorts] = useState([]);
 
-  const endpoint = `${process.env.REACT_APP_C10}/cohorts/${cohortId}/users`;
-  console.log("endpoint", endpoint);
+  const endpoint = `users`;
+  const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    get(endpoint).then((item) => {
+      setCohorts(item.data.users);
+    });
+  }, []);
 
   return (
     <>
@@ -19,119 +27,53 @@ export default function MyCohort() {
           <h4>My Cohort</h4>
 
           <div className="soft-ware-dev">
-            <ProfileCircle
+            <ProfileCircle newColor={randomColor}
               initials={<SquareBracketsIcon color="white" scale="scale(1.4)" />}
             />
             <div>
               <span>Software Development, Cohort 10</span>
-              <p>Januart 2023 - June 2023</p>
+              <p>January 2023 - June 2023</p>
             </div>
           </div>
 
           <div className="user-display-grid">
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
 
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-
-            <section className="post-details user-display">
-              <ProfileCircle initials="K9" />
-              <p>Joe Bloggs</p>
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
+            {
+                cohorts.map((item, index) => {
+                    if(item.role === 'STUDENT'){
+                    return <Students key={index} firstName={item.firstName} lastName={item.lastName}/>}
+                })
+            }
           </div>
         </Card>
       </main>
-      {/* right side teacher bar */}
       <aside>
         <Card>
-          <div class="teacher-bar">
+          <div className="teacher-bar">
             <h4>Teachers</h4>
-            <section className="post-details ">
-              <ProfileCircle />
+            {
+                cohorts.map((item, index) => {
+                    if(item.role === 'TEACHER'){
+                    return <Teachers key={index} bio={item.bio} firstName={item.firstName} lastName={item.lastName}/>}
+                })
+            }
 
-              <div class="teacher-info">
-                <span>Software Development, Cohort 10</span>
-                <p>Software Development</p>
-              </div>
-
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
-            {/* teacher two */}
-            <section className="post-details user-display">
-              <ProfileCircle />
-
-              <div class="teacher-info">
-                <span>Software Development, Cohort 10</span>
-                <p>Software Development</p>
-              </div>
-
-              <div className="edit-icon">
-                <p>...</p>
-              </div>
-            </section>
           </div>
         </Card>
-
-        {/* right side excercise bar */}
         <Card>
-          <h4>My Exercise</h4>
-          <div className="myexercises">
-            <div>Modules:</div>
-            <div>2/7 completed</div>
-            <div>Units:</div>
-            <div>4/10 completed</div>
-            <div>Exercises:</div>
-            <div>34/58 completed</div>
-          </div>
-          <button>See Exercises</button>
+          <section className="exercise-tab">
+            <h3>My Exercise</h3>
+            <div className="myexercises">
+              <p>Modules:</p>
+              <p>2/7 completed</p>
+              <p>Units:</p>
+              <p>4/10 completed</p>
+              <p>Exercises:</p>
+              <p>34/58 completed</p>
+            </div>
+            <br />
+            <button className="excercise-button">See Exercises</button>
+          </section>
         </Card>
       </aside>
     </>

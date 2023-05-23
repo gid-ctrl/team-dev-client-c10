@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AddIcon from "../../assets/icons/addIcon"
 import CohortIcon from "../../assets/icons/cohortIcon"
 import CohortIconFill from "../../assets/icons/cohortIcon-fill"
@@ -10,14 +10,14 @@ import Menu from "../menu"
 import MenuItem from "../menu/menuItem"
 import './style.css'
 
-const ProfileCircle = ({ initials }) => {
+const ProfileCircle = ({ initials, id, newColor }) => {
     const [isMenuVisible, setIsMenuVisible] = useState(false)
 
     return (
-        <div className="profile-circle" onClick={() => setIsMenuVisible(!isMenuVisible)}>
+        <div className="profile-circle" id={id} onClick={() => setIsMenuVisible(!isMenuVisible)}>
             {isMenuVisible && <CascadingMenu />}
             
-            <div className="profile-icon">
+            <div className="profile-icon" style={{backgroundColor: `${newColor}`}}>
                 <p>{initials}</p>
             </div>
         </div>

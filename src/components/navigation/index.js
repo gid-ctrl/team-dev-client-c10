@@ -35,6 +35,7 @@ const Navigation = () => {
             <p>Cohort</p>
           </NavLink>
         </li>
+
       </ul>
     </nav>
   );

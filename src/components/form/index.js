@@ -1,14 +1,14 @@
-const Form = ({ children, onSubmit, className }) => {
-  const onFormSubmit = (event) => {
-    event.preventDefault();
-    onSubmit();
-  };
+const Form = ({ children, onSubmit, className, onBlur }) => {
+    const onFormSubmit = (event) => {
+        event.preventDefault()
+        onSubmit()
+    }
 
-  return (
-    <form className={className} onSubmit={onFormSubmit}>
-      {children}
-    </form>
-  );
-};
+    return (
+        <form className={className} onSubmit={onFormSubmit} onBlur={onBlur}>
+            {children}
+        </form>
+    )
+}
 
 export default Form;
