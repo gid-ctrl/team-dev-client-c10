@@ -9,27 +9,36 @@ import useAuth from "../../hooks/useAuth";
 import jwt_decode from "jwt-decode"
 import { useEffect, useState } from 'react'
 import { get } from '../../service/apiClient'
+import { useParams } from 'react-router-dom';
+
 
 
 const ViewProfile = () => {
   const navigate = useNavigate();
 	const { userId } = useAuth();
+  const urlParams = useParams();
+
   const [user, setUser] = useState({})
   const [userInitials, setUserInitials] = useState(``)
 
+
+  
   const handleClick = () => {
     navigate("/profile/1/edit");
   };
  
+  // console.log(`params`, urlParams.id)
 
   useEffect(() => {
     async function getUserInfo() {
-      const userInfo = await get(`users/${userId}`)
+      const userInfo = await get(`users/${urlParams.id}`)
+      // console.log(`userid`, userId)
+
       setUser(userInfo.data.user)
       setUserInitials(getInitailsFromUser(userInfo.data.user))
     }
     getUserInfo()
-  }, [userId]);
+  }, [urlParams.id]);
 
   const userDisplayName = (user) => {
     return `${user.firstName} ${user.lastName}`
