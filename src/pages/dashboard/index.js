@@ -150,7 +150,7 @@ const Dashboard = () => {
                            
                          </>
                        );
-                     } else if (filteredUsers.length >= 2) {
+                     } else if (filteredUsers.length >= 10) {
                        return (
                          <>
                            <h5>People</h5>
