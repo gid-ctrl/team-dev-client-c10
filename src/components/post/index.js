@@ -16,24 +16,19 @@ const Post = ({
   date,
   content,
   comments = [],
-  likes = 0,
+  liked,
   id,
   setTriggerUpdate,
-  currentUserName
+  currentUserName,
+  currentUserId
 }) => {
   const { openModal, setModal } = useModal();
   const { token } = useAuth();
   const { userLogged } = jwt_decode(token);
   const userInitials = name.match(/\b(\w)/g);
   const [isLiked, setIsLiked] = useState(false);
-  const [like, setLike] = useState(likes);
+  const [like, setLike] = useState(liked.length);
 
-
-
-  useEffect(() => {
-   
-    }
-  , [id]);
 
   const showModal = () => {
     setModal(
@@ -49,6 +44,13 @@ const Post = ({
     openModal();
   };
 
+  useEffect(() => {
+    for(let i = 0; i < liked.length; i++){
+      if (liked[i].userId === currentUserId){
+        setIsLiked(true);
+      }
+    }}, [liked])
+    
   const handleClick = () => {
     const requestData = { id };
 
