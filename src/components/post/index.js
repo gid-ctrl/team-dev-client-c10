@@ -7,7 +7,7 @@ import Comment from "../comment";
 import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
 import "./style.css";
-import { post, request, get } from "../../service/apiClient";
+import { post, deleted } from "../../service/apiClient";
 
 
 const Post = ({
@@ -53,12 +53,12 @@ const Post = ({
     const requestData = { id };
 
     if (isLiked) {
-      request("DELETE", `posts/${id}/like`, requestData).then(() => {
+        deleted(`posts/${id}/like`, requestData).then(() => {
         setIsLiked(false);
         setLike((prevLike) => prevLike - 1);
       });
     } else {
-      post(`posts/${id}/like`, requestData).then(() => {
+        post(`posts/${id}/like`, requestData).then(() => {
         setIsLiked(true);
         setLike((prevLike) => prevLike + 1);
       });
