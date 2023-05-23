@@ -11,17 +11,24 @@ const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
 	const navigate = useNavigate()
-	const location = useLocation()
+	
 	const [token, setToken] = useState(null)
+  const [userId, setUserId] = useState(null)
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('token')
 
-        if (storedToken && !token) {
-            setToken(storedToken)
-            navigate("/")
-        }
-    }, [location.pathname])
+      const storedToken = localStorage.getItem('token')
+
+      if (storedToken && !token) {
+          setToken(storedToken)
+          navigate("/")
+      }
+      if (token) {
+        const decoded = jwt_decode(token)
+        setUserId(decoded.userId)
+      }
+    }, [navigate, token])
+
 
 	const handleLogin = async (email, password) => {
 		const res = await login(email, password)
@@ -57,13 +64,14 @@ const AuthProvider = ({ children }) => {
         navigate('/')
     }
 
-	const value = {
-		token,
-		onLogin: handleLogin,
-		onLogout: handleLogout,
-        onRegister: handleRegister,
-        onCreateProfile: handleCreateProfile
-	};
+  const value = {
+    token,
+    userId,
+    onLogin: handleLogin,
+    onLogout: handleLogout,
+    onRegister: handleRegister,
+    onCreateProfile: handleCreateProfile
+  };
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 };
