@@ -10,25 +10,23 @@ import jwt_decode from 'jwt-decode'
 const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
-	const navigate = useNavigate()
-	
-	const [token, setToken] = useState(null)
+  const navigate = useNavigate()
+
+  const [token, setToken] = useState(null)
   const [userId, setUserId] = useState(null)
 
-    useEffect(() => {
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token')
 
-      const storedToken = localStorage.getItem('token')
-
-      if (storedToken && !token) {
-          setToken(storedToken)
-          navigate("/")
-      }
-      if (token) {
-        const decoded = jwt_decode(token)
-        setUserId(decoded.userId)
-      }
-    }, [navigate, token])
-
+    if (storedToken && !token) {
+      setToken(storedToken)
+      navigate('/')
+    }
+    if (token) {
+      const decoded = jwt_decode(token)
+      setUserId(decoded.userId)
+    }
+  }, [navigate, token])
 
   const handleLogin = async (email, password, successRoute = '/') => {
     const res = await login(email, password)
@@ -49,14 +47,13 @@ const AuthProvider = ({ children }) => {
   }
 
   const handleRegister = async (email, password) => {
-    const res = register(email, password).then((res) => {
+    return register(email, password).then((res) => {
       if (res.status === 'fail') {
         throw new Error(res.data.error)
       }
       setToken(res.data.token)
       navigate('/verification')
     })
-    return res
   }
 
   const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
@@ -75,7 +72,7 @@ const AuthProvider = ({ children }) => {
     onLogout: handleLogout,
     onRegister: handleRegister,
     onCreateProfile: handleCreateProfile
-  };
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
