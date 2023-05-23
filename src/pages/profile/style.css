@@ -1,0 +1,127 @@
+:root { 
+    --color-blue: #000046;
+    --color-blue1: #64648c; 
+    --color-blue2: #96a0be; 
+    --color-blue5: #e6ebf5; 
+    --color-blue7: #f5faff; 
+    --color-green: #64dc78; 
+    --color-offwhite: #f0f5fa; 
+    --color-lightgrey: #f5f5f5; 
+}
+
+.hr-line {
+  background-color: "#e6ebf5";
+  height: 1;
+}
+
+.profile-container {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.main-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
+  column-gap: 30px;
+  row-gap: 30px;
+}
+
+.info-grid {
+  display: grid;
+  /* grid-template-rows: 90px repeat(90px, auto-fill) */
+}
+
+.textarea-small {
+  height: 50px;
+}
+
+small {
+  color: #64648C;
+}
+
+.training-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+
+.bio-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 10px; /* Adjust the gap between rows as needed */
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  overflow-y: auto;
+}
+
+.password-field {
+  position: relative;
+}
+
+.textarea-small {
+  padding-right: 30px; /* Adjust padding to create space for the SVG */
+}
+
+.svg-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust the right position as needed */
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  fill: #999; /* Adjust the SVG color as needed */
+}
+
+.button-container {
+  display: flex;
+  gap: 10px; /* Adjust the gap size as needed */
+  padding-top: 30px; /* Add top padding size as needed */
+}
+
+.button {
+  width: 40%; /* Reduce the width by 20% */
+}
+
+.training-info, .password-field {
+  position: relative;  
+  display: grid;
+  align-items: center;
+}
+
+.lock-icon {
+  position: absolute;
+  align-items: center;
+  right: 0px;
+}
+
+.eye-icon {
+  position: absolute;
+  align-items: center;
+  right: 7px;
+}
+
+
+.padding-title {
+  padding-top: 5px;
+
+}
+
+.padding-field-name {
+  padding-top: 16px;
+  padding-bottom: 7px;
+}
+
+.basic-info {
+  margin-bottom: 6px;
+  position: relative;  
+  display: grid;
+  align-items: center;
+}
