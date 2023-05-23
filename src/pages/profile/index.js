@@ -29,7 +29,7 @@ const ViewProfile = () => {
   })
  
   const handleClick = () => {
-    navigate("/profile/1/edit");
+    navigate(`/profile/${urlParams.id}/edit`);
   };
  
   useEffect(() => {
