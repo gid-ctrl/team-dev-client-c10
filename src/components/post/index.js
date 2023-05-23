@@ -1,14 +1,17 @@
-import useModal from "../../hooks/useModal"
-import Card from "../card"
-import Comment from "../comment"
-import EditPostModal from "../editPostModal"
-import ProfileCircle from "../profileCircle"
+
+import Like from "../../assets/icons/like";
+import LikeRed from "../../assets/icons/likeRed";
+import useModal from "../../hooks/useModal";
+import Card from "../card";
+import Comment from "../comment";
+import EditPostModal from "../editPostModal";
+import ProfileCircle from "../profileCircle";
 import CommentIcon from "../../assets/icons/commentIcon"
 import CommentIconFilled from "../../assets/icons/commentIconFilled"
 import TextInput from "../form/textInput"
 import CommentButton from "../commentButton"
 import { useState, useEffect } from "react"
-import "./style.css"
+import "./style.css";
 import AddCommentModal from "../addCommentModal"
 import { get } from "../../service/apiClient"
 
@@ -18,9 +21,11 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
     const [postComments, setPostComments] = useState([])
     const [updateComments, setUpdateComments] = useState(false)
     const [showAllComments, setShowAllComments] = useState(false)
+    const [firstClick, setFirstClick] = useState(true)
 
-
-    const userInitials = name.match(/\b(\w)/g)
+  const userInitials = name.match(/\b(\w)/g);
+  const [isLiked, setIsLiked] = useState(false);
+  const [like, setLike] = useState(likes);
     
     const showModal = () => {
         setModal('Edit post', 
@@ -28,9 +33,23 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
             id={id} 
             content={content} 
             setTriggerUpdate={setTriggerUpdate}
+            name={name}
+            userInitials={userInitials}
         />)
         openModal()
     }
+
+  const handleClick = () => {
+    setIsLiked((prevIsLiked) => !prevIsLiked);
+    setLike((prevLike) => (isLiked ? prevLike - 1 : prevLike + 1));
+  };
+
+  let likeIcon = null;
+  if (isLiked) {
+    likeIcon = <LikeRed />;
+  } else {
+    likeIcon = <Like />;
+  }
 
     const showCommentModal = () => {
         setModal('Add a comment...', 
@@ -68,14 +87,34 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
           setPostComments(sortedArray.reverse());
       };
       
+    //   const fetchComments = async () => {
+    //     if (postComments.length === 0 || updateComments) {
+    //         await findComments();
+    //         setShowComments(true)
+    //     } else {
+    //         setShowComments(!showComments)
+    //     }
+    //   };
+
       const fetchComments = async () => {
-        if (postComments.length === 0 || updateComments) {
-            await findComments();
-            setShowComments(true)
-        } else {
+        if (updateComments || firstClick) {
+            setFirstClick(false)
+            setUpdateComments(false)
+            findComments()
+        } else if (postComments.length !== 0) {
             setShowComments(!showComments)
         }
       };
+
+      useEffect(() => {
+        if (!firstClick) {
+            if (postComments.length !== 0) {
+                setShowComments(true)
+            } else {
+                setShowComments(false)
+            }
+        }
+      }, [postComments])
 
       useEffect(() => {
         if (updateComments) {
@@ -88,42 +127,44 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
         setShowAllComments(!showAllComments)
       }
     
-    return (
-        <Card>
-            <article className="post">
-                <section className="post-details">
-                    <ProfileCircle initials={userInitials} />
+  return (
+    <Card>
+      <article className="post">
+        <section className="post-details">
+          <ProfileCircle initials={userInitials} />
 
-                    <div className="post-user-name">
-                        <p>{name}</p>
-                        <small>{date}</small>
-                    </div>
-                    
-                    <div className="edit-icon">
-                        <p onClick={showModal}>...</p>
-                    </div>
-                </section>
+          <div className="post-user-name">
+            <p>{name}</p>
+            <small>{date}</small>
+          </div>
+          {name === currentUserName && (
+            <div className="edit-icon">
+              <p onClick={showModal}>...</p>
+            </div>
+          )}
+        </section>
 
-                <section className="post-content">
-                    <p>{content}</p>
-                </section>
+        <section className="post-content">
+          <p>{content}</p>
+        </section>
 
                 <section className={`post-interactions-container border-top ${postComments.length ? 'border-bottom' : null}`}>
                     <div className="post-interactions">
-                        <div>Like</div>
+                    <button className="post-interactions-button like" onClick={handleClick}>
+                    {likeIcon}
+                    <p>Like</p>
+                </button>
                         <button className="post-interactions-button" onClick={fetchComments} >
                             {!showComments && <CommentIcon />}
                             {showComments && <CommentIconFilled />}
                             <p>Comment</p>
                         </button>
                     </div>
-
-                    <p>{!likes && 'Be the first to like this'}</p>
-                    
-                </section>
+          <p>{(!like && "Be the first to like this") || like} </p>
+        </section>
 
                 <section>
-                    {postComments.length < 3 && showComments && (
+                    {postComments.length <= 3 && showComments && (
                         <>
                             {postComments.map(comment => <Comment
                                 key={comment.id}

@@ -5,6 +5,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Loading from "./pages/loading";
 import Verification from "./pages/verification";
+import SearchPage from "./pages/search";
 import { AuthProvider, ProtectedRoute } from "./context/auth";
 import { ModalProvider } from "./context/modal";
 import Welcome from "./pages/welcome";
@@ -19,16 +20,19 @@ import Header from "./components/header";
 import MyCohort from "./pages/mycohort/MyCohort";
 import EditProfile from "./pages/edit";
 
+
 const App = () => {
   return (
     <>
       <AuthProvider>
         <ModalProvider>
+          
           <Routes>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="loading" element={<Loading />} />
             <Route path="verification" element={<Verification />} />
+
 
             <Route
               index
@@ -70,11 +74,21 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+                
+              <Route 
+                  path="search"
+                   element={
+                       <ProtectedRoute>
+                            <SearchPage />
+                       </ProtectedRoute>
+                  }
+              />
           </Routes>
         </ModalProvider>
       </AuthProvider>
     </>
   );
+
 };
 
 export default App;

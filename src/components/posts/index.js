@@ -12,7 +12,9 @@ const Posts = ({triggerUpdate, setTriggerUpdate, currentUserName, currentUserIni
         } else {
             getPosts().then(setPosts)
         }
-    }, [triggerUpdate])
+    }, [setTriggerUpdate, triggerUpdate])
+
+    
 
     return (
         <>

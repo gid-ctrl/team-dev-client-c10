@@ -1,4 +1,4 @@
-import { Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Card from "../../components/card";
 import TextInput from "../../components/form/textInput";
 import "./style.css";
@@ -6,24 +6,73 @@ import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
 import EyeIcon from "../../assets/icons/eyeIcon";
 import useAuth from "../../hooks/useAuth";
-import jwt_decode from "jwt-decode"
 import { useEffect, useState } from 'react'
 import { get } from '../../service/apiClient'
-
+import { useParams } from 'react-router-dom';
 
 const ViewProfile = () => {
   const navigate = useNavigate();
-  const [ userId, setUserId ] = useState()
-	const { token } = useAuth();
+	const { userId } = useAuth();
+  const urlParams = useParams();
+  const [allowedToEdit, setAllowedToEdit] = useState(false)
+  const [userProfile, setUserProfile] = useState({})
+  const [userInitials, setUserInitials] = useState(``)
+  const [user, setUser] = useState({id: ""})
 
+
+  useEffect(() => {
+    async function getUserInfo() {
+      const userInfo = await get(`users/${userId}`)
+      setUser(userInfo.data.user)
+    }
+    getUserInfo()
+  })
+ 
   const handleClick = () => {
     navigate("/profile/1/edit");
   };
+ 
+  useEffect(() => {
+    async function getUserInfo() {
+      const userInfo = await get(`users/${urlParams.id}`)
+      setUserProfile(userInfo.data.user)
+      setUserInitials(getInitailsFromUser(userInfo.data.user))
+    }
+    getUserInfo()
+  }, [urlParams.id, allowedToEdit]);
+
+  const userDisplayName = (user) => {
+    return `${user.firstName} ${user.lastName}`
+  }
+
+  const cohortDisplayName = (cohortId) => {
+    return `Cohort ${cohortId}`
+  }
+
+  const getInitailsFromUser = (user) => {
+    const firstInital = user.firstName.slice(0, 1)
+    const lastInital = user.lastName.slice(0, 1)
+    return `${firstInital}${lastInital}`
+  }
+
+  const checkUserAllowedToEdit = (loggedInUser, profilePageId) => {
+    if (loggedInUser === undefined) { 
+      setAllowedToEdit(false)
+      return null
+    }
+    if (loggedInUser.role === "TEACHER") {
+      setAllowedToEdit(true)
+    } else if (loggedInUser.id.toString() === profilePageId) {
+      setAllowedToEdit(true)
+    } else {
+      setAllowedToEdit(false)
+    }
+  }
 
   useEffect(() => {
-      const { userId } = jwt_decode(token)
-      setUserId(userId)
-  }, [token]);
+    checkUserAllowedToEdit(user, urlParams.id)
+  }, [urlParams.id, userProfile.id, user.id])
+
 
   return (
     <>
@@ -32,11 +81,11 @@ const ViewProfile = () => {
         <Card>
           <div className="profile-container">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>{userInitials}</p>
             </div>
             <div className="profile-summary">
-              <h3>Full name</h3>
-              <p>Title</p>
+              <h3>{userDisplayName(userProfile)}</h3>
+              <p>Software Developer</p>
             </div>
           </div>
 
@@ -49,7 +98,7 @@ const ViewProfile = () => {
                 <br />
                 <p>Photo</p>
                 <div className="profile-icon">
-                  <p>AJ</p>
+                  <p>{userInitials}</p>
                   <TextInput />
                 </div>
               </div>
@@ -61,6 +110,7 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Alex"
                 disabled
+                value={userProfile.firstName}
               ></textarea>
               <small className="padding-field-name">Last Name*</small>
               <textarea
@@ -69,6 +119,8 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Walker"
                 disabled
+                value={userProfile.lastName}
+
               ></textarea>
               <small className="padding-field-name">Username*</small>
               <textarea
@@ -77,6 +129,8 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="Alex Walker"
                 disabled
+                value={userDisplayName(userProfile)}
+
               ></textarea>
               <small className="padding-field-name">GitHub Username*</small>
               <textarea
@@ -85,6 +139,8 @@ const ViewProfile = () => {
                 className="textarea-small"
                 placeholder="alex-walker"
                 disabled
+                value={userProfile.githubUrl}
+
               ></textarea>
             </div>
 
@@ -101,6 +157,7 @@ const ViewProfile = () => {
                     className="textarea-small"
                     placeholder="Student"
                     disabled
+                    value={userProfile.role}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -129,6 +186,7 @@ const ViewProfile = () => {
                     className="textarea-small"
                     placeholder="Cohort 4"
                     disabled
+                    value={cohortDisplayName(userProfile.cohortId)}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -176,6 +234,8 @@ const ViewProfile = () => {
                   className="textarea-small"
                   placeholder="alex.walker@boolean.co.uk"
                   disabled
+                  value={userProfile.email}
+
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Mobile*</small>
@@ -218,17 +278,22 @@ const ViewProfile = () => {
                 <textarea
                   placeholder="Tell us about yourself, your professional and educational highlights to date..."
                   spellCheck="false"
+                  value={userProfile.bio}
+
                 ></textarea>
                 <small>0/300</small>
               </div>
               <div class="button-container">
-                <button
-                  type="button"
-                  class="button offwhite"
-                  onClick={handleClick}
-                >
-                  Edit
-                </button>
+                { allowedToEdit ? (
+                  <button
+                    type="button"
+                    class="button offwhite"
+                    onClick={handleClick}
+                  >
+                    Edit
+                  </button>
+                  ) : null
+                }
               </div>
             </div>
           </div>

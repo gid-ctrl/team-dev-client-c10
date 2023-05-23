@@ -23,6 +23,11 @@ async function getPosts() {
   return res.data.posts;
 }
 
+async function getUsers() {
+    const res = await get('users')
+    return res.data.users
+}
+
 async function post(endpoint, data, auth = true) {
   return await request("POST", endpoint, data, auth);
 }
@@ -52,8 +57,18 @@ async function request(method, endpoint, data, auth = true) {
   }
 
   const response = await fetch(`${API_URL}/${endpoint}`, opts);
+  
 
   return response.json();
 }
 
-export { login, getPosts, register, createProfile, get, patch, post };
+export {
+    login,
+    getPosts,
+    getUsers,
+    register,
+    createProfile,
+    get,
+    patch,
+    post,
+}

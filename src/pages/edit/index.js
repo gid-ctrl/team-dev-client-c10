@@ -4,33 +4,64 @@ import TextInput from "../../components/form/textInput";
 import "./style.css";
 import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
+import { get } from "../../service/apiClient";
+import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const EditProfile = () => {
+  const { userId } = useAuth();
+  const [user, setUser] = useState({});
+  const [userInitials, setUserInitials] = useState(``);
+
+  useEffect(() => {
+    async function getUserInfo() {
+      const userInfo = await get(`users/${userId}`);
+      setUser(userInfo.data.user);
+      setUserInitials(getInitailsFromUser(userInfo.data.user));
+    }
+    getUserInfo();
+  }, [userId]);
+
+  const userDisplayName = (user) => {
+    return `${user.firstName} ${user.lastName}`;
+  };
+
+  const cohortDisplayName = (cohortId) => {
+    return `Cohort ${cohortId}`;
+  };
+
+  const getInitailsFromUser = (user) => {
+    const firstInital = user.firstName.slice(0, 1);
+    const lastInital = user.lastName.slice(0, 1);
+    return `${firstInital}${lastInital}`;
+  };
+
   return (
     <>
       <main>
         <h2>Profile</h2>
+        <br />
         <Card>
           <div className="profile-container">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>{userInitials}</p>
             </div>
             <div className="profile-summary">
-              <h3>Full name</h3>
-              <p>Title</p>
+              <h3>{userDisplayName(user)}</h3>
+              <p>Software Developer</p>
             </div>
           </div>
 
           <div className="main-info-grid">
             <div className="basic-info">
-           <hr class="hr-line" />
+              <hr class="hr-line" />
               <br />
               <div className="basic-info-content info-grid">
                 <h4 className="padding-title">Basic info</h4>
                 <br />
                 <p>Photo</p>
                 <div className="profile-icon">
-                  <p>AJ</p>
+                  <p>{userInitials}</p>
                   <TextInput />
                 </div>
               </div>
@@ -41,7 +72,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Alex"
-                disabled
+                value={user.firstName}
               ></textarea>
               <small className="padding-field-name">Last Name*</small>
               <textarea
@@ -49,7 +80,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Walker"
-                disabled
+                value={user.lastName}
               ></textarea>
               <small className="padding-field-name">Username*</small>
               <textarea
@@ -57,7 +88,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Alex Walker"
-                disabled
+                value={userDisplayName(user)}
               ></textarea>
               <small className="padding-field-name">GitHub Username*</small>
               <textarea
@@ -65,12 +96,12 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="alex-walker"
-                disabled
+                value={user.githubUrl}
               ></textarea>
             </div>
 
             <div className="training-info">
-           <hr class="hr-line" />
+              <hr class="hr-line" />
               <br />
               <h4 className="padding-title">Training info</h4>
               <div className="training-info-content info-grid">
@@ -82,6 +113,7 @@ const EditProfile = () => {
                     className="textarea-small"
                     placeholder="Student"
                     disabled
+                    value={user.role}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -110,6 +142,7 @@ const EditProfile = () => {
                     className="textarea-small"
                     placeholder="Cohort 4"
                     disabled
+                    value={cohortDisplayName(user.cohortId)}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -147,7 +180,7 @@ const EditProfile = () => {
             </div>
 
             <div className="contact-info">
-           <hr class="hr-line" />
+              <hr class="hr-line" />
               <div className="contact-info-content info-grid">
                 <h4 className="padding-title">Contact info</h4>
                 <div className="padding-top"></div>
@@ -156,7 +189,7 @@ const EditProfile = () => {
                   cols="40"
                   className="textarea-small"
                   placeholder="alex.walker@boolean.co.uk"
-                  disabled
+                  value={user.email}
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Mobile*</small>
@@ -164,7 +197,6 @@ const EditProfile = () => {
                   cols="40"
                   className="textarea-small"
                   placeholder="07890 123456"
-                  disabled
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Password*</small>
@@ -177,7 +209,7 @@ const EditProfile = () => {
                       name="password"
                       placeholder="***************"
                       disabled
-                      required
+                      value={user.password}
                     ></textarea>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -204,20 +236,24 @@ const EditProfile = () => {
 
             <div className="bio">
               <div className="bio-content">
-             <hr class="hr-line" />
+                <hr class="hr-line" />
                 <h4>Bio</h4>
                 <div className="padding-top"></div>
                 <small>Bio</small>
                 <textarea
                   placeholder="Tell us about yourself, your professional and educational highlights to date..."
                   spellCheck="false"
+                  value={user.bio}
                 ></textarea>
                 <small>0/300</small>
               </div>
 
               <div class="button-container">
                 <button type="button" class="button offwhite">
-                  Edit
+                  Cancel
+                </button>
+                <button type="button" class="button blue">
+                  Save
                 </button>
               </div>
             </div>
