@@ -8,8 +8,7 @@ import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
 import "./style.css";
 import { post, request, get } from "../../service/apiClient";
-import jwt_decode from "jwt-decode";
-import useAuth from "../../hooks/useAuth";
+
 
 const Post = ({
   name,
@@ -23,8 +22,7 @@ const Post = ({
   currentUserId
 }) => {
   const { openModal, setModal } = useModal();
-  const { token } = useAuth();
-  const { userLogged } = jwt_decode(token);
+
   const userInitials = name.match(/\b(\w)/g);
   const [isLiked, setIsLiked] = useState(false);
   const [like, setLike] = useState(liked.length);
@@ -49,7 +47,7 @@ const Post = ({
       if (liked[i].userId === currentUserId){
         setIsLiked(true);
       }
-    }}, [liked])
+    }}, [currentUserId, liked])
     
   const handleClick = () => {
     const requestData = { id };
