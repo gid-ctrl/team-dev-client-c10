@@ -11,6 +11,8 @@ import { useState } from "react"
 const Header = () => {
     const { token, onLogout } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
+    const { userId } = useAuth();
+
 
     const onClickProfileIcon = () => {
         setIsMenuVisible(!isMenuVisible)
@@ -42,7 +44,7 @@ const Header = () => {
 
                         <section className="user-panel-options border-top">
                             <ul>
-                                <li><NavLink to='/'><ProfileIcon /> <p>Profile</p></NavLink></li>
+                                <li><NavLink to={`/profile/${userId}`}><ProfileIcon /> <p>Profile</p></NavLink></li>
                                 <li><NavLink to='/'><CogIcon /> <p>Settings &amp; Privacy</p></NavLink></li>
                                 <li><NavLink to='#' onClick={onLogout}><LogoutIcon /> <p>Log out</p></NavLink></li>
                             </ul>
