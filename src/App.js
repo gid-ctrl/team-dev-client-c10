@@ -26,6 +26,7 @@ const App = () => {
     <>
       <AuthProvider>
         <ModalProvider>
+          
           <Routes>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
@@ -73,15 +74,15 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-
+                
               <Route 
-                path="search"
-                element={
-                    <ProtectedRoute>
-                        <SearchPage />
-                    </ProtectedRoute>
-                }
-            />            
+                  path="search"
+                   element={
+                       <ProtectedRoute>
+                            <SearchPage />
+                       </ProtectedRoute>
+                  }
+              />
           </Routes>
         </ModalProvider>
       </AuthProvider>

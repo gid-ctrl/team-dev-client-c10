@@ -5,8 +5,8 @@ async function login(email, password) {
 }
 
 async function register(email, password) {
-  await post("users", { email, password }, false);
-  return await login(email, password);
+    return await post('users', { email, password }, false)
+    
 }
 
 async function createProfile(userId, firstName, lastName, githubUrl, bio) {
@@ -56,7 +56,6 @@ async function request(method, endpoint, data, auth = true) {
     opts.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   }
 
-  console.log(opts);
   const response = await fetch(`${API_URL}/${endpoint}`, opts);
   
 
@@ -71,6 +70,4 @@ export {
     createProfile,
     patch,
     post,
-    get
 }
-

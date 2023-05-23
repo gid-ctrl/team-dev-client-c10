@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import "../../styles/_buttons.css"
 import "./style.css";
-import ProfileCircle from "../../components/profileCircle"
+import ProfileButton from "../../components/profileButton";
+
 
 
 const Dashboard = () => {
@@ -159,10 +160,11 @@ const Dashboard = () => {
                              <div className="nameSearch" key={user.id}>
                                {user.firstName.length !== 0 && (
                                  <>
-                                <ProfileCircle id="search-element" initials= {`${user.firstName?.[0]}${user.lastName?.[0]}`} />
+                                <ProfileButton id={user.id} initials= {`${user.firstName?.[0]}${user.lastName?.[0]}`} />
                                    <div id="post-user-name">
                                      <p>
                                        {user.firstName} {user.lastName}
+                                  
                                      </p>
                                      <small>
                                        {user.role[0]}
@@ -191,19 +193,22 @@ const Dashboard = () => {
                              <div className="nameSearch" key={user.id}>
                                {user.firstName.length !== 0 && (
                                  <>
-                                 <ProfileCircle id="search-element" initials= {`${user.firstName?.[0]}${user.lastName?.[0]}`} />
+                                 <ProfileButton id={user.id} initials= {`${user.firstName?.[0]}${user.lastName?.[0]}`} />
                                    <div className="name-tag-role">
                                      <p id="searched-name">
                                        {user.firstName} {user.lastName}
+                            
                                      </p>
                                      <div className="role">
                                        {user.role[0]}
                                        {user.role.toLowerCase().slice(1)}
                                      </div>
                                    </div>
-                                   <div className="edit-icon">
+                                
+                                    <div className="edit-icon">
                                      <p>...</p>
                                    </div>
+                                   
                                  </>
                                )}
                              </div>

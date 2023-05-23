@@ -7,25 +7,37 @@ import { getUsers } from "../../service/apiClient"
 import { Link } from "react-router-dom";
 import CrossBlackIcon from "../../assets/icons/crossBlackIcon";
 import ProfileIcon from "../../assets/icons/profileIcon";
+import useAuth from "../../hooks/useAuth";
 
 function SearchPage () {
-    // create a state hook that will store the fetched data.
+    
+    
     const [formData, setFormData] = useState('')
     const [users, setUsers] = useState([])
     const [results, setResults] = useState([])
     const [showMore, setShowMore] = useState(-1)
+    const [userRole, setUserRole] = useState('')
     const ref = useRef(null)
+    const { userId } = useAuth()
 
     useEffect(() => {
-        getUsers().then(setUsers)
+        getUsers()
+        .then(data => {
+            setUsers(data)
+            setResults(data)
+            const currentUser = data.find(user => user.id === userId)
+            if (currentUser) {
+                setUserRole(currentUser.role)
+            }
+        })
         
     }, [])
    
     useEffect(() => {
-        getUsers().then(setResults)
+        document.addEventListener("click", handleClickOutside, true)
     }, [])
-       
-    // create the onChange event listener that will log the text being entered in the field.
+
+
     const onChange = (event) => {
            
         setFormData(event.target.value)
@@ -44,8 +56,11 @@ function SearchPage () {
 
     const onSubmit = (event) => {
         event.preventDefault()
-        getUsers().then(setUsers)
-        getUsers().then(setResults)
+        getUsers()
+        .then(data => {
+            setUsers(data)
+            setResults(data)
+        })
         setFormData('')
     }
 
@@ -57,10 +72,6 @@ function SearchPage () {
             setShowMore(index)
         }
     }
-
-    useEffect(() => {
-        document.addEventListener("click", handleClickOutside, true)
-    }, [])
     
     const handleClickOutside = (e) => {
         if (ref.current !== null && !ref.current.contains(e.target)) {
@@ -69,77 +80,78 @@ function SearchPage () {
         }
 
     return (
-        <>
-
-        <div className="parent">
-            <BackButton />
-            <h1>Search Results</h1>
-            <section className="searchparent">
-                <div className="">
-                    {formData.length !== 0 
-                    ? (<form onSubmit={onSubmit}>
-                    <TextInput
-                    value={formData}
-                    onChange={onChange}
-                    name={'searchusers'}
-                    type="text"
-                    icon={<SearchIcon />}/>
-
-                    <button className="clearbutton">
-                        <CrossBlackIcon/>
-                    </button>
-
-                    
-                    </form>) : (
-                        <form onSubmit={onSubmit}>
+        <>  
+            <div className="parent">
+                <BackButton />
+                <h1>Search Results</h1>
+                <section className="searchparent">
+                    <div className="">
+                        {formData.length !== 0 
+                        ? (<form onSubmit={onSubmit}>
                         <TextInput
                         value={formData}
                         onChange={onChange}
                         name={'searchusers'}
                         type="text"
                         icon={<SearchIcon />}/>
+
+                        <button className="clearbutton">
+                            <CrossBlackIcon/>
+                        </button>
                         
-                        </form>
-                    )}
+                        </form>) : (
+                            <form onSubmit={onSubmit}>
+                            <TextInput
+                            value={formData}
+                            onChange={onChange}
+                            name={'searchusers'}
+                            type="text"
+                            icon={<SearchIcon />}/>
+                            
+                            </form>
+                        )}
 
-                </div>
-            </section>
+                    </div>
+                </section>
 
-            <section className="resultsparent">
-                <div className="resultslist">
-                <p>People</p>
-                    <ul>
-                        {results.map((obj, index) => {
-                           
-                        return (
-                            <li key={index} >
-                                <div className="profile-icon search-picture">
-                                    <p>{obj.firstName[0]}{obj.lastName[0]}</p>
-                                </div>
-                                <div>
-                                    <h4>{obj.firstName} {obj.lastName}</h4>
+                <section className="resultsparent">
+                    <div className="resultslist">
+                    <p>People</p>
+                        <ul>
+                            {results.map((obj, index) => {
+                                return (
+                                    <li key={index} >
+                                        <div className="profile-icon search-picture">
+                                            <p>{obj.firstName[0]}{obj.lastName[0]}</p>
+                                        </div>
+                                        <div>
+                                            <h4>{obj.firstName} {obj.lastName}</h4>
 
-                                    {obj.cohortId !== null
-                                        ? <p className="extrainfo">{obj.role}, Cohort {obj.cohortId}</p>
-                                        : <p className="extrainfo">{obj.role}</p>
-                                    }
-                                
-                                </div>
-                                <Link to={`/profile/${obj.id}`} className="profiles">Profile</Link>
-                                {/* Requires link to profile page */}
+                                            {obj.cohortId !== null
+                                                ? <p className="extrainfo">{obj.role}, Cohort {obj.cohortId}</p>
+                                                : <p className="extrainfo">{obj.role}</p>
+                                            }
+                                        </div>
+                                        <Link to={`/profile/${obj.id}`} className="profiles">Profile</Link>
+                                        { 
+                                            userRole === 'TEACHER' && (
+                                                <>
+                                                    <div>Add Note</div>
+                                                    <div>Move to Cohort</div>
+                                                </>
+                                            )
+                                        }
+                                        <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
+                                        {showMore === index && (<div className="showmore" ref={ref}><Link to={`/profile/${obj.id}`} className="dropprofiles"><div className="dropicon"><ProfileIcon /></div><div className="droptext">Profile</div></Link></div>)}
+                                    </li>
+                                )         
+                            })}                            
+                        </ul>
+                    </div>
+                </section>
+            </div>
 
-                                <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
-                                {showMore === index && (<div className="showmore" ref={ref}><Link to={`/profile/${obj.id}`} className="dropprofiles"><div className="dropicon"><ProfileIcon /></div><div className="droptext">Profile</div></Link></div>)}
-                            </li>
-            )
-            
-        })}                            
-                    </ul>
-                </div>
-            </section>
-        </div>
         </>
-
     )
 }
 
