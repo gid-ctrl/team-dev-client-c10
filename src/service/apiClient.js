@@ -70,4 +70,5 @@ export {
     createProfile,
     patch,
     post,
+    get
 }
