@@ -40,8 +40,8 @@
 
 .user-display-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 48%));
-    gap: 0px 40px
+    grid-template-columns: repeat(auto-fit, minmax(300px, 45%));
+    gap: 0px 70px
 }
 
 .teacher-bar>h4 {
