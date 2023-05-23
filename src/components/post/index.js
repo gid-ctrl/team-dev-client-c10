@@ -43,11 +43,9 @@ const Post = ({
   };
 
   useEffect(() => {
-    for(let i = 0; i < liked.length; i++){
-      if (liked[i].userId === currentUserId){
-        setIsLiked(true);
-      }
-    }}, [currentUserId, liked])
+    const isLiked = liked.some(postlikes => postlikes.userId === currentUserId)
+    setIsLiked(isLiked)
+    }, [currentUserId, liked])
     
   const handleClick = () => {
 
