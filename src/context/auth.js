@@ -47,14 +47,13 @@ const AuthProvider = ({ children }) => {
   }
 
   const handleRegister = async (email, password) => {
-    return register(email, password).then((res) => {
-      if (res.status === 'fail') {
-        throw new Error(res.data.error)
-      }
-      setToken(res.data.token)
-      navigate('/verification')
-    })
-  }
+    const res = await register(email, password)
+    if (res.status === 'fail') {
+      throw new Error(res.data.error)
+    }
+    setToken(res.data.token)
+    navigate('/verification')
+}
 
   const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
     const { userId } = jwt_decode(token)
