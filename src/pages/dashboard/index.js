@@ -81,7 +81,8 @@ const Dashboard = () => {
         <Posts triggerUpdate={triggerUpdate}
         setTriggerUpdate = {setTriggerUpdate}
         currentUserName={currentUserName}
-        currentUserInitials={currentUserInitials} />
+        currentUserInitials={currentUserInitials}
+        currentUser={currentUser} />
       </main>
 
       <aside>

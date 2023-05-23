@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Post from "../post";
 import { getPosts } from "../../service/apiClient";
 
-const Posts = ({triggerUpdate, setTriggerUpdate, currentUserName, currentUserInitials}) => {
+const Posts = ({triggerUpdate, setTriggerUpdate, currentUserName, currentUserInitials, currentUser}) => {
     const [posts, setPosts] = useState([])
        
     useEffect(() => {
@@ -26,6 +26,7 @@ const Posts = ({triggerUpdate, setTriggerUpdate, currentUserName, currentUserIni
                         setTriggerUpdate={setTriggerUpdate}
                         currentUserName={currentUserName}
                         currentUserInitials={currentUserInitials}
+                        currentUser={currentUser}
                     />
             })}
         </>

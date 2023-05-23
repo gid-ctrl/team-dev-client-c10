@@ -4,6 +4,7 @@ import Comment from "../comment"
 import EditPostModal from "../editPostModal"
 import ProfileCircle from "../profileCircle"
 import CommentIcon from "../../assets/icons/commentIcon"
+import CommentIconFilled from "../../assets/icons/commentIconFilled"
 import TextInput from "../form/textInput"
 import CommentButton from "../commentButton"
 import { useState, useEffect } from "react"
@@ -11,11 +12,12 @@ import "./style.css"
 import AddCommentModal from "../addCommentModal"
 import { get } from "../../service/apiClient"
 
-const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUserName, currentUserInitials}) => {
+const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUserName, currentUserInitials, currentUser}) => {
     const { openModal, setModal } = useModal()
     const [showComments, setShowComments] = useState(false)
     const [postComments, setPostComments] = useState([])
     const [updateComments, setUpdateComments] = useState(false)
+    const [showAllComments, setShowAllComments] = useState(false)
 
 
     const userInitials = name.match(/\b(\w)/g)
@@ -54,6 +56,7 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
               const initials = `${commentRes.data.user.firstName?.[0]}${commentRes.data.user.lastName?.[0]}`;
               const newComment = {
                 id: comment.id,
+                authorId: comment.userId,
                 name: name,
                 initials: initials,
                 text: comment.content,
@@ -81,8 +84,8 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
         }
       },[updateComments])
       
-      const testFunction = () => {
-        console.log(postComments)
+      const toggleAllComments = () => {
+        setShowAllComments(!showAllComments)
       }
     
     return (
@@ -107,9 +110,10 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
 
                 <section className={`post-interactions-container border-top ${postComments.length ? 'border-bottom' : null}`}>
                     <div className="post-interactions">
-                        <div onClick={testFunction} >Like</div>
+                        <div>Like</div>
                         <button className="post-interactions-button" onClick={fetchComments} >
-                            <CommentIcon />
+                            {!showComments && <CommentIcon />}
+                            {showComments && <CommentIconFilled />}
                             <p>Comment</p>
                         </button>
                     </div>
@@ -119,9 +123,33 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
                 </section>
 
                 <section>
-                    {showComments && postComments.map(comment => <Comment
-                        key={comment.id}
-                        comment={comment} />)}
+                    {postComments.length < 3 && showComments && (
+                        <>
+                            {postComments.map(comment => <Comment
+                                key={comment.id}
+                                comment={comment}
+                                currentUser={currentUser} />)}
+                        </>
+                    )}
+                    {postComments.length > 3 && showComments && !showAllComments && (
+                        <>
+                            <p onClick={toggleAllComments}>See previous comments</p>
+                            {postComments.slice(0,3).map(comment => <Comment
+                                key={comment.id}
+                                comment={comment}
+                                currentUser={currentUser} />)}
+                        </>
+                    )}
+                    {postComments.length > 3 && showComments && showAllComments && (
+                        <>
+                            <p onClick={toggleAllComments}>Hide previous comments</p>
+                            {postComments.map(comment => <Comment
+                                key={comment.id}
+                                comment={comment}
+                                currentUser={currentUser} />)}
+                        </>
+                    )}
+                        
                 </section>
 
                 <section className="create-post-input">
