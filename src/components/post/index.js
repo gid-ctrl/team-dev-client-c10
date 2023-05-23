@@ -86,15 +86,6 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
           const sortedArray = tempArray.sort((a,b) => a.id - b.id)
           setPostComments(sortedArray.reverse());
       };
-      
-    //   const fetchComments = async () => {
-    //     if (postComments.length === 0 || updateComments) {
-    //         await findComments();
-    //         setShowComments(true)
-    //     } else {
-    //         setShowComments(!showComments)
-    //     }
-    //   };
 
       const fetchComments = async () => {
         if (updateComments || firstClick) {
