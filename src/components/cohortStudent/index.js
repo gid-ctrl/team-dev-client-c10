@@ -1,16 +1,19 @@
 import ProfileCircle from "../profileCircle"
+import "./style.css"
 
 
-const CohortStudent = ({name}) => {
+const CohortStudent = ({firstName, lastName}) => {
 
-    const userInitials = name.match(/\b(\w)/g)
+    const userInitials = `${firstName[0]}${lastName[0]}`
 
     return(
-        <>
+        <div className="user">
             <span><ProfileCircle initials={userInitials} /></span>
-            <span>`${name}</span>
-
-        </>
+            <span>{`${firstName} ${lastName}`}</span>
+            <div className="more-icon">
+                <span className="more-text">...</span>
+            </div>
+        </div>
     )
 
 }

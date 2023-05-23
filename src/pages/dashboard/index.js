@@ -228,7 +228,9 @@ const Dashboard = () => {
            
            
         <Card>
-          <CohortList />
+          <CohortList 
+            currentUser = {currentUser}
+            users = {users}/>
         </Card>
       </aside>
     </>

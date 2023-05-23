@@ -5,20 +5,20 @@ import { json } from "react-router-dom"
 
 
 
-const CohortList = () => {
-    // we'll need props or something else to get the current user's cohort id
+const CohortList = ({currentUser, users}) => {
     const [cohortList, setCohortList] = useState([])
 
-    // set up fetch request to get all students in current user's cohort
-    useEffect(() => {
-        get(`cohorts/1/users`)
-        .then(res => res.json())
-        .then(data => setCohortList(data.users))
+    // cohort/id/users does not have names, so here we are filtering all users to match with
+    // current users cohort Id
+    
+    useEffect(() =>{
+        const filteredCohortUsers = users.filter(cohUser => cohUser.cohortId === currentUser.cohortId)
+        setCohortList(filteredCohortUsers)
         console.log(cohortList)
-        }, [cohortList])
+    }, [currentUser, users])
     
 
-    // update state to the list of students
+    
 
     return (
         <>
@@ -27,7 +27,8 @@ const CohortList = () => {
             {cohortList.map(cohortStudent => {
                 return <CohortStudent
                     key={cohortStudent.id}
-                    name={`${cohortStudent.firstName} ${cohortStudent.lastName}`}
+                    firstName={cohortStudent.firstName}
+                    lastName={cohortStudent.lastName}
                 />
             })}
         </ul>
