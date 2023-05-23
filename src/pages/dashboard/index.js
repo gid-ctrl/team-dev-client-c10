@@ -174,7 +174,7 @@ const Dashboard = ({ name, userInitials }) => {
           </form>
         </Card>
         <Card>
-          <h4>My Cohort</h4>
+          <CohortList />
         </Card>
       </aside>
     </>

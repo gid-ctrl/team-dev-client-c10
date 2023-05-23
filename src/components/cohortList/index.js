@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import CohortStudent from "../cohortStudent"
+import { get } from "../../service/apiClient"
 import { json } from "react-router-dom"
 
 
@@ -9,17 +11,11 @@ const CohortList = () => {
 
     // set up fetch request to get all students in current user's cohort
     useEffect(() => {
-    fetch('https://localhost:4000/cohorts/1/users', {
-        headers: {
-            
-        }
-    })
-    // hardcoded for now until I can figure out how to get the current users cohort id
+        get(`cohorts/1/users`)
         .then(res => res.json())
-        .then(data => {
-            setCohortList(data.users)
-
-        })}, [])
+        .then(data => setCohortList(data.users))
+        console.log(cohortList)
+        }, [cohortList])
     
 
     // update state to the list of students
@@ -29,7 +25,7 @@ const CohortList = () => {
         <h4>My Cohort</h4>
         <ul>
             {cohortList.map(cohortStudent => {
-                return <cohortStudent
+                return <CohortStudent
                     key={cohortStudent.id}
                     name={`${cohortStudent.firstName} ${cohortStudent.lastName}`}
                 />

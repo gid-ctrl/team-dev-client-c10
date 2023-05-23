@@ -14,3 +14,5 @@ const CohortStudent = ({name}) => {
     )
 
 }
+
+export default CohortStudent
