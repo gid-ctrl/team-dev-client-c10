@@ -27,7 +27,7 @@ function SearchPage () {
             setResults(data)
             const currentUser = data.find(user => user.id === userId)
             if (currentUser) {
-                setUserRole(currentUser.role)
+                setUserRole(currentUser.role.toLowerCase())
             }
         })
         
@@ -120,7 +120,7 @@ function SearchPage () {
                         <ul>
                             {results.map((obj, index) => {
                                 return (
-                                    <li key={index} >
+                                    <li key={index} className={`user-${userRole}`}>
                                         <div className="profile-icon search-picture">
                                             <p>{obj.firstName[0]}{obj.lastName[0]}</p>
                                         </div>
@@ -132,12 +132,12 @@ function SearchPage () {
                                                 : <p className="extrainfo">{obj.role}</p>
                                             }
                                         </div>
-                                        <Link to={`/profile/${obj.id}`} className="profiles">Profile</Link>
+                                        <button className="sr-button"><Link to={`/profile/${obj.id}`} className="profiles">Profile</Link></button>
                                         { 
-                                            userRole === 'TEACHER' && (
+                                            userRole === 'teacher' && (
                                                 <>
-                                                    <div>Add Note</div>
-                                                    <div>Move to Cohort</div>
+                                                    <button className="sr-button">Add note</button>
+                                                    <button className="sr-button">Move to cohort</button>
                                                 </>
                                             )
                                         }

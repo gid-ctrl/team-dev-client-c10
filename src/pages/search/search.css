@@ -28,9 +28,17 @@ h1 {
     text-decoration: none;
 }
 
-.resultslist > ul > li {
+.resultslist > ul > li.user-student {
     display: grid;
     grid-template-columns: 100px 1fr 100px 75px auto;
+    align-items:  center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.resultslist > ul > li.user-teacher {
+    display: grid;
+    grid-template-columns: 100px 1fr 100px 100px 100px 75px auto;
     align-items:  center;
     padding-top: 25px;
     padding-bottom: 25px;
@@ -92,6 +100,10 @@ li {
     position: relative;
 }
 
+li:hover {
+    background-color: #F5FAFF;
+}
+
 .showmore {
     position: absolute;
     background-color: white;
@@ -122,4 +134,14 @@ li {
     position: absolute;
     right: -40px;
     top: 12px
+}
+
+.sr-button {
+   height: 48px;
+   width: fit-content;
+   background-color: #FFFFFF;
+   border-radius: 8px;
+   color: #64648C;
+   font-size: 18px;
+   font-weight: 400;
 }
