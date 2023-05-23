@@ -73,8 +73,6 @@ function SearchPage () {
         }
     }
     
-    console.log(userRole)
-    
     const handleClickOutside = (e) => {
         if (ref.current !== null && !ref.current.contains(e.target)) {
                 setShowMore(-1)
