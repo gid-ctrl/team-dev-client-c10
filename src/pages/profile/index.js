@@ -10,8 +10,6 @@ import { useEffect, useState } from 'react'
 import { get } from '../../service/apiClient'
 import { useParams } from 'react-router-dom';
 
-
-
 const ViewProfile = () => {
   const navigate = useNavigate();
 	const { userId } = useAuth();
@@ -19,7 +17,7 @@ const ViewProfile = () => {
   const [allowedToEdit, setAllowedToEdit] = useState(false)
   const [userProfile, setUserProfile] = useState({})
   const [userInitials, setUserInitials] = useState(``)
-  const [user, setUser] = useState()
+  const [user, setUser] = useState({id: ""})
 
 
   useEffect(() => {
@@ -58,7 +56,7 @@ const ViewProfile = () => {
   }
 
   const checkUserAllowedToEdit = (loggedInUser, profilePageId) => {
-    if (loggedInUser === undefined || profilePageId === undefined) { 
+    if (loggedInUser === undefined) { 
       setAllowedToEdit(false)
       return null
     }
@@ -73,7 +71,7 @@ const ViewProfile = () => {
 
   useEffect(() => {
     checkUserAllowedToEdit(user, urlParams.id)
-  }, [urlParams.id, userProfile, user])
+  }, [urlParams.id, userProfile.id, user.id])
 
 
   return (
