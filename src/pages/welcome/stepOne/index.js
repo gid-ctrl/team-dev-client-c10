@@ -39,7 +39,7 @@ const StepOne = ({ data, setData, setValidForm }) => {
   };
 
   checkValidBothNames();
-  console.log(requiredFirstName, requiredLastName)
+
   return (
     <>
       <div className="welcome-formheader">
