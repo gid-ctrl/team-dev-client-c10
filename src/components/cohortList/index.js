@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import CohortStudent from "../cohortStudent"
-import { get } from "../../service/apiClient"
-import { json } from "react-router-dom"
+
+
 
 
 
@@ -14,7 +14,6 @@ const CohortList = ({currentUser, users}) => {
     useEffect(() =>{
         const filteredCohortUsers = users.filter(cohUser => cohUser.cohortId === currentUser.cohortId)
         setCohortList(filteredCohortUsers)
-        console.log(cohortList)
     }, [currentUser, users])
     
 
