@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import CredentialsCard from "../../components/credentials";
 import "./login.css";
 
+
 const Login = () => {
   const { onLogin } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -54,3 +55,4 @@ const Login = () => {
 };
 
 export default Login;
+
