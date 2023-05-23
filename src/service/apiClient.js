@@ -5,8 +5,7 @@ async function login(email, password) {
 }
 
 async function register(email, password) {
-  await post("users", { email, password }, false);
-  return await login(email, password);
+  return await post("users", { email, password }, false);
 }
 
 async function createProfile(userId, firstName, lastName, githubUrl, bio) {
@@ -24,8 +23,8 @@ async function getPosts() {
 }
 
 async function getUsers() {
-    const res = await get('users')
-    return res.data.users
+  const res = await get("users");
+  return res.data.users;
 }
 
 async function post(endpoint, data, auth = true) {
@@ -66,12 +65,13 @@ async function request(method, endpoint, data, auth = true) {
 }
 
 export {
-    login,
-    getPosts,
-    getUsers,
-    register,
-    createProfile,
-    get,
-    patch,
-    post,
-}
+  login,
+  getPosts,
+  getUsers,
+  register,
+  createProfile,
+  get,
+  patch,
+  post,
+  put,
+};

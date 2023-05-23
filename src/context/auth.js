@@ -48,7 +48,9 @@ const AuthProvider = ({ children }) => {
 
   const handleRegister = async (email, password) => {
     const res = await register(email, password)
+   console.log('register', res)
     if (res.status === 'fail') {
+      
       throw new Error(res.data.error)
     }
     setToken(res.data.token)
