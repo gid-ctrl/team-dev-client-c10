@@ -249,7 +249,7 @@ const EditProfile = () => {
               </div>
 
               <div class="button-container">
-                <button type="button" class="button offwhite">
+                <button type="button" className="button offwhite">
                   Cancel
                 </button>
                 <button type="button" class="button blue">
