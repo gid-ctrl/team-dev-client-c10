@@ -70,9 +70,8 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
           await Promise.all(
             tempComments.map(async (comment) => {
               const userId = comment.userId;
-              const commentRes = await get(`users/${userId}`);
-              const name = `${commentRes.data.user.firstName} ${commentRes.data.user.lastName}`;
-              const initials = `${commentRes.data.user.firstName?.[0]}${commentRes.data.user.lastName?.[0]}`;
+              const name = `${comment.user.profile.firstName} ${comment.user.profile.lastName}`;
+              const initials = `${comment.user.profile.firstName?.[0]}${comment.user.profile.lastName?.[0]}`;
               const newComment = {
                 id: comment.id,
                 authorId: comment.userId,
