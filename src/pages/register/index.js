@@ -33,8 +33,7 @@ const Register = () => {
               label={"Email *"}
             />
             <p className="error-message">
-              {" "}
-              * Email address must be in a valid format.
+             
             </p>
             <TextInput
               value={formData.password}
@@ -44,8 +43,7 @@ const Register = () => {
               type={"password"}
             />
             <p className="error-message">
-              * Password must contain at least one uppercase letter, one number,
-              one special character and be at least 8 characters long.
+              
             </p>
           </form>
           <Button
