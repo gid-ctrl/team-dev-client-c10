@@ -1,4 +1,4 @@
-
+import React, { useEffect, useState } from "react";
 import Like from "../../assets/icons/like";
 import LikeRed from "../../assets/icons/likeRed";
 import useModal from "../../hooks/useModal";
@@ -10,12 +10,12 @@ import CommentIcon from "../../assets/icons/commentIcon"
 import CommentIconFilled from "../../assets/icons/commentIconFilled"
 import TextInput from "../form/textInput"
 import CommentButton from "../commentButton"
-import { useState, useEffect } from "react"
 import "./style.css";
+import { post, deleted } from "../../service/apiClient";
 import AddCommentModal from "../addCommentModal"
 import { get } from "../../service/apiClient"
 
-const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUserName, currentUserInitials, currentUser}) => {
+const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, currentUserName, currentUserInitials, currentUser, currentUserId}) => {
     const { openModal, setModal } = useModal()
     const [showComments, setShowComments] = useState(false)
     const [postComments, setPostComments] = useState([])
@@ -25,23 +25,41 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
 
   const userInitials = name.match(/\b(\w)/g);
   const [isLiked, setIsLiked] = useState(false);
-  const [like, setLike] = useState(likes);
-    
-    const showModal = () => {
-        setModal('Edit post', 
-        <EditPostModal 
-            id={id} 
-            content={content} 
-            setTriggerUpdate={setTriggerUpdate}
-            name={name}
-            userInitials={userInitials}
-        />)
-        openModal()
-    }
+  const [like, setLike] = useState(liked.length);
 
+    
+  const showModal = () => {
+    setModal(
+      'Edit post',
+      <EditPostModal
+        id={id}
+        content={content}
+        setTriggerUpdate={setTriggerUpdate}
+        name={name}
+        userInitials={userInitials}
+      />
+    );
+    openModal();
+  };
+
+  useEffect(() => {
+    const isLiked = liked.some(postlikes => postlikes.userId === currentUserId)
+    setIsLiked(isLiked)
+    }, [currentUserId, liked])
+    
   const handleClick = () => {
-    setIsLiked((prevIsLiked) => !prevIsLiked);
-    setLike((prevLike) => (isLiked ? prevLike - 1 : prevLike + 1));
+
+    if (isLiked) {
+        deleted(`posts/${id}/like`, {id}).then(() => {
+        setIsLiked(false);
+        setLike((prevLike) => prevLike - 1);
+      });
+    } else {
+        post(`posts/${id}/like`, {id}).then(() => {
+        setIsLiked(true);
+        setLike((prevLike) => prevLike + 1);
+      });
+    }
   };
 
   let likeIcon = null;
@@ -139,17 +157,18 @@ const Post = ({ name, date, content, likes = 0, id, setTriggerUpdate, currentUse
         </section>
 
                 <section className={`post-interactions-container border-top ${postComments.length ? 'border-bottom' : null}`}>
-                    <div className="post-interactions">
-                    <button className="post-interactions-button like" onClick={handleClick}>
-                    {likeIcon}
-                    <p>Like</p>
-                </button>
-                        <button className="post-interactions-button" onClick={fetchComments} >
-                            {!showComments && <CommentIcon />}
-                            {showComments && <CommentIconFilled />}
-                            <p>Comment</p>
-                        </button>
-                    </div>
+                    {/* <div className="post-interactions"> */}
+                    <button className="post-interactions" onClick={handleClick}>
+                      {!isLiked && <Like />}
+                      {isLiked && <LikeRed/>}
+                      <p>Like</p>
+                    </button>
+                      <button className="post-interactions" onClick={fetchComments} >
+                          {!showComments && <CommentIcon />}
+                          {showComments && <CommentIconFilled />}
+                          <p>Comment</p>
+                      </button>
+                    {/* </div> */}
           <p>{(!like && "Be the first to like this") || like} </p>
         </section>
 
