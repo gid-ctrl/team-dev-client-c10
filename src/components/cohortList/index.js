@@ -28,6 +28,7 @@ const CohortList = ({currentUser, users}) => {
                     key={cohortStudent.id}
                     firstName={cohortStudent.firstName}
                     lastName={cohortStudent.lastName}
+                    id={cohortStudent.id}
                 />
             })}
         </ul>

@@ -14,6 +14,7 @@ import useAuth from "../../hooks/useAuth";
 import "../../styles/_buttons.css"
 import "./style.css";
 import ProfileButton from "../../components/profileButton";
+import Form from "../../components/form";
 
 
 
@@ -22,8 +23,8 @@ const Dashboard = () => {
 	const [triggerUpdate, setTriggerUpdate] = useState(false)
 	const [users, setUsers] = useState([]);
 	const [currentUser, setCurrentUser] = useState({})
-	const [userInitials, setUserInitials] = useState("")
-	const [userName, setUserName] = useState("")
+	const [currentUserInitials, setCurrentUserInitials] = useState("")
+	const [currentUserName, setCurrentUserName] = useState("")
 	const [showResults, setShowResults] = useState(false);
 	const { token } = useAuth()
   const [isFormFocused, setIsFormFocused] = useState(false);
@@ -37,15 +38,15 @@ const Dashboard = () => {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { userId } = jwt_decode(token);
-      const res = await get(`users/${userId}`);
-      const user = res.data.user;
-      setCurrentUser(user);
-      setUserName(`${user.firstName} ${user.lastName?.[0]}`);
-      setUserInitials(`${user.firstName?.[0]}${user.lastName?.[0]}`);
-    };
-    fetchData();
+	const fetchData = async () => {
+		const { userId } = jwt_decode(token)
+		const res = await get(`users/${userId}`)
+		const user = res.data.user
+		setCurrentUser(user)
+		setCurrentUserName(`${user.firstName} ${user.lastName?.[0]}`)
+		setCurrentUserInitials(`${user.firstName?.[0]}${user.lastName?.[0]}`)
+	}
+	fetchData()
   }, [token, setCurrentUser]);
 
   const onChange = (e) => {
@@ -74,23 +75,9 @@ const Dashboard = () => {
     document.addEventListener('mousedown', handleFormMouseDown);
   }, [])
 
-
-  // Use the useModal hook to get the openModal and setModal functions
   const { openModal, setModal } = useModal();
-  // Create a function to run on user interaction
-  const showModal = () => {
-    // Use setModal to set the header of the modal and the component the modal should render
-    setModal(
-      "Create a post",
-      <CreatePostModal
-        triggerUpdate={triggerUpdate}
-        setTriggerUpdate={setTriggerUpdate}
-        userName={userName}
-        userInitials={userInitials}
-      />
-    ); // CreatePostModal is just a standard React component, nothing special
-
-    // Create a function to run on user interaction
+	const showModal = () => {
+		setModal("Create a post", <CreatePostModal triggerUpdate = {triggerUpdate} setTriggerUpdate = {setTriggerUpdate} currentUserName = {currentUserName} currentUserInitials = {currentUserInitials} />);
 
     openModal();
   };
@@ -109,17 +96,21 @@ const Dashboard = () => {
 				<Card>
 					<div className="create-post-input">
 						<div className="profile-icon">
-							<p>{userInitials}</p>
+							<p>{currentUserInitials}</p>
 						</div>
 						<Button text="What's on your mind?" onClick={showModal} />
 					</div>
 				</Card>
-        <Posts triggerUpdate={triggerUpdate} setTriggerUpdate = {setTriggerUpdate} currentUser={currentUser}/>
+        <Posts triggerUpdate={triggerUpdate}
+        setTriggerUpdate = {setTriggerUpdate}
+        currentUserName={currentUserName}
+        currentUserInitials={currentUserInitials}
+        currentUser={currentUser} />
       </main>
 
       <aside>
         <Card>
-          <form 
+          <Form 
           onSubmit={(e) => e.preventDefault()} 
           onMouseDown={handleFormMouseDown}
           onFocus={handleFormFocus}
@@ -223,7 +214,7 @@ const Dashboard = () => {
        
            </Card>
             )}
-            </form>
+            </Form>
             </Card>
            
            
