@@ -6,6 +6,7 @@ import Card from "../card";
 import Comment from "../comment";
 import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
+import OptionsButton from "../optionsButton";
 import "./style.css";
 
 const Post = ({
@@ -24,17 +25,17 @@ const Post = ({
   const [isLiked, setIsLiked] = useState(false);
   const [like, setLike] = useState(likes);
 
-    const showModal = () => {
-        setModal('Edit post', 
-        <EditPostModal 
-            id={id} 
-            content={content} 
-            setTriggerUpdate={setTriggerUpdate}
-            name={name}
-            userInitials={userInitials}
-        />)
-        openModal()
-    }
+  const showModal = () => {
+      setModal('Edit post', 
+      <EditPostModal 
+          id={id} 
+          content={content} 
+          setTriggerUpdate={setTriggerUpdate}
+          name={name}
+          userInitials={userInitials}
+      />)
+      openModal()
+  }
 
   const handleClick = () => {
     setIsLiked((prevIsLiked) => !prevIsLiked);
@@ -59,9 +60,7 @@ const Post = ({
             <small>{date}</small>
           </div>
           {name === currentUserName && (
-            <div className="edit-icon">
-              <p onClick={showModal}>...</p>
-            </div>
+            <OptionsButton showModal={showModal}/>
           )}
         </section>
 

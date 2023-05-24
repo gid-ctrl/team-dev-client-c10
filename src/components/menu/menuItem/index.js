@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom"
 import ArrowRightIcon from "../../../assets/icons/arrowRightIcon"
 
-const MenuItem = ({ icon, text, children, linkTo='#nogo' }) => {
+const MenuItem = ({ icon, text, children, linkTo='#nogo', onClick }) => {
+    const handleOnClick = () => {
+        onClick()
+    }
     return (
-        <li>
+        <li onClick={handleOnClick}>
             <NavLink to={linkTo}>
                 {icon}
                 <p>{text}</p>
