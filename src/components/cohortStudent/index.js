@@ -1,7 +1,8 @@
+import ProfileButton from "../profileButton";
 import ProfileCircle from "../profileCircle";
 import "./style.css";
 
-const CohortStudent = ({ firstName, lastName }) => {
+const CohortStudent = ({ firstName, lastName, id }) => {
   if (
     firstName.length === 0 ||
     lastName.length === 0 ||
@@ -16,9 +17,9 @@ const CohortStudent = ({ firstName, lastName }) => {
   return (
     <div className="user">
       <span>
-        <ProfileCircle initials={userInitials} />
+        <ProfileButton initials={userInitials} id={id}/>
       </span>
-      <span>{`${firstName} ${lastName}`}</span>
+      <span className="name-user-cohort">{`${firstName} ${lastName}`}</span>
       <div className="more-icon">
         <span className="more-text">...</span>
       </div>
