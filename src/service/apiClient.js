@@ -69,14 +69,14 @@ async function request(method, endpoint, data, auth = true) {
 }
 
 export {
-  login,
-  getPosts,
-  getUsers,
-  register,
-  createProfile,
-  get,
-  patch,
-  post,
-  deleted,
-  put,
-};
+    login,
+    getPosts,
+    getUsers,
+    register,
+    createProfile,
+    patch,
+    get,
+    post, 
+    deleted
+
+}

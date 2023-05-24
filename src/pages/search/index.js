@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import CrossBlackIcon from "../../assets/icons/crossBlackIcon";
 import ProfileIcon from "../../assets/icons/profileIcon";
 import useAuth from "../../hooks/useAuth";
+import CascadingMenu from "../../components/CascadingMenu"
 
 function SearchPage () {
     
@@ -17,6 +18,7 @@ function SearchPage () {
     const [results, setResults] = useState([])
     const [showMore, setShowMore] = useState(-1)
     const [userRole, setUserRole] = useState('')
+    const [cascadeMenu, showMenu] = useState(false)
     const ref = useRef(null)
     const { userId } = useAuth()
 
@@ -31,7 +33,7 @@ function SearchPage () {
             }
         })
         
-    }, [])
+    }, [userId])
    
     useEffect(() => {
         document.addEventListener("click", handleClickOutside, true)
@@ -66,12 +68,28 @@ function SearchPage () {
 
     
     const clickShowMore = (index) => {
-        if (showMore === index) {
+        if (showMore === index ) {
             setShowMore(-1)
+            
         } else {
             setShowMore(index)
+            
         }
+        
+        if (showMore === index && userRole === 'TEACHER') {
+            setShowMore(-1)
+            showMenu(false)
+        } else if (showMore !== index && userRole === 'TEACHER'){
+            setShowMore(index)
+            showMenu(true)
+
+        }
+
+       
+
+
     }
+
     
     const handleClickOutside = (e) => {
         if (ref.current !== null && !ref.current.contains(e.target)) {
@@ -143,7 +161,30 @@ function SearchPage () {
                                             )
                                         }
                                         <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
-                                        {showMore === index && (<div className="showmore" ref={ref}><Link to={`/profile/${obj.id}`} className="dropprofiles"><div className="dropicon"><ProfileIcon /></div><div className="droptext">Profile</div></Link></div>)}
+                                        {showMore === index && (
+                                        <div>
+
+                                            {cascadeMenu  && <CascadingMenu />}
+                                            {!cascadeMenu && 
+                                            
+                                            
+                                            <div className="showmore" ref={ref}>
+                                                <Link to={`/profile/${obj.id}`} className="dropprofiles">
+                                                        <div className="dropicon">
+                                                            <ProfileIcon />
+                                                        </div>
+                                                        <div className="droptext">
+                                                            Profile
+                                                        </div>
+                                                </Link>
+
+                                            </div>
+                                            }
+
+                                            
+                                                
+                                                
+                                        </div>)}
                                     </li>
                                 )         
                             })}                            

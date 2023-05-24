@@ -1,29 +1,14 @@
-import { useState } from "react"
-import AddIcon from "../../assets/icons/addIcon"
-import CohortIcon from "../../assets/icons/cohortIcon"
-import CohortIconFill from "../../assets/icons/cohortIcon-fill"
-import DeleteIcon from "../../assets/icons/deleteIcon"
-import MonitorIcon from "../../assets/icons/monitorIcon"
-import ProfileIcon from "../../assets/icons/profileIcon"
-import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon"
 import Menu from "../menu"
 import MenuItem from "../menu/menuItem"
+import ProfileIcon from "../../assets/icons/profileIcon"
+import AddIcon from "../../assets/icons/addIcon"
+import CohortIcon from "../../assets/icons/cohortIcon"
+import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon"
+import CohortIconFill from "../../assets/icons/cohortIcon-fill"
+import MonitorIcon from "../../assets/icons/monitorIcon"
+import DeleteIcon from "../../assets/icons/deleteIcon"
 import './style.css'
 
-const ProfileCircle = ({ initials, id, newColor }) => {
-    const [isMenuVisible, setIsMenuVisible] = useState(false)
-
-    return (
-        <div className="profile-circle" id={id} onClick={() => setIsMenuVisible(!isMenuVisible)}>
-            {isMenuVisible && <CascadingMenu />}
-            
-            <div className="profile-icon" style={{backgroundColor: `${newColor}`}}>
-                <p>{initials}</p>
-            </div>
-        </div>
-        
-    )
-}
 
 const CascadingMenu = () => {
     return (
@@ -51,4 +36,4 @@ const CascadingMenu = () => {
     )
 }
 
-export default ProfileCircle
+export default CascadingMenu
