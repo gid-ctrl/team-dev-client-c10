@@ -4,10 +4,10 @@ import "./style.css";
 
 const CohortStudent = ({ firstName, lastName, id }) => {
   if (
-    firstName.length === 0 ||
-    lastName.length === 0 ||
     !firstName ||
-    !lastName
+    !lastName ||
+    firstName.length === 0 ||
+    lastName.length === 0 
   ) {
     return <></>;
   }
