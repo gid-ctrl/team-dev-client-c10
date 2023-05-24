@@ -6,74 +6,72 @@ import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
 import EyeIcon from "../../assets/icons/eyeIcon";
 import useAuth from "../../hooks/useAuth";
-import { useEffect, useState } from 'react'
-import { get } from '../../service/apiClient'
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { get } from "../../service/apiClient";
+import { useParams } from "react-router-dom";
 
 const ViewProfile = () => {
   const navigate = useNavigate();
-	const { userId } = useAuth();
+  const { userId } = useAuth();
   const urlParams = useParams();
   const [allowedToEdit, setAllowedToEdit] = useState(false)
   const [userProfile, setUserProfile] = useState({})
   const [userInitials, setUserInitials] = useState(``)
   const [user, setUser] = useState({id: ""})
-  const [userOwnsPage, setUserOwnsPage] = useState(false)
 
 
   useEffect(() => {
     async function getUserInfo() {
-      const userInfo = await get(`users/${userId}`)
-      setUser(userInfo.data.user)
+      const userInfo = await get(`users/${userId}`);
+      setUser(userInfo.data.user);
     }
-    getUserInfo()
-  })
- 
+    getUserInfo();
+  });
+
   const handleClick = () => {
     navigate(`/profile/${urlParams.id}/edit`);
   };
- 
+
   useEffect(() => {
     async function getUserInfo() {
-      const userInfo = await get(`users/${urlParams.id}`)
-      setUserProfile(userInfo.data.user)
-      setUserInitials(getInitailsFromUser(userInfo.data.user))
+      const userInfo = await get(`users/${urlParams.id}`);
+      setUserProfile(userInfo.data.user);
+      setUserInitials(getInitailsFromUser(userInfo.data.user));
     }
-    getUserInfo()
+    getUserInfo();
   }, [urlParams.id, allowedToEdit]);
 
   const userDisplayName = (user) => {
-    return `${user.firstName} ${user.lastName}`
-  }
+    return `${user.firstName} ${user.lastName}`;
+  };
 
   const cohortDisplayName = (cohortId) => {
-    return `Cohort ${cohortId}`
-  }
+    return `Cohort ${cohortId}`;
+  };
 
   const getInitailsFromUser = (user) => {
-    const firstInital = user.firstName.slice(0, 1)
-    const lastInital = user.lastName.slice(0, 1)
-    return `${firstInital}${lastInital}`
-  }
+    const firstInital = user.firstName.slice(0, 1);
+    const lastInital = user.lastName.slice(0, 1);
+    return `${firstInital}${lastInital}`;
+  };
 
   const checkUserAllowedToEdit = (loggedInUser, profilePageId) => {
-    if (loggedInUser === undefined) { 
-      setAllowedToEdit(false)
-      return null
+    if (loggedInUser === undefined) {
+      setAllowedToEdit(false);
+      return null;
     }
     if (loggedInUser.role === "TEACHER") {
-      setAllowedToEdit(true)
+      setAllowedToEdit(true);
     } else if (loggedInUser.id.toString() === profilePageId) {
-      setAllowedToEdit(true)
+      setAllowedToEdit(true);
     } else {
-      setAllowedToEdit(false)
+      setAllowedToEdit(false);
     }
-  }
+  };
 
   useEffect(() => {
-    checkUserAllowedToEdit(user, urlParams.id)
-  }, [urlParams.id, userProfile.id, user.id])
-
+    checkUserAllowedToEdit(user, urlParams.id);
+  }, [urlParams.id, userProfile.id, user.id]);
 
   return (
     <>
@@ -104,7 +102,7 @@ const ViewProfile = () => {
                 </div>
               </div>
               <br></br>
-              <small className="padding-field-name">First Name*</small>
+              <small className="padding-field-name"></small>
               <textarea
                 rows=""
                 cols="40"
@@ -113,7 +111,7 @@ const ViewProfile = () => {
                 disabled
                 value={userProfile.firstName}
               ></textarea>
-              <small className="padding-field-name">Last Name*</small>
+              <small className="padding-field-name">Last Name</small>
               <textarea
                 rows=""
                 cols="40"
@@ -121,9 +119,8 @@ const ViewProfile = () => {
                 placeholder="Walker"
                 disabled
                 value={userProfile.lastName}
-
               ></textarea>
-              <small className="padding-field-name">Username*</small>
+              <small className="padding-field-name">Username</small>
               <textarea
                 rows=""
                 cols="40"
@@ -131,9 +128,8 @@ const ViewProfile = () => {
                 placeholder="Alex Walker"
                 disabled
                 value={userDisplayName(userProfile)}
-
               ></textarea>
-              <small className="padding-field-name">GitHub Username*</small>
+              <small className="padding-field-name">GitHub Username</small>
               <textarea
                 rows=""
                 cols="40"
@@ -141,7 +137,6 @@ const ViewProfile = () => {
                 placeholder="alex-walker"
                 disabled
                 value={userProfile.githubUrl}
-
               ></textarea>
             </div>
 
@@ -150,7 +145,7 @@ const ViewProfile = () => {
               <br />
               <h4 className="padding-title">Training info</h4>
               <div className="training-info-content info-grid">
-                <small className="padding-field-name">Role*</small>
+                <small className="padding-field-name">Role</small>
                 <div className="training-info">
                   <textarea
                     rows="1"
@@ -165,7 +160,7 @@ const ViewProfile = () => {
                   </div>
                 </div>
 
-                <small className="padding-field-name">Specialism*</small>
+                <small className="padding-field-name">Specialism</small>
                 <div className="training-info">
                   <textarea
                     rows=""
@@ -179,7 +174,7 @@ const ViewProfile = () => {
                   </div>
                 </div>
 
-                <small className="padding-field-name">Cohort*</small>
+                <small className="padding-field-name">Cohort</small>
                 <div className="training-info">
                   <textarea
                     rows=""
@@ -194,7 +189,7 @@ const ViewProfile = () => {
                   </div>
                 </div>
 
-                <small className="padding-field-name">Start Date*</small>
+                <small className="padding-field-name">Start Date</small>
                 <div className="training-info">
                   <textarea
                     rows=""
@@ -208,7 +203,7 @@ const ViewProfile = () => {
                   </div>
                 </div>
 
-                <small className="padding-field-name">End Date*</small>
+                <small className="padding-field-name">End Date</small>
                 <div className="training-info">
                   <textarea
                     rows=""
@@ -229,17 +224,16 @@ const ViewProfile = () => {
               <div className="contact-info-content info-grid">
                 <h4 className="padding-title">Contact info</h4>
                 <div className="padding-top"></div>
-                <small className="padding-field-name">Email*</small>
+                <small className="padding-field-name">Email</small>
                 <textarea
                   cols="40"
                   className="textarea-small"
                   placeholder="alex.walker@boolean.co.uk"
                   disabled
                   value={userProfile.email}
-
                 ></textarea>
                 <div className="padding"></div>
-                <small className="padding-field-name">Mobile*</small>
+                <small className="padding-field-name">Mobile</small>
                 <textarea
                   cols="40"
                   className="textarea-small"
@@ -268,10 +262,6 @@ const ViewProfile = () => {
                     </>
                   ) : null
                 }
-
-                <div className="padding-bottom"></div>
-                <br></br>
-                <small>*Required</small>
                 <br></br>
               </div>
             </div>
@@ -286,12 +276,11 @@ const ViewProfile = () => {
                   placeholder="Tell us about yourself, your professional and educational highlights to date..."
                   spellCheck="false"
                   value={userProfile.bio}
-
                 ></textarea>
                 <small>0/300</small>
               </div>
               <div class="button-container">
-                { allowedToEdit ? (
+                {allowedToEdit ? (
                   <button
                     type="button"
                     class="button offwhite"
@@ -299,8 +288,7 @@ const ViewProfile = () => {
                   >
                     Edit
                   </button>
-                  ) : null
-                }
+                ) : null}
               </div>
             </div>
           </div>
