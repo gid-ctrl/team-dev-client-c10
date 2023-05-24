@@ -6,9 +6,7 @@ import './style.css'
 function DeletePostModal({ id, setTriggerUpdate }) {
   const { closeModal } = useModal()
 
-  const handleOnClick = (e) => {
-    const value = e.target.innerText
-    if (value === 'Delete Post') {
+  const handleDelete = (e) => {
       deleted(`posts/${id}`)
       .then(() => {
         setTriggerUpdate(true)
@@ -17,16 +15,17 @@ function DeletePostModal({ id, setTriggerUpdate }) {
       setTimeout(() => {
         closeModal()
     }, 2000)
-    } else {
-      closeModal()
-    }
+  }
+
+  const handleClose = () => {
+    closeModal()
   }
   return(
     <>
       <p>Are you sure you want to delete this post?</p>
       <div className='button-container'>
-        <button className='cancel-button' onClick={handleOnClick}>Cancel</button>
-        <button className='delete-button' onClick={handleOnClick}>Delete Post</button>
+        <button className='cancel-button' onClick={handleClose}>Cancel</button>
+        <button className='delete-button' onClick={handleDelete}>Delete Post</button>
       </div>
     </>
   )
