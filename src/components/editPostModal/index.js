@@ -18,13 +18,11 @@ const EditPostModal = ({ id, content, setTriggerUpdate, name, userInitials}) => 
     }
 
     const onSubmit = () => {
-   
         patch(`posts/${id}`, {
             'content': text
         }).then(() => {
             setTriggerUpdate(true)
         })
-
 
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
 

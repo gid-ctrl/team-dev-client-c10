@@ -1,5 +1,3 @@
-import { useState } from "react"
-import { post } from "../../service/apiClient"
 import useModal from "../../hooks/useModal"
 import { deleted } from '../../service/apiClient'
 import './style.css'
