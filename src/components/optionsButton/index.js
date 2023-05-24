@@ -4,7 +4,6 @@ import MenuItem from '../menu/menuItem'
 import DeleteIcon from '../../assets/icons/deleteIcon'
 import CogIcon from '../../assets/icons/cogIcon'
 import LocIcon from '../../assets/icons/locIcon'
-import { deleted } from '../../service/apiClient'
 import './style.css'
 
 function OptionsButton({ showEditModal, showDeleteModal, authorId, currentUserId, postId, setTriggerUpdate}) {
