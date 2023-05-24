@@ -4,8 +4,38 @@ import TextInput from "../../components/form/textInput";
 import "./style.css";
 import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
+import { get } from "../../service/apiClient";
+import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const EditProfile = () => {
+  const { userId } = useAuth();
+  const [user, setUser] = useState({});
+  const [userInitials, setUserInitials] = useState(``);
+
+  useEffect(() => {
+    async function getUserInfo() {
+      const userInfo = await get(`users/${userId}`);
+      setUser(userInfo.data.user);
+      setUserInitials(getInitailsFromUser(userInfo.data.user));
+    }
+    getUserInfo();
+  }, [userId]);
+
+  const userDisplayName = (user) => {
+    return `${user.firstName} ${user.lastName}`;
+  };
+
+  const cohortDisplayName = (cohortId) => {
+    return `Cohort ${cohortId}`;
+  };
+
+  const getInitailsFromUser = (user) => {
+    const firstInital = user.firstName.slice(0, 1);
+    const lastInital = user.lastName.slice(0, 1);
+    return `${firstInital}${lastInital}`;
+  };
+
   return (
     <>
       <main>
@@ -14,10 +44,10 @@ const EditProfile = () => {
         <Card>
           <div className="profile-container">
             <div className="profile-icon">
-              <p>AJ</p>
+              <p>{userInitials}</p>
             </div>
             <div className="profile-summary">
-              <h3>Alex Walker</h3>
+              <h3>{userDisplayName(user)}</h3>
               <p>Software Developer</p>
             </div>
           </div>
@@ -31,7 +61,7 @@ const EditProfile = () => {
                 <br />
                 <p>Photo</p>
                 <div className="profile-icon">
-                  <p>AJ</p>
+                  <p>{userInitials}</p>
                   <TextInput />
                 </div>
               </div>
@@ -42,6 +72,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Alex"
+                value={user.firstName}
               ></textarea>
               <small className="padding-field-name">Last Name*</small>
               <textarea
@@ -49,6 +80,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Walker"
+                value={user.lastName}
               ></textarea>
               <small className="padding-field-name">Username*</small>
               <textarea
@@ -56,6 +88,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="Alex Walker"
+                value={userDisplayName(user)}
               ></textarea>
               <small className="padding-field-name">GitHub Username*</small>
               <textarea
@@ -63,6 +96,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder="alex-walker"
+                value={user.githubUrl}
               ></textarea>
             </div>
 
@@ -79,6 +113,7 @@ const EditProfile = () => {
                     className="textarea-small"
                     placeholder="Student"
                     disabled
+                    value={user.role}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -107,6 +142,7 @@ const EditProfile = () => {
                     className="textarea-small"
                     placeholder="Cohort 4"
                     disabled
+                    value={cohortDisplayName(user.cohortId)}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -153,6 +189,7 @@ const EditProfile = () => {
                   cols="40"
                   className="textarea-small"
                   placeholder="alex.walker@boolean.co.uk"
+                  value={user.email}
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Mobile*</small>
@@ -172,7 +209,7 @@ const EditProfile = () => {
                       name="password"
                       placeholder="***************"
                       disabled
-                      required
+                      value={user.password}
                     ></textarea>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -206,6 +243,7 @@ const EditProfile = () => {
                 <textarea
                   placeholder="Tell us about yourself, your professional and educational highlights to date..."
                   spellCheck="false"
+                  value={user.bio}
                 ></textarea>
                 <small>0/300</small>
               </div>
