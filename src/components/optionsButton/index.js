@@ -7,7 +7,7 @@ import LocIcon from '../../assets/icons/locIcon'
 import { deleted } from '../../service/apiClient'
 import './style.css'
 
-function OptionsButton({ showModal, authorId, currentUserId, postId, setTriggerUpdate}) {
+function OptionsButton({ showEditModal, showDeleteModal, authorId, currentUserId, postId, setTriggerUpdate}) {
   const [isMenuVisible, setIsMenuVisible] = useState(false)
 
   const CascadingMenu = () => {
@@ -19,11 +19,11 @@ function OptionsButton({ showModal, authorId, currentUserId, postId, setTriggerU
               <>
                 <MenuItem icon={<CogIcon />} text='Edit' onClick={() => {
                   setIsMenuVisible(false)
-                  showModal()
+                  showEditModal()
                 }}/>
                 <MenuItem icon={<DeleteIcon />} text='Delete' onClick={() => {
-                   deleted(`posts/${postId}`)
-                   .then(() => setTriggerUpdate(true))
+                  setIsMenuVisible(false)
+                  showDeleteModal()
                 }}/>
               </>
             ) : <></>}

@@ -5,6 +5,7 @@ import useModal from "../../hooks/useModal";
 import Card from "../card";
 import Comment from "../comment";
 import EditPostModal from "../editPostModal";
+import DeletePostModal from "../deletePostModal"
 import ProfileCircle from "../profileCircle";
 import OptionsButton from "../optionsButton";
 import CommentIcon from "../../assets/icons/commentIcon"
@@ -67,7 +68,7 @@ const Post = ({
     setIsLiked(isLiked)
     }, [currentUserId, liked])
 
-  const showModal = () => {
+  const showEditModal = () => {
     setModal(
       'Edit post',
       <EditPostModal
@@ -76,6 +77,17 @@ const Post = ({
         setTriggerUpdate={setTriggerUpdate}
         name={name}
         userInitials={userInitials}
+      />
+    );
+    openModal();
+  };
+
+  const showDeleteModal = () => {
+    setModal(
+      'Delete post',
+      <DeletePostModal
+        id={id}
+        setTriggerUpdate={setTriggerUpdate}
       />
     );
     openModal();
@@ -164,7 +176,13 @@ const Post = ({
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          <OptionsButton showModal={showModal} authorId={authorId} currentUserId={currentUserId} postId={id} setTriggerUpdate={setTriggerUpdate}/>
+          <OptionsButton 
+            showEditModal={showEditModal} 
+            showDeleteModal={showDeleteModal} 
+            authorId={authorId} 
+            currentUserId={currentUserId} 
+            postId={id} 
+            setTriggerUpdate={setTriggerUpdate}/>
         </section>
 
         <section className="post-content">
