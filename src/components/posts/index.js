@@ -18,10 +18,9 @@ const Posts = ({triggerUpdate, setTriggerUpdate, currentUserName, currentUserIni
         <>
             {
             posts.sort( (a, b) => {
-                return a.createdAt.localeCompare(b.createdAt);
+                return b.createdAt.localeCompare(a.createdAt);
             })
-            .slice(0)
-            .reverse()
+            
             .map(post => {
                     return <Post
                         key={post.id}
