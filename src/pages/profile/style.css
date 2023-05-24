@@ -120,7 +120,6 @@ textarea {
 }
 
 .basic-info {
-  margin-bottom: 6px;
   position: relative;  
   display: grid;
   align-items: center;

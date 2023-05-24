@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import Card from "../../components/card";
-import TextInput from "../../components/form/textInput";
 import "./style.css";
 import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
@@ -91,18 +90,15 @@ const ViewProfile = () => {
           <div className="main-info-grid">
             <div className="basic-info">
               <hr class="hr-line" />
-              <br />
               <div className="basic-info-content info-grid">
                 <h4 className="padding-title">Basic info</h4>
                 <br />
                 <p>Photo</p>
                 <div className="profile-icon">
                   <p>{userInitials}</p>
-                  <TextInput />
                 </div>
               </div>
-              <br></br>
-              <small className="padding-field-name"></small>
+              <small className="padding-field-name">First Name</small>
               <textarea
                 rows=""
                 cols="40"
@@ -142,7 +138,6 @@ const ViewProfile = () => {
 
             <div className="training-info">
               <hr class="hr-line" />
-              <br />
               <h4 className="padding-title">Training info</h4>
               <div className="training-info-content info-grid">
                 <small className="padding-field-name">Role</small>
@@ -242,7 +237,7 @@ const ViewProfile = () => {
                 ></textarea>
                 <div className="padding"></div>
                 {
-                  ( userId === userProfile.id ) ? (
+                  ( userId === userProfile.id ) && (
                     <>
                       <small className="padding-field-name">Password*</small>
                       <div class="input-container">
@@ -260,8 +255,7 @@ const ViewProfile = () => {
                         </div>
                       </div>
                     </>
-                  ) : null
-                }
+                  )}
                 <br></br>
               </div>
             </div>
@@ -270,7 +264,6 @@ const ViewProfile = () => {
               <div className="bio-content">
                 <hr class="hr-line" />
                 <h4>Bio</h4>
-                <div className="padding-top"></div>
                 <small>Bio</small>
                 <textarea
                   placeholder="Tell us about yourself, your professional and educational highlights to date..."
@@ -280,7 +273,7 @@ const ViewProfile = () => {
                 <small>0/300</small>
               </div>
               <div class="button-container">
-                {allowedToEdit ? (
+                {allowedToEdit && (
                   <button
                     type="button"
                     className="button offwhite"
@@ -288,7 +281,7 @@ const ViewProfile = () => {
                   >
                     Edit
                   </button>
-                ) : null}
+                )}
               </div>
             </div>
           </div>
