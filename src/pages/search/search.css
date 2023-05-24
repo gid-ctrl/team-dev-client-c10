@@ -1,5 +1,11 @@
-.parent {
-    padding-left: 100px;  
+.parent-teacher {
+    padding-left: 100px;
+    width: 964px; 
+}
+
+.parent-student {
+    padding-left: 100px;
+    width: 744px; 
 }
 
 h1 {
@@ -26,29 +32,80 @@ h1 {
     justify-self:  center;
     text-align: center;
     text-decoration: none;
+    padding: 0px;
+    font-size: 18px;
+    color: #64648C;
 }
 
-.resultslist > ul > li {
+.results-header {
+    font-size: 18px;
+    margin: 16px 560px 18px 24px;
+    padding: 0px;
+    color: #64648C;
+}
+
+.hr-search {
+    height: 1px;
+    background: #E6EBF5;
+    margin-inline: 24px;
+}
+
+.resultslist > ul > li.user-student {
     display: grid;
-    grid-template-columns: 100px 1fr 100px 75px auto;
+    grid-template-columns: 100px 1fr 100px 75px;
+    grid-template-columns: 24px 56px 16px 229px 133px 88px 24px 48px 24px;
+    grid-template-areas: '. icon . userinfo . profile . more .';
+    grid-template-rows: 1fr;
     align-items:  center;
     padding-top: 25px;
     padding-bottom: 25px;
 }
 
+.resultslist > ul > li.user-teacher {
+    display: grid;
+    width: 864px;
+    grid-template-columns: 24px 56px 16px 229px 32px 88px 24px 300px 24px 48px 24px;
+    grid-template-areas: '. icon . userinfo . profile . teacher . more .';
+    grid-template-rows: 1fr;
+    align-items:  center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.search-picture {
+    grid-area: icon;
+    display: grid;
+    place-content: center;
+}
+
+.profile-info {
+    grid-area: userinfo;
+}
+
+.profile-info > h4 {
+    font-size: 20px;
+}
+
+.profile-info > p {
+    font-size: 16px;
+}
+
+.profile-btn {
+    grid-area: profile;
+    display: grid;
+    place-content: center;
+}
+
+.teacher-buttons {
+    grid-area: teacher;
+}
+
+#search-more {
+    grid-area: more;
+}
+
 .userpicture {
     border-radius: 35px;
-    margin-left: 22px;
-    margin-top: 5px
-}
-
-.resultslist > p {
-    padding-left: 20px;
-    padding-top: 20px
-}
-
-.search-picture  {
-    margin-left: 20px;
 }
 
 .backarrow {
@@ -90,6 +147,11 @@ h1 {
 
 li {
     position: relative;
+
+}
+
+li:hover {
+    background-color: #F5FAFF;
 }
 
 .showmore {
@@ -122,4 +184,22 @@ li {
     position: absolute;
     right: -40px;
     top: 12px
+}
+
+.teacher-buttons {
+    display: grid;
+    grid-template-columns: 112px 164px;
+    gap: 24px;
+    width: 300px;
+    height: 48px;
+}
+
+button.sr-button{
+   height: 48px;
+   width: 100%;
+   background-color: #FFFFFF;
+   border-radius: 8px;
+   color: #64648C;
+   font-size: 18px;
+   padding: 0px;
 }
