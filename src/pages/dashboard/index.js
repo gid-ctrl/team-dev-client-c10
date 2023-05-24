@@ -14,7 +14,6 @@ import useAuth from "../../hooks/useAuth";
 import "../../styles/_buttons.css"
 import "./style.css";
 import ProfileButton from "../../components/profileButton";
-import Form from "../../components/form";
 
 
 
@@ -120,7 +119,7 @@ const Dashboard = () => {
 
       <aside>
         <Card>
-          <Form 
+          <form 
           onSubmit={(e) => e.preventDefault()} 
           onMouseDown={handleFormMouseDown}
           onFocus={handleFormFocus}
@@ -224,7 +223,7 @@ const Dashboard = () => {
        
            </Card>
             )}
-            </Form>
+            </form>
             </Card>
            
            
