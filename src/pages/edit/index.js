@@ -33,12 +33,14 @@ const EditProfile = () => {
         lastName: "Bloggs",
         bio: "",
         githubUrl: "student1",
-      }).then((response) => {
-        console.log("User updated successfully:", response.data);
-  })
-  }
-      function handleSaveButtonClick() {
-    updateUser();
+      })
+      .then((response) => { console.log("User updated successfully:", response.data); })
+    }
+  }, [userId])
+
+    function handleSaveButtonClick() {
+      updateUser();
+    }
 
     const userDisplayName = (user) => {
       return `${user.firstName} ${user.lastName}`;
@@ -283,6 +285,5 @@ const EditProfile = () => {
         </main>
       </>
     );
-  }
 }
 export default EditProfile;
