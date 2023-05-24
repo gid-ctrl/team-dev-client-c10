@@ -101,13 +101,13 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
           const tempArray = [];
           const res = await get(`posts/${id}/comments`);
           const tempComments = res.data.comments;
-          await Promise.all(
             tempComments.map(async (comment) => {
               const userId = comment.userId;
               const name = `${comment.user.profile.firstName} ${comment.user.profile.lastName}`;
               const initials = `${comment.user.profile.firstName?.[0]}${comment.user.profile.lastName?.[0]}`;
               const newComment = {
                 id: comment.id,
+                updateTime: comment.updatedAt,
                 authorId: comment.userId,
                 name: name,
                 initials: initials,
@@ -115,7 +115,6 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
               };
               tempArray.push(newComment);
             })
-          );
           const sortedArray = tempArray.sort((a,b) => a.id - b.id)
           setPostComments(sortedArray.reverse());
       };
