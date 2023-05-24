@@ -5,7 +5,9 @@ import useModal from "../../hooks/useModal";
 import Card from "../card";
 import Comment from "../comment";
 import EditPostModal from "../editPostModal";
+import DeletePostModal from "../deletePostModal"
 import ProfileCircle from "../profileCircle";
+import OptionsButton from "../optionsButton";
 import CommentIcon from "../../assets/icons/commentIcon"
 import CommentIconFilled from "../../assets/icons/commentIconFilled"
 import TextInput from "../form/textInput"
@@ -17,13 +19,27 @@ import { get } from "../../service/apiClient"
 
 
 
-const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, currentUserName, currentUserInitials, currentUser, currentUserId}) => {
-    const { openModal, setModal } = useModal()
-    const [showComments, setShowComments] = useState(false)
-    const [postComments, setPostComments] = useState([])
-    const [updateComments, setUpdateComments] = useState(false)
-    const [showAllComments, setShowAllComments] = useState(false)
-    const [firstClick, setFirstClick] = useState(true)
+const Post = ({
+  name, 
+  date, 
+  content, 
+  comments=[], 
+  liked, 
+  id, 
+  setTriggerUpdate, 
+  currentUserName, 
+  currentUserInitials, 
+  currentUser, 
+  currentUserId, 
+  authorId
+}) => {
+
+  const { openModal, setModal } = useModal()
+  const [showComments, setShowComments] = useState(false)
+  const [postComments, setPostComments] = useState([])
+  const [updateComments, setUpdateComments] = useState(false)
+  const [showAllComments, setShowAllComments] = useState(false)
+  const [firstClick, setFirstClick] = useState(true)
 
 
   const userInitials = name.match(/\b(\w)/g);
@@ -52,7 +68,7 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
     setIsLiked(isLiked)
     }, [currentUserId, liked])
 
-  const showModal = () => {
+  const showEditModal = () => {
     setModal(
       'Edit post',
       <EditPostModal
@@ -61,6 +77,17 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
         setTriggerUpdate={setTriggerUpdate}
         name={name}
         userInitials={userInitials}
+      />
+    );
+    openModal();
+  };
+
+  const showDeleteModal = () => {
+    setModal(
+      'Delete post',
+      <DeletePostModal
+        id={id}
+        setTriggerUpdate={setTriggerUpdate}
       />
     );
     openModal();
@@ -139,22 +166,23 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
       const toggleAllComments = () => {
         setShowAllComments(!showAllComments)
       }
-    
+
   return (
     <Card>
       <article className="post">
         <section className="post-details">
           <ProfileCircle initials={userInitials} />
-
           <div className="post-user-name">
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          {name === currentUserName && (
-            <div className="edit-icon">
-              <p onClick={showModal}>...</p>
-            </div>
-          )}
+          <OptionsButton 
+            showEditModal={showEditModal} 
+            showDeleteModal={showDeleteModal} 
+            authorId={authorId} 
+            currentUserId={currentUserId} 
+            postId={id} 
+            setTriggerUpdate={setTriggerUpdate}/>
         </section>
 
         <section className="post-content">
