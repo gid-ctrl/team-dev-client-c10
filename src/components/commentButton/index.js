@@ -1,4 +1,6 @@
-const Button = ({
+import AddCommentIcon from "../../assets/icons/addCommentIcon";
+
+const CommentButton = ({
   text,
   onClick,
   type = "button",
@@ -13,8 +15,9 @@ const Button = ({
       disabled={disabled}
     >
       {text}
+      <AddCommentIcon />
     </button>
   );
 };
 
-export default Button;
+export default CommentButton;

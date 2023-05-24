@@ -1,4 +1,3 @@
-import { Route } from "react-router-dom";
 import Card from "../../components/card";
 import TextInput from "../../components/form/textInput";
 import "./style.css";
@@ -7,20 +6,22 @@ import LockIcon from "../../assets/icons/locIcon";
 import { get } from "../../service/apiClient";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import { useParams } from 'react-router-dom';
 
 const EditProfile = () => {
   const { userId } = useAuth();
   const [user, setUser] = useState({});
   const [userInitials, setUserInitials] = useState(``);
+  const urlParams = useParams();
 
   useEffect(() => {
     async function getUserInfo() {
-      const userInfo = await get(`users/${userId}`);
+      const userInfo = await get(`users/${urlParams.id}`);
       setUser(userInfo.data.user);
       setUserInitials(getInitailsFromUser(userInfo.data.user));
     }
     getUserInfo();
-  }, [userId]);
+  }, [urlParams.id]);
 
   const userDisplayName = (user) => {
     return `${user.firstName} ${user.lastName}`;
@@ -249,7 +250,7 @@ const EditProfile = () => {
               </div>
 
               <div class="button-container">
-                <button type="button" class="button offwhite">
+                <button type="button" className="button offwhite">
                   Cancel
                 </button>
                 <button type="button" class="button blue">
