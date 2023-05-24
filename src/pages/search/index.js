@@ -164,8 +164,8 @@ function SearchPage () {
                                         {showMore === index && (
                                         <div>
 
-                                            {cascadeMenu === true && <CascadingMenu />}
-                                            {cascadeMenu === false && 
+                                            {cascadeMenu  && <CascadingMenu />}
+                                            {!cascadeMenu && 
                                             
                                             
                                             <div className="showmore" ref={ref}>
