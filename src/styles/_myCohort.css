@@ -38,17 +38,10 @@
     padding-top: 10px
 }
 
-.user-display {
-    display: grid;
-    padding: 10px 0;
-    margin: 10px 0;
-    align-items: center;
-}
-
 .user-display-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 48%));
-    gap: 4%
+    grid-template-columns: repeat(auto-fit, minmax(300px, 45%));
+    gap: 0px 70px
 }
 
 .teacher-bar>h4 {
@@ -66,12 +59,6 @@
 .teacher-info>span {
     font-weight: bolder;
 
-}
-
-.user-display-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 48%));
-    gap: 4%
 }
 
 .myexercises {

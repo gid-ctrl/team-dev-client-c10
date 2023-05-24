@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const TextInput = ({ value, onChange, name, label, icon, type = "text", placeholder, onFocus, onActive, onFocusOut}) => {
+const TextInput = ({ value, onChange, name, label, icon, type = "text", required, placeholder, onFocus, onActive, onFocusOut}) => {
 	const [input, setInput] = useState("");
 	const [showpassword, setShowpassword] = useState(false);
 	if (type === "password") {
@@ -9,6 +9,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = "text", placehol
 				<label htmlFor={name}>{label}</label>
 				<input
 					type={type}
+					required={required}
 					name={name}
 					value={value}
 					onChange={(e) => {
@@ -20,6 +21,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = "text", placehol
 					<input
 						type="text"
 						name={name}
+						required={required}
 						value={input}
 						className="passwordreveal"
 					/>
@@ -41,7 +43,7 @@ const TextInput = ({ value, onChange, name, label, icon, type = "text", placehol
 		return (
 			<div className="inputwrapper">
 				{label && <label htmlFor={name}>{label}</label>}
-				<input placeholder={placeholder} type={type} name={name} value={value} onChange={onChange} onFocus={onFocus} onActive={onActive} onFocusOut={onFocusOut} className={icon && 'input-has-icon'} />
+				<input placeholder={placeholder} type={type} name={name} value={value} onChange={onChange} required={required} onFocus={onFocus} onActive={onActive} onFocusOut={onFocusOut} className={icon && 'input-has-icon'} />
                 {icon && <span className="input-icon">{icon}</span>}
 			</div>
 		);
