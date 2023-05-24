@@ -20,6 +20,7 @@ import Header from "./components/header";
 import MyCohort from "./pages/mycohort/MyCohort";
 import EditProfile from "./pages/edit";
 import ProfilePage from "./pages/profile"
+import MyExercises from "./pages/exercises/MyExercises"
 
 
 const App = () => {
@@ -56,6 +57,14 @@ const App = () => {
               element={
                 <ProtectedRoute>
                   <MyCohort />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="MyExercises"
+              element={
+                <ProtectedRoute>
+                  <MyExercises />
                 </ProtectedRoute>
               }
             />
