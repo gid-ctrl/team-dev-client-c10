@@ -31,6 +31,7 @@ const Posts = ({triggerUpdate, setTriggerUpdate, currentUserName, currentUserIni
                         currentUserInitials={currentUserInitials}
                         currentUser={currentUser}
                         currentUserId={currentUser.id}
+                        authorId={post.author.id}
                     />
             })}
         </>

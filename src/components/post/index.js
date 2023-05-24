@@ -18,13 +18,27 @@ import { get } from "../../service/apiClient"
 
 
 
-const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, currentUserName, currentUserInitials, currentUser, currentUserId}) => {
-    const { openModal, setModal } = useModal()
-    const [showComments, setShowComments] = useState(false)
-    const [postComments, setPostComments] = useState([])
-    const [updateComments, setUpdateComments] = useState(false)
-    const [showAllComments, setShowAllComments] = useState(false)
-    const [firstClick, setFirstClick] = useState(true)
+const Post = ({
+  name, 
+  date, 
+  content, 
+  comments=[], 
+  liked, 
+  id, 
+  setTriggerUpdate, 
+  currentUserName, 
+  currentUserInitials, 
+  currentUser, 
+  currentUserId, 
+  authorId
+}) => {
+
+  const { openModal, setModal } = useModal()
+  const [showComments, setShowComments] = useState(false)
+  const [postComments, setPostComments] = useState([])
+  const [updateComments, setUpdateComments] = useState(false)
+  const [showAllComments, setShowAllComments] = useState(false)
+  const [firstClick, setFirstClick] = useState(true)
 
 
   const userInitials = name.match(/\b(\w)/g);
@@ -140,20 +154,17 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
       const toggleAllComments = () => {
         setShowAllComments(!showAllComments)
       }
-    
+
   return (
     <Card>
       <article className="post">
         <section className="post-details">
           <ProfileCircle initials={userInitials} />
-
           <div className="post-user-name">
             <p>{name}</p>
             <small>{date}</small>
           </div>
-          {name === currentUserName && (
-            <OptionsButton showModal={showModal} id={id}/>
-          )}
+          <OptionsButton showModal={showModal} authorId={authorId} currentUserId={currentUserId} postId={id} setTriggerUpdate={setTriggerUpdate}/>
         </section>
 
         <section className="post-content">
