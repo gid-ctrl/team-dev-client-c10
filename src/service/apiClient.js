@@ -73,8 +73,8 @@ export {
     register,
     createProfile,
     patch,
-    post,
-    get, 
+    get,
+    post, 
     deleted
 
 }
