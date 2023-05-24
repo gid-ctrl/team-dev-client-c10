@@ -41,8 +41,9 @@ export default function MyCohort() {
             {
               cohorts.length === 0 ? <p>No Data</p> : cohorts.map((item, index) => {
                   if(item.role === 'STUDENT' && item.firstName !== undefined && item.lastName !== undefined){
-                  return <Students key={index} firstName={item.firstName} lastName={item.lastName}/>}
+                  return <Students key={index} firstName={item.firstName} lastName={item.lastName} id={item.id}/>}
               })
+
             }
           </div>
         </Card>
