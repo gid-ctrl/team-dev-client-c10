@@ -1,7 +1,6 @@
 import Form from "../../../components/form";
 
 const StepFour = ({ data, setData }) => {
- 
   return (
     <>
       <div className="welcome-formheader">

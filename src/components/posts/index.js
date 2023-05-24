@@ -26,8 +26,10 @@ const Posts = ({triggerUpdate, setTriggerUpdate, currentUser}) => {
                         content={post.content}
                         comments={post.comments}
                         id={post.id}
+                        liked={post.likedPosts}
                         setTriggerUpdate={setTriggerUpdate}
                         currentUserName={`${currentUser.firstName} ${currentUser.lastName}`}
+                        currentUserId={currentUser.id}
                     />
             })}
         </>

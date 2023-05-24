@@ -43,6 +43,10 @@ async function get(endpoint, auth = true) {
   return await request("GET", endpoint, null, auth);
 }
 
+async function deleted(endpoint, data, auth = true) {
+  return await request("DELETE", endpoint, data, auth);
+}
+
 async function request(method, endpoint, data, auth = true) {
   const opts = {
     headers: {
@@ -73,5 +77,6 @@ export {
   get,
   patch,
   post,
+  deleted,
   put,
 };
