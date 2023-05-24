@@ -72,8 +72,9 @@ export {
     getUsers,
     register,
     createProfile,
-    get,
     patch,
+    get,
     post, 
     deleted
+
 }
