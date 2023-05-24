@@ -47,7 +47,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center
-
 }
 
 .post-interactions > p {
@@ -58,8 +57,5 @@ padding-left: 10px;
 .post-interactions-container p {
     text-align: right;
     display: grid;
-    align-self: center;
-    
-    
+    align-self: center; 
 }
-
