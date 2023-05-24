@@ -283,7 +283,7 @@ const ViewProfile = () => {
                 {allowedToEdit ? (
                   <button
                     type="button"
-                    class="button offwhite"
+                    className="button offwhite"
                     onClick={handleClick}
                   >
                     Edit
