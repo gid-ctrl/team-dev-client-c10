@@ -1,6 +1,4 @@
-import { Route } from "react-router-dom";
 import Card from "../../components/card";
-import TextInput from "../../components/form/textInput";
 import "./style.css";
 import "../../styles/index.css";
 import LockIcon from "../../assets/icons/locIcon";
@@ -11,8 +9,9 @@ import { patch } from "../../service/apiClient";
 
 const EditProfile = () => {
   const { userId } = useAuth();
-  const [user, setUser] = useState({});
+  const [userProfile, setUserProfile] = useState({});
   const [userInitials, setUserInitials] = useState(``);
+  const [user, setUser] = useState({ id: "" });
 
   useEffect(() => {
     async function getUserInfo() {
@@ -24,7 +23,7 @@ const EditProfile = () => {
   }, [userId]);
 
   const updateUser = async () => {
-    await patch(`users/${userId}`, {
+    const response = await patch(`users/${userId}`, {
       email: "updatedemail@example.com",
       password: "",
       cohortId: 0,
@@ -32,17 +31,13 @@ const EditProfile = () => {
       lastName: "Bloggs",
       bio: "",
       githubUrl: "student1",
-    }).then((response) => {
-      console.log("User updated successfully:", response.data);
     });
+    console.log("User updated successfully:", response.data);
   };
 
-  useEffect(() => {
-    updateUser();
-  }, [userId]);
-  function handleSaveButtonClick() {
-    updateUser();
-  }
+  const handleSaveButtonClick = async () => {
+    await updateUser();
+  };
 
   const userDisplayName = (user) => {
     return `${user.firstName} ${user.lastName}`;
@@ -92,32 +87,28 @@ const EditProfile = () => {
                 rows=""
                 cols="40"
                 className="textarea-small"
-                placeholder="Alex"
-                value={user.firstName}
+                placeholder={user.firstName}
               ></textarea>
               <small className="padding-field-name">Last Name*</small>
               <textarea
                 rows=""
                 cols="40"
                 className="textarea-small"
-                placeholder="Walker"
-                value={user.lastName}
+                placeholder={user.lastName}
               ></textarea>
               <small className="padding-field-name">Username*</small>
               <textarea
                 rows=""
                 cols="40"
                 className="textarea-small"
-                placeholder="Alex Walker"
-                value={userDisplayName(user)}
+                placeholder={userDisplayName(user)}
               ></textarea>
               <small className="padding-field-name">GitHub Username*</small>
               <textarea
                 rows=""
                 cols="40"
                 className="textarea-small"
-                placeholder="alex-walker"
-                value={user.githubUrl}
+                placeholder={user.githubUrl}
               ></textarea>
             </div>
 
@@ -132,9 +123,8 @@ const EditProfile = () => {
                     rows="1"
                     cols="40"
                     className="textarea-small"
-                    placeholder="Student"
                     disabled
-                    value={user.role}
+                    placeholder={user.role}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -161,9 +151,8 @@ const EditProfile = () => {
                     rows=""
                     cols="40"
                     className="textarea-small"
-                    placeholder="Cohort 4"
                     disabled
-                    value={cohortDisplayName(user.cohortId)}
+                    placeholder={cohortDisplayName(user.cohortId)}
                   ></textarea>
                   <div className="lock-icon">
                     <LockIcon />
@@ -261,11 +250,7 @@ const EditProfile = () => {
                 <h4>Bio</h4>
                 <div className="padding-top"></div>
                 <small>Bio</small>
-                <textarea
-                  placeholder="Tell us about yourself, your professional and educational highlights to date..."
-                  spellCheck="false"
-                  value={user.bio}
-                ></textarea>
+                <textarea spellCheck="false" placeholder={user.bio}></textarea>
                 <small>0/300</small>
               </div>
 
