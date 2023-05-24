@@ -3,7 +3,6 @@ import Stepper from "../../components/stepper";
 import useAuth from "../../hooks/useAuth";
 import StepOne from "./stepOne";
 import StepTwo from "./stepTwo";
-import StepFour from "./stepFour";
 import "./style.css";
 
 const Welcome = () => {
@@ -56,7 +55,6 @@ const Welcome = () => {
           setValidForm={setValidForm}
         />
         <StepTwo data={profile} setData={onChange} />
-        <StepFour data={profile} setData={onChange} />
       </Stepper>
     </main>
   );
