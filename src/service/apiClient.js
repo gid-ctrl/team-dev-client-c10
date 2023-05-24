@@ -76,7 +76,7 @@ export {
     createProfile,
     patch,
     get,
-    post, 
-    deleted
-
-}
+    post,
+    deleted,
+    put
+};
