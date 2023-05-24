@@ -90,7 +90,6 @@ const ProtectedRoute = ({ children }) => {
       <Navigation />
       <Modal />
       {children}
-      {console.log(children)}
     </div>
   )
 }
