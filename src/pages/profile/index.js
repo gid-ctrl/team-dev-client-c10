@@ -18,6 +18,7 @@ const ViewProfile = () => {
   const [userProfile, setUserProfile] = useState({})
   const [userInitials, setUserInitials] = useState(``)
   const [user, setUser] = useState({id: ""})
+  const [userOwnsPage, setUserOwnsPage] = useState(false)
 
 
   useEffect(() => {
@@ -246,21 +247,27 @@ const ViewProfile = () => {
                   disabled
                 ></textarea>
                 <div className="padding"></div>
-                <small className="padding-field-name">Password*</small>
-                <div class="input-container">
-                  <div className="password-field">
-                    <textarea
-                      rows="10"
-                      cols="40"
-                      class="textarea-small"
-                      name="password"
-                      placeholder="***************"
-                      disabled
-                      required
-                    ></textarea>
-                    <EyeIcon className="eye-icon"/>
-                  </div>
-                </div>
+                {
+                  ( userId === userProfile.id ) ? (
+                    <>
+                      <small className="padding-field-name">Password*</small>
+                      <div class="input-container">
+                        <div className="password-field">
+                          <textarea
+                            rows="10"
+                            cols="40"
+                            class="textarea-small"
+                            name="password"
+                            placeholder="***************"
+                            disabled
+                            required
+                          ></textarea>
+                          <EyeIcon className="eye-icon"/>
+                        </div>
+                      </div>
+                    </>
+                  ) : null
+                }
 
                 <div className="padding-bottom"></div>
                 <br></br>
