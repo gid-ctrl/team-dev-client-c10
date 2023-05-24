@@ -33,7 +33,7 @@ function SearchPage () {
             }
         })
         
-    }, [])
+    }, [userId])
    
     useEffect(() => {
         document.addEventListener("click", handleClickOutside, true)

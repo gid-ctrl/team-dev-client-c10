@@ -71,7 +71,7 @@ const ViewProfile = () => {
 
   useEffect(() => {
     checkUserAllowedToEdit(user, urlParams.id)
-  }, [urlParams.id, userProfile.id, user.id])
+  }, [urlParams.id, userProfile.id, user.id, user])
 
 
   return (
