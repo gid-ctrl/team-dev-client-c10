@@ -6,7 +6,8 @@ import CreatePostModal from "../../components/createPostModal";
 import TextInput from "../../components/form/textInput";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
-import jwt_decode from "jwt-decode";
+import CohortList from "../../components/cohortList";
+import jwt_decode from "jwt-decode"
 import { get } from "../../service/apiClient";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -227,7 +228,9 @@ const Dashboard = () => {
            
            
         <Card>
-          <h4>My Cohort</h4>
+          <CohortList 
+            currentUser = {currentUser}
+            users = {users}/>
         </Card>
       </aside>
     </>
