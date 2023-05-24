@@ -1,9 +1,17 @@
 .register-form {
 	margin-bottom: 32px;
 }
+
 .register-form form {
 	display: grid;
 	grid-template-rows: repeat(2, auto);
 	gap: 24px;
 	margin-bottom: 40px;
+}
+
+.error-message,
+.error-message {
+	color: rgb(220, 8, 8);
+	margin-top: -15px;
+
 }
