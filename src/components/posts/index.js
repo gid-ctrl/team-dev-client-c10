@@ -14,11 +14,15 @@ const Posts = ({triggerUpdate, setTriggerUpdate, currentUserName, currentUserIni
         }
     }, [setTriggerUpdate, triggerUpdate])
 
-    
-
     return (
         <>
-            {posts.map(post => {
+            {
+            posts.sort( (a, b) => {
+                return a.createdAt.localeCompare(b.createdAt);
+            })
+            .slice(0)
+            .reverse()
+            .map(post => {
                     return <Post
                         key={post.id}
                         name={`${post.author.firstName} ${post.author.lastName}`}
