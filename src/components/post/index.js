@@ -65,7 +65,6 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
     );
     openModal();
   };
-<<<<<<< HEAD
 
   useEffect(() => {
     const isLiked = liked.some(postlikes => postlikes.userId === currentUserId)
@@ -77,11 +76,7 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
       setLike((prevLike) => prevLike)
       return
 		}
-=======
    
-  const handleClick = () => {
->>>>>>> main
-
     if (isLiked) {
         deleted(`posts/${id}/like`, {id}).then(() => {
         setIsLiked(false);
@@ -95,12 +90,7 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
     }
   };
 
-  let likeIcon = null;
-  if (isLiked) {
-    likeIcon = <LikeRed />;
-  } else {
-    likeIcon = <Like />;
-  }
+
 
     const showCommentModal = () => {
         setModal('Add a comment...', 
