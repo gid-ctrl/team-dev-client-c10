@@ -39,10 +39,10 @@ export default function MyCohort() {
           <div className="user-display-grid">
 
             {
-                cohorts.map((item, index) => {
-                    if(item.role === 'STUDENT'){
-                    return <Students key={index} firstName={item.firstName} lastName={item.lastName}/>}
-                })
+              cohorts.length === 0 ? <p>No Data</p> : cohorts.map((item, index) => {
+                  if(item.role === 'STUDENT' && item.firstName !== undefined && item.lastName !== undefined){
+                  return <Students key={index} firstName={item.firstName} lastName={item.lastName}/>}
+              })
             }
           </div>
         </Card>
@@ -52,8 +52,8 @@ export default function MyCohort() {
           <div className="teacher-bar">
             <h4>Teachers</h4>
             {
-                cohorts.map((item, index) => {
-                    if(item.role === 'TEACHER'){
+                cohorts.length === 0 ? <p>No Data</p> : cohorts.map((item, index) => {
+                    if(item.role === 'TEACHER'  && item.firstName !== undefined && item.lastName !== undefined){
                     return <Teachers key={index} bio={item.bio} firstName={item.firstName} lastName={item.lastName}/>}
                 })
             }

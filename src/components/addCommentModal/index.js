@@ -4,7 +4,7 @@ import useModal from "../../hooks/useModal"
 import './style.css'
 import Button from '../button'
 
-const CreatePostModal = ({setTriggerUpdate, currentUserName, currentUserInitials}) => {
+const AddCommentModal = ({setTriggerUpdate, currentUserName, currentUserInitials, id, setUpdateComments}) => {
     const { closeModal } = useModal()
 
     const [message, setMessage] = useState(null)
@@ -16,9 +16,10 @@ const CreatePostModal = ({setTriggerUpdate, currentUserName, currentUserInitials
 
     const onSubmit = (e) => {
         setMessage('Submit button was clicked! Closing modal in 2 seconds...')
-        post('posts', {"content": text})
+        post(`posts/${id}/comments`, {"content": text})
         .then(() => {
             setTriggerUpdate(true)
+            setUpdateComments(true)
         })
 
         setTimeout(() => {
@@ -26,6 +27,7 @@ const CreatePostModal = ({setTriggerUpdate, currentUserName, currentUserInitials
             closeModal()
         }, 2000)
     }
+
 
     return (
         <>
@@ -35,13 +37,13 @@ const CreatePostModal = ({setTriggerUpdate, currentUserName, currentUserInitials
             </section>
 
             <section>
-                <textarea onChange={onChange} value={text} placeholder="What's on your mind?"></textarea>
+                <textarea onChange={onChange} value={text} placeholder="What's your comment?"></textarea>
             </section>
 
             <section className="create-post-actions">
                 <Button
                     onClick={onSubmit}
-                    text='Post'
+                    text='Post Comment'
                     classes={`${text.length ? 'blue' : 'offwhite' } width-full`}
                     disabled={!text.length}
                 />
@@ -51,5 +53,4 @@ const CreatePostModal = ({setTriggerUpdate, currentUserName, currentUserInitials
         </>
     )
 }
-
-export default CreatePostModal
+export default AddCommentModal

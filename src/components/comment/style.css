@@ -1,0 +1,19 @@
+.comment {
+    margin: 10px 0px;
+    display: grid;
+    grid-template-columns: min-content 1fr auto;
+    grid-gap: 10px;
+}
+
+.comment-body {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.comment-body > p {
+    font-size: 14px;
+}
+
+.comment > .edit-icon {
+    justify-self: start;
+}
