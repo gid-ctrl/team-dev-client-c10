@@ -7,7 +7,7 @@ function DeletePostModal({ id, setTriggerUpdate }) {
   const { closeModal } = useModal()
 
   const handleDelete = (e) => {
-      deleted(`posts/${id}`)
+      deleted(`posts/${id}`, {id})
       .then(() => {
         setTriggerUpdate(true)
       })
