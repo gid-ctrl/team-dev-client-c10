@@ -41,7 +41,7 @@ export default function MyCohort() {
             {
                 cohorts.map((item, index) => {
                     if(item.role === 'STUDENT'){
-                    return <Students key={index} firstName={item.firstName} lastName={item.lastName}/>}
+                    return <Students key={index} firstName={item.firstName} lastName={item.lastName} id={item.id} />}
                 })
             }
           </div>
