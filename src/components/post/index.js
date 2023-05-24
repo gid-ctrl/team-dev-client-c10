@@ -74,7 +74,7 @@ const Post = ({
             <small>{date}</small>
           </div>
           {name === currentUserName && (
-            <OptionsButton showModal={showModal}/>
+            <OptionsButton showModal={showModal} id={id}/>
           )}
         </section>
 

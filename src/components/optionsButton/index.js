@@ -4,9 +4,10 @@ import MenuItem from '../menu/menuItem'
 import DeleteIcon from '../../assets/icons/deleteIcon'
 import CogIcon from '../../assets/icons/cogIcon'
 import LocIcon from '../../assets/icons/locIcon'
+import { deleted } from '../../service/apiClient'
 import './style.css'
 
-function OptionsButton({ showModal }) {
+function OptionsButton({ showModal, id}) {
   const [isMenuVisible, setIsMenuVisible] = useState(false)
 
   const CascadingMenu = () => {
@@ -17,7 +18,9 @@ function OptionsButton({ showModal }) {
               setIsMenuVisible(false)
               showModal()
             }}/>
-            <MenuItem icon={<DeleteIcon />} text='Delete' />
+            <MenuItem icon={<DeleteIcon />} text='Delete' onClick={() => {
+              deleted()
+            }}/>
         </Menu>
     )
   }
