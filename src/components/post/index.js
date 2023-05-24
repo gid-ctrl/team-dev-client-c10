@@ -16,6 +16,8 @@ import { post, deleted } from "../../service/apiClient";
 import AddCommentModal from "../addCommentModal"
 import { get } from "../../service/apiClient"
 
+
+
 const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, currentUserName, currentUserInitials, currentUser, currentUserId}) => {
     const { openModal, setModal } = useModal()
     const [showComments, setShowComments] = useState(false)
@@ -23,6 +25,7 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
     const [updateComments, setUpdateComments] = useState(false)
     const [showAllComments, setShowAllComments] = useState(false)
     const [firstClick, setFirstClick] = useState(true)
+
 
   const userInitials = name.match(/\b(\w)/g);
   const [isLiked, setIsLiked] = useState(false);
@@ -63,9 +66,18 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
     );
     openModal();
   };
-   
-  const handleClick = () => {
 
+  useEffect(() => {
+    const isLiked = liked.some(postlikes => postlikes.userId === currentUserId)
+    setIsLiked(isLiked)
+    }, [currentUserId, liked])
+    
+  const handleClick = (event) => {
+    if(event.detail > 1){
+      setLike((prevLike) => prevLike)
+      return
+		}
+   
     if (isLiked) {
         deleted(`posts/${id}/like`, {id}).then(() => {
         setIsLiked(false);
@@ -79,12 +91,7 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
     }
   };
 
-  let likeIcon = null;
-  if (isLiked) {
-    likeIcon = <LikeRed />;
-  } else {
-    likeIcon = <Like />;
-  }
+
 
     const showCommentModal = () => {
         setModal('Add a comment...', 
