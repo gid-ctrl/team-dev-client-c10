@@ -8,6 +8,8 @@ import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
 import "./style.css";
 import { post, deleted } from "../../service/apiClient";
+import { useRef } from 'react';
+
 
 
 const Post = ({
@@ -22,6 +24,7 @@ const Post = ({
   currentUserId
 }) => {
   const { openModal, setModal } = useModal();
+
 
   const userInitials = name.match(/\b(\w)/g);
   const [isLiked, setIsLiked] = useState(false);
@@ -47,7 +50,11 @@ const Post = ({
     setIsLiked(isLiked)
     }, [currentUserId, liked])
     
-  const handleClick = () => {
+  const handleClick = (event) => {
+    if(event.detail > 1){
+      setLike((prevLike) => prevLike)
+      return
+		}
 
     if (isLiked) {
         deleted(`posts/${id}/like`, {id}).then(() => {
