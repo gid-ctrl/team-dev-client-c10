@@ -31,8 +31,16 @@ const CommentEditMenu = ({userId, authorId}) => {
 
     return (
         <Menu className="edit-comment-menu" >
-            {sameUser && <CommentEditMenuItem icon={<DeleteIcon />} text='Delete Comment' sameUser={sameUser}/>}
-            {!sameUser && <CommentEditMenuItem icon={<ReportIcon />} text='Report Comment' sameUser={sameUser} />}
+            { sameUser ? <CommentEditMenuItem 
+                icon={<DeleteIcon />} 
+                text='Delete Comment' 
+                sameUser={sameUser} 
+            /> : 
+            <CommentEditMenuItem 
+                icon={<ReportIcon />} 
+                text='Report Comment' 
+                sameUser={sameUser} 
+            /> }
         </Menu>
     )
 }

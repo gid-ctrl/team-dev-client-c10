@@ -26,8 +26,29 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
   const userInitials = name.match(/\b(\w)/g);
   const [isLiked, setIsLiked] = useState(false);
   const [like, setLike] = useState(liked.length);
-
     
+  useEffect(() => {
+    if (!firstClick) {
+        if (postComments.length !== 0) {
+            setShowComments(true)
+        } else {
+            setShowComments(false)
+        }
+    }
+  }, [postComments])
+
+  useEffect(() => {
+    if (updateComments) {
+        fetchComments()
+        setUpdateComments(false)
+    }
+  },[updateComments])
+
+  useEffect(() => {
+    const isLiked = liked.some(postlikes => postlikes.userId === currentUserId)
+    setIsLiked(isLiked)
+    }, [currentUserId, liked])
+
   const showModal = () => {
     setModal(
       'Edit post',
@@ -41,12 +62,7 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
     );
     openModal();
   };
-
-  useEffect(() => {
-    const isLiked = liked.some(postlikes => postlikes.userId === currentUserId)
-    setIsLiked(isLiked)
-    }, [currentUserId, liked])
-    
+   
   const handleClick = () => {
 
     if (isLiked) {
@@ -104,7 +120,7 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
           setPostComments(sortedArray.reverse());
       };
 
-      const fetchComments = async () => {
+      const fetchComments = () => {
         if (updateComments || firstClick) {
             setFirstClick(false)
             setUpdateComments(false)
@@ -113,23 +129,6 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
             setShowComments(!showComments)
         }
       };
-
-      useEffect(() => {
-        if (!firstClick) {
-            if (postComments.length !== 0) {
-                setShowComments(true)
-            } else {
-                setShowComments(false)
-            }
-        }
-      }, [postComments])
-
-      useEffect(() => {
-        if (updateComments) {
-            fetchComments()
-            setUpdateComments(false)
-        }
-      },[updateComments])
       
       const toggleAllComments = () => {
         setShowAllComments(!showAllComments)
@@ -157,7 +156,6 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
         </section>
 
                 <section className={`post-interactions-container border-top ${postComments.length ? 'border-bottom' : null}`}>
-                    {/* <div className="post-interactions"> */}
                     <button className="post-interactions" onClick={handleClick}>
                       {!isLiked && <Like />}
                       {isLiked && <LikeRed/>}
@@ -168,7 +166,6 @@ const Post = ({ name, date, content, comments=[], liked, id, setTriggerUpdate, c
                           {showComments && <CommentIconFilled />}
                           <p>Comment</p>
                       </button>
-                    {/* </div> */}
           <p>{(!like && "Be the first to like this") || like} </p>
         </section>
 

@@ -5,7 +5,6 @@ import './style.css'
 import Button from '../button'
 
 const AddCommentModal = ({setTriggerUpdate, currentUserName, currentUserInitials, id, setUpdateComments}) => {
-    // Use the useModal hook to get the closeModal function so we can close the modal on user interaction
     const { closeModal } = useModal()
 
     const [message, setMessage] = useState(null)
