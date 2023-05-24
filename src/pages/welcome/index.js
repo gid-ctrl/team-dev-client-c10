@@ -34,8 +34,6 @@ const Welcome = () => {
     );
   };
 
-  console.log("data", profile);
-
   return (
     <main className="welcome">
       <div className="welcome-titleblock">
@@ -54,7 +52,10 @@ const Welcome = () => {
           setData={onChange}
           setValidForm={setValidForm}
         />
-        <StepTwo data={profile} setData={onChange} />
+        <StepTwo
+          data={profile}
+          setData={onChange}
+        />
       </Stepper>
     </main>
   );
