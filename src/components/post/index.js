@@ -6,14 +6,11 @@ import Card from "../card";
 import Comment from "../comment";
 import EditPostModal from "../editPostModal";
 import ProfileCircle from "../profileCircle";
-<<<<<<< HEAD
 import OptionsButton from "../optionsButton";
-=======
 import CommentIcon from "../../assets/icons/commentIcon"
 import CommentIconFilled from "../../assets/icons/commentIconFilled"
 import TextInput from "../form/textInput"
 import CommentButton from "../commentButton"
->>>>>>> main
 import "./style.css";
 import { post, deleted } from "../../service/apiClient";
 import AddCommentModal from "../addCommentModal"
