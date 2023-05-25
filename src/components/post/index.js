@@ -191,7 +191,7 @@ const Post = ({
 
                 <section className={`post-interactions-container border-top ${postComments.length ? 'border-bottom' : null}`}>
                     <button className="post-interactions" onClick={handleClick}>
-                      {!isLiked && <Like />}
+                      {!isLiked && <Like className='style-update'/>}
                       {isLiked && <LikeRed/>}
                       <p>Like</p>
                     </button>
