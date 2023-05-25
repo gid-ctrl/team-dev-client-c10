@@ -12,6 +12,7 @@ const EditProfile = () => {
   const [userProfile, setUserProfile] = useState({});
   const [userInitials, setUserInitials] = useState(``);
   const [user, setUser] = useState({ id: "" });
+  const [ updatedProfile, setUpdatedProfile ] = useState({})
 
   useEffect(() => {
     async function getUserInfo() {
@@ -21,6 +22,11 @@ const EditProfile = () => {
     }
     getUserInfo();
   }, [userId]);
+
+  useEffect(() => {
+    setUpdatedProfile(user)
+  }, [user])
+
 
   const updateUser = async () => {
     const response = await patch(`users/1`, {
@@ -52,6 +58,11 @@ const EditProfile = () => {
     const lastInital = user.lastName.slice(0, 1);
     return `${firstInital}${lastInital}`;
   };
+
+  const handleFirstNameChange = (e) => {
+    console.log(updatedProfile)
+    setUpdatedProfile({...updatedProfile, firstName:e.target.value})
+  }
 
   return (
     <>
@@ -88,6 +99,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder={user.firstName}
+                onChange={handleFirstNameChange}
               ></textarea>
               <small className="padding-field-name">Last Name*</small>
               <textarea
