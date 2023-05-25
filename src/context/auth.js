@@ -68,7 +68,6 @@ const AuthProvider = ({ children }) => {
 
     const user = await createProfile(userId, firstName, lastName, githubUrl, bio);
 	setProfile(user.data.profile)
-	console.log('temp',user)
     localStorage.setItem("token", token);
     navigate("/");
   }; 
@@ -93,8 +92,6 @@ const ProtectedRoute = ({ children }) => {
   if (!token) {
     return <Navigate to={"/login"} replace state={{ from: location }} />;
   }
-  console.log('location path name', location.pathname)
-  console.log('profile', profile)
   if ((!profile || !profile.firstName) && location.pathname !== '/welcome') {
     return <Navigate to={"/welcome"} replace state={{ from: location }} />;
   }
