@@ -89,6 +89,10 @@ const Dashboard = () => {
         .toLowerCase()
         .includes(searchVal.toLowerCase())
   );
+
+  const students = users.filter(
+    (user) => 
+    user.role === "STUDENT")
   
 	return (
 		<>
@@ -230,7 +234,33 @@ const Dashboard = () => {
             <p>List of Cohorts</p>
           </Card>
           <Card>
-            <p>List of students</p>
+          <h4>Students</h4>
+          <hr className="line"/>
+          {students.map((user) => (
+                             <div className="nameSearch" key={user.id}>
+                               {user.firstName.length !== 0 && (
+                                 <>
+                                 <ProfileButton id={user.id} initials= {`${user.firstName?.[0]}${user.lastName?.[0]}`} />
+                                   <div className="name-tag-role">
+                                     <p id="searched-name">
+                                       {user.firstName} {user.lastName}
+                            
+                                     </p>
+                                     <div className="role">
+                                       {user.role[0]}
+                                       {user.role.toLowerCase().slice(1)}
+                                     </div>
+                                   </div>
+                                
+                                    <div className="edit-icon">
+                                     <p>...</p>
+                                   </div>
+                                   
+                                 </>
+                               )}
+                             </div>
+                           ))}
+          
           </Card>
           <Card>
             <p>List of teachers</p>
