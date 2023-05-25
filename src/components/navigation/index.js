@@ -39,7 +39,7 @@ const Navigation = () => {
         <li>
           <NavLink to="/MyExercises">
             <DataIcon />
-            <p>Cohort</p>
+            <p>Exercises</p>
           </NavLink>
         </li>
         
