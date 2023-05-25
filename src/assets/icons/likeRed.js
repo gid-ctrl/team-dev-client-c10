@@ -15,7 +15,7 @@ const LikeRed = () => {
         <style>
           {`.cls-1 {
             fill: #ed1b24;
-            fill-rule: evenodd;
+            fillRule: evenodd;
           }`}
         </style>
       </defs>

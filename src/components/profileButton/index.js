@@ -21,7 +21,6 @@ const ProfileButton = ({ initials, id }) => {
 const CascadingMenu = ({ id }) => {
   return (
     <Menu className="profile-circle-menu">
-      {console.log('user id', id)}
         <MenuItem icon={<ProfileIcon />} text='Profile' linkTo={`/profile/${id}`} />
     </Menu>
   );

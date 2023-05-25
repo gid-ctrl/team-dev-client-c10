@@ -25,7 +25,9 @@ const Header = () => {
         const profile = await getUserProfile(userId)
         setUserProfile(profile)
       }
-      setProfile()
+      if (userId !== null) {
+        setProfile()
+      }
     }, [userId])
     
     useEffect(() => {
