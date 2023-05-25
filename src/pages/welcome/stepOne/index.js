@@ -1,6 +1,6 @@
 import Form from "../../../components/form";
 import TextInput from "../../../components/form/textInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const StepOne = ({ data, setData, setValidForm }) => {
   const [requiredFirstName, setRequiredFirstName] = useState(false);
@@ -24,21 +24,15 @@ const StepOne = ({ data, setData, setValidForm }) => {
     }
   };
 
-  const checkValidBothNames = () => {
-    if (requiredFirstName && requiredLastName) {
-      setValidForm(true);
-    } else {
-      setValidForm(false);
-    }
-  };
-
   const handleInput = (e) => {
     setData(e);
     checkValidFirstName(e);
     checkValidLastName(e);
   };
-
-  checkValidBothNames();
+  
+useEffect(() => {
+  setValidForm(requiredFirstName && requiredLastName)
+}, [requiredFirstName, requiredLastName, setValidForm])
 
   return (
     <>

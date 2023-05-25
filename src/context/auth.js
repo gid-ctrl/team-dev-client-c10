@@ -25,6 +25,9 @@ const AuthProvider = ({ children }) => {
     if (token) {
       const decoded = jwt_decode(token);
       setUserId(decoded.userId);
+	  if (profile && profile.firstName) {
+		return
+	  }
       getUserProfile(decoded.userId).then((profile) => {
         setProfile(profile);
 		if (profile.firstName) navigate("/");
