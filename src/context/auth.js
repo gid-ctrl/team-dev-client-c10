@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
       setToken(storedToken);
 
     }
-  }, [navigate, token]);
+  }, [navigate, token, profile]);
 
   const handleLogin = async (email, password, successRoute = "/") => {
     const res = await login(email, password);
