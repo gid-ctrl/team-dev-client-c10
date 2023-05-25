@@ -174,7 +174,7 @@ const Post = ({
           <ProfileCircle initials={userInitials} />
           <div className="post-user-name">
             <p>{name}</p>
-            <small>{date}</small>
+            <small>{(new Date(Date.parse(date))).toLocaleDateString('en-GB')} at {date.slice(11, 16)}</small>
           </div>
           <OptionsButton 
             showEditModal={showEditModal} 
