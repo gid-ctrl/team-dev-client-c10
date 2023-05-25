@@ -217,12 +217,26 @@ const Dashboard = () => {
             </Form>
             </Card>
            
-           
-        <Card>
-          <CohortList 
-            currentUser = {currentUser}
-            users = {users}/>
-        </Card>
+        {currentUser.role === "STUDENT" && (
+          <Card>
+            <CohortList 
+              currentUser = {currentUser}
+              users = {users}/>
+          </Card>)}
+
+        {currentUser.role === "TEACHER" && (
+          <>
+          <Card>
+            <p>List of Cohorts</p>
+          </Card>
+          <Card>
+            <p>List of students</p>
+          </Card>
+          <Card>
+            <p>List of teachers</p>
+          </Card>
+          </>)}
+        
       </aside>
     </>
   );
