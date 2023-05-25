@@ -25,6 +25,9 @@ const AuthProvider = ({ children }) => {
     if (token) {
       const decoded = jwt_decode(token);
       setUserId(decoded.userId);
+	  if (profile && profile.firstName) {
+		return
+	  }
       getUserProfile(decoded.userId).then((profile) => {
         setProfile(profile);
 		if (profile.firstName) navigate("/");
@@ -34,7 +37,7 @@ const AuthProvider = ({ children }) => {
       setToken(storedToken);
 
     }
-  }, [navigate, token]);
+  }, [navigate, token, profile]);
 
   const handleLogin = async (email, password, successRoute = "/") => {
     const res = await login(email, password);
