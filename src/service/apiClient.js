@@ -68,7 +68,13 @@ async function request(method, endpoint, data, auth = true) {
 	return response.json()
 }
 
+async function getUserProfile(userId) {
+  const res = await get(`users/${userId}`);
+  return res.data.user;
+}
+
 export {
+
 	login,
 	getPosts,
 	getUsers,
@@ -79,4 +85,6 @@ export {
 	post,
 	deleted,
 	put,
+  getUserProfile
+
 }
