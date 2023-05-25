@@ -38,7 +38,7 @@ const Header = () => {
       ) {
         setUserInitials(getInitials(userProfile.firstName, userProfile.lastName))
         setUserFullName(`${userProfile.firstName} ${userProfile.lastName}`)
-        if (userProfile.cohortId === null) {
+        if (userProfile.role === 'TEACHER') {
           setCohort(`Teacher`)
         } else {
           setCohort(`Cohort ${userProfile.cohortId}`)
