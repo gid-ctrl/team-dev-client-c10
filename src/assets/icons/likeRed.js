@@ -7,8 +7,8 @@ const LikeRed = () => {
       data-name="Layer 1" 
       xmlns="http://www.w3.org/2000/svg" 
       viewBox="0 0 122.88 107.39"
-      width="40px"
-      height="40px"
+      width="35px"
+      height="35px"
     >
       <defs>
  
