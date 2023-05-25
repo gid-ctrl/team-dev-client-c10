@@ -23,9 +23,9 @@ const EditProfile = () => {
   }, [userId]);
 
   const updateUser = async () => {
-    const response = await patch(`users/${userId}`, {
-      email: "updatedemail@example.com",
-      password: "",
+    const response = await patch(`users/1`, {
+      email: "student@test.com",
+      password: "Testpassword1!",
       cohortId: 0,
       firstName: "Joe",
       lastName: "Bloggs",
@@ -71,7 +71,7 @@ const EditProfile = () => {
 
           <div className="main-info-grid">
             <div className="basic-info">
-              <hr class="hr-line" />
+              <hr className="hr-line" />
               <br />
               <div className="basic-info-content info-grid">
                 <h4 className="padding-title">Basic info</h4>
@@ -113,7 +113,7 @@ const EditProfile = () => {
             </div>
 
             <div className="training-info">
-              <hr class="hr-line" />
+              <hr className="hr-line" />
               <br />
               <h4 className="padding-title">Training info</h4>
               <div className="training-info-content info-grid">
@@ -210,7 +210,7 @@ const EditProfile = () => {
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Password*</small>
-                <div class="input-container">
+                <div className="input-container">
                   <div className="password-field">
                     <textarea
                       rows="10"
@@ -254,7 +254,7 @@ const EditProfile = () => {
                 <small>0/300</small>
               </div>
 
-              <div class="button-container">
+              <div className="button-container">
                 <button type="button" class="button offwhite">
                   Cancel
                 </button>
