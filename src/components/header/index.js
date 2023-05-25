@@ -16,6 +16,8 @@ const Header = () => {
     const { userId } = useAuth();
     const [ userProfile, setUserProfile ] = useState({})
     const [ userInitials, setUserInitials ] = useState("")
+    const [ userFullName, setUserFullName ] = useState("")
+    const [ cohort, setCohort ] = useState("")
 
 
     useEffect(() => {
@@ -27,8 +29,19 @@ const Header = () => {
     }, [userId])
     
     useEffect(() => {
-      if (typeof userProfile ==='object' && typeof userProfile.firstName === 'string' && typeof userProfile.lastName ==='string') {
+      if (
+        typeof userProfile ==='object'
+        && typeof userProfile.firstName === 'string'
+        && typeof userProfile.lastName ==='string'
+      ) {
+      console.log(userProfile)
         setUserInitials(getInitials(userProfile.firstName, userProfile.lastName))
+        setUserFullName(`${userProfile.firstName} ${userProfile.lastName}`)
+        if (userProfile.cohortId === null) {
+          setCohort(`Teacher`)
+        } else {
+          setCohort(`Cohort ${userProfile.cohortId}`)
+        }
       }
     }, [userProfile])
 
@@ -52,12 +65,12 @@ const Header = () => {
                     <Card>
                         <section className="post-details">
                             <div className="profile-icon">
-                                <p>AJ</p>
+                                <p>{userInitials}</p>
                             </div>
 
                             <div className="post-user-name">
-                                <p>Alex Jameson</p>
-                                <small>Software Developer, Cohort 3</small>
+                                <p>{userFullName}</p>
+                                <small>Software Developer, {cohort}</small>
                             </div>
                         </section>
 
