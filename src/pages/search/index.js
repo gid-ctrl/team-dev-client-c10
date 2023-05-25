@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import CrossBlackIcon from "../../assets/icons/crossBlackIcon";
 import ProfileIcon from "../../assets/icons/profileIcon";
 import useAuth from "../../hooks/useAuth";
+import CascadingMenu from "../../components/CascadingMenu"
 
 function SearchPage () {
     
@@ -17,6 +18,7 @@ function SearchPage () {
     const [results, setResults] = useState([])
     const [showMore, setShowMore] = useState(-1)
     const [userRole, setUserRole] = useState('')
+    const [cascadeMenu, showMenu] = useState(false)
     const ref = useRef(null)
     const { userId } = useAuth()
 
@@ -27,11 +29,11 @@ function SearchPage () {
             setResults(data)
             const currentUser = data.find(user => user.id === userId)
             if (currentUser) {
-                setUserRole(currentUser.role)
+                setUserRole(currentUser.role.toLowerCase())
             }
         })
         
-    }, [])
+    }, [userId])
    
     useEffect(() => {
         document.addEventListener("click", handleClickOutside, true)
@@ -66,12 +68,28 @@ function SearchPage () {
 
     
     const clickShowMore = (index) => {
-        if (showMore === index) {
+        if (showMore === index ) {
             setShowMore(-1)
+            
         } else {
             setShowMore(index)
+            
         }
+        
+        if (showMore === index && userRole === 'TEACHER') {
+            setShowMore(-1)
+            showMenu(false)
+        } else if (showMore !== index && userRole === 'TEACHER'){
+            setShowMore(index)
+            showMenu(true)
+
+        }
+
+       
+
+
     }
+
     
     const handleClickOutside = (e) => {
         if (ref.current !== null && !ref.current.contains(e.target)) {
@@ -81,7 +99,7 @@ function SearchPage () {
 
     return (
         <>  
-            <div className="parent">
+            <div className={`parent parent-${userRole}`}>
                 <BackButton />
                 <h1>Search Results</h1>
                 <section className="searchparent">
@@ -116,15 +134,16 @@ function SearchPage () {
 
                 <section className="resultsparent">
                     <div className="resultslist">
-                    <p>People</p>
+                        <p className="results-header">People</p>
+                        <hr  className="hr-search"/>
                         <ul>
                             {results.map((obj, index) => {
                                 return (
-                                    <li key={index} >
+                                    <li key={index} className={`user-${userRole}`}>
                                         <div className="profile-icon search-picture">
                                             <p>{obj.firstName[0]}{obj.lastName[0]}</p>
                                         </div>
-                                        <div>
+                                        <div className="profile-info">
                                             <h4>{obj.firstName} {obj.lastName}</h4>
 
                                             {obj.cohortId !== null
@@ -132,17 +151,40 @@ function SearchPage () {
                                                 : <p className="extrainfo">{obj.role}</p>
                                             }
                                         </div>
-                                        <Link to={`/profile/${obj.id}`} className="profiles">Profile</Link>
+                                        <button className="sr-button profile-btn"><Link to={`/profile/${obj.id}`} className="profiles">Profile</Link></button>
                                         { 
-                                            userRole === 'TEACHER' && (
-                                                <>
-                                                    <div>Add Note</div>
-                                                    <div>Move to Cohort</div>
-                                                </>
+                                            userRole === 'teacher' && (
+                                                <div className='teacher-buttons'>
+                                                    <button className="sr-button">Add note</button>
+                                                    <button className="sr-button">Move to cohort</button>
+                                                </div >
                                             )
                                         }
                                         <button id="search-more" onClick={() => clickShowMore(index)} >...</button>
-                                        {showMore === index && (<div className="showmore" ref={ref}><Link to={`/profile/${obj.id}`} className="dropprofiles"><div className="dropicon"><ProfileIcon /></div><div className="droptext">Profile</div></Link></div>)}
+                                        {showMore === index && (
+                                        <div>
+
+                                            {cascadeMenu  && <CascadingMenu />}
+                                            {!cascadeMenu && 
+                                            
+                                            
+                                            <div className="showmore" ref={ref}>
+                                                <Link to={`/profile/${obj.id}`} className="dropprofiles">
+                                                        <div className="dropicon">
+                                                            <ProfileIcon />
+                                                        </div>
+                                                        <div className="droptext">
+                                                            Profile
+                                                        </div>
+                                                </Link>
+
+                                            </div>
+                                            }
+
+                                            
+                                                
+                                                
+                                        </div>)}
                                     </li>
                                 )         
                             })}                            

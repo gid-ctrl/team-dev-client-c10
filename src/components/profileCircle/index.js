@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import AddIcon from "../../assets/icons/addIcon"
 import CohortIcon from "../../assets/icons/cohortIcon"
 import CohortIconFill from "../../assets/icons/cohortIcon-fill"

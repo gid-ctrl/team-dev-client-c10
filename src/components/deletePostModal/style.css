@@ -1,0 +1,14 @@
+.button-container {
+  display: grid;
+  grid-template-columns: '. .';
+  grid-template-areas: 1fr 1fr;
+}
+
+.cancel-button {
+  background-color: #000046;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f0f5fa;
+}

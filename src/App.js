@@ -19,6 +19,8 @@ import SocialLinks from "./components/socialLinks";
 import Header from "./components/header";
 import MyCohort from "./pages/mycohort/MyCohort";
 import EditProfile from "./pages/edit";
+import ProfilePage from "./pages/profile"
+import MyExercises from "./pages/exercises/MyExercises"
 
 
 const App = () => {
@@ -58,6 +60,24 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="MyExercises"
+              element={
+                <ProtectedRoute>
+                  <MyExercises />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/MyCohort/:id"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+
             <Route
               path="/profile/:id"
               element={
