@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import ProfileIcon from "../../assets/icons/profileIcon";
 import Menu from "../menu";
 import MenuItem from "../menu/menuItem";
