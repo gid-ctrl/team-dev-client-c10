@@ -6,12 +6,31 @@ import ProfileIcon from "../../assets/icons/profileIcon"
 import CogIcon from "../../assets/icons/cogIcon"
 import LogoutIcon from "../../assets/icons/logoutIcon"
 import { NavLink } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { getUserProfile } from "../../service/apiClient"
+import { getInitials } from "../../utils/Users"
 
 const Header = () => {
     const { token, onLogout } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
     const { userId } = useAuth();
+    const [ userProfile, setUserProfile ] = useState({})
+    const [ userInitials, setUserInitials ] = useState("")
+
+
+    useEffect(() => {
+      const setProfile = async () => {
+        const profile = await getUserProfile(userId)
+        setUserProfile(profile)
+      }
+      setProfile()
+    }, [userId])
+    
+    useEffect(() => {
+      if (typeof userProfile ==='object' && typeof userProfile.firstName === 'string' && typeof userProfile.lastName ==='string') {
+        setUserInitials(getInitials(userProfile.firstName, userProfile.lastName))
+      }
+    }, [userProfile])
 
 
     const onClickProfileIcon = () => {
@@ -26,7 +45,7 @@ const Header = () => {
         <header>
             <FullLogo textColour="white" />
 
-            <div className="profile-icon" onClick={onClickProfileIcon}><p>AJ</p></div>
+            <div className="profile-icon" onClick={onClickProfileIcon}><p>{userInitials}</p></div>
 
             {isMenuVisible &&
                 <div className="user-panel">
