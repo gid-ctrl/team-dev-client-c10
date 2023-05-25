@@ -5,7 +5,6 @@ import useAuth from "../../hooks/useAuth";
 import CredentialsCard from "../../components/credentials";
 import "./login.css";
 
-
 const Login = () => {
   const { onLogin } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -32,7 +31,7 @@ const Login = () => {
               name="email"
               label={"Email *"}
             />
-            <p className="email-error-message"> * Email address must be in a valid format.</p>
+
             <TextInput
               value={formData.password}
               onChange={onChange}
@@ -40,7 +39,6 @@ const Login = () => {
               label={"Password *"}
               type={"password"}
             />
-            
           </form>
 
           <Button
@@ -55,4 +53,3 @@ const Login = () => {
 };
 
 export default Login;
-

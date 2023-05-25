@@ -5,6 +5,7 @@ import ProfileIcon from "../../assets/icons/profileIcon";
 import useAuth from "../../hooks/useAuth";
 import jwt_decode from "jwt-decode";
 import "./style.css";
+import DataIcon from "../../assets/icons/dataIcon";
 
 const Navigation = () => {
   const { token } = useAuth();
@@ -35,7 +36,13 @@ const Navigation = () => {
             <p>Cohort</p>
           </NavLink>
         </li>
-
+        <li>
+          <NavLink to="/MyExercises">
+            <DataIcon />
+            <p>Cohort</p>
+          </NavLink>
+        </li>
+        
       </ul>
     </nav>
   );
