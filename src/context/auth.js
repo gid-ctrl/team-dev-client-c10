@@ -18,21 +18,21 @@ const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState(undefined);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-
-    if (storedToken && !token) {
-      setToken(storedToken);
-      navigate("/");
-    }
     if (token) {
       const decoded = jwt_decode(token);
       setUserId(decoded.userId);
       getUserProfile(decoded.userId).then((profile) => {
         setProfile(profile);
+		if (profile.firstName) navigate("/");
       });
+    }
+    if (storedToken && !token) {
+      setToken(storedToken);
+
     }
   }, [navigate, token]);
 
@@ -66,11 +66,17 @@ const AuthProvider = ({ children }) => {
   const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
     const { userId } = jwt_decode(token);
 
-    const user = await createProfile(userId, firstName, lastName, githubUrl, bio);
-	setProfile(user.data.profile)
+    const user = await createProfile(
+      userId,
+      firstName,
+      lastName,
+      githubUrl,
+      bio
+    );
+    setProfile(user.data.profile);
     localStorage.setItem("token", token);
     navigate("/");
-  }; 
+  };
 
   const value = {
     token,
@@ -92,7 +98,10 @@ const ProtectedRoute = ({ children }) => {
   if (!token) {
     return <Navigate to={"/login"} replace state={{ from: location }} />;
   }
-  if ((!profile || !profile.firstName) && location.pathname !== '/welcome') {
+  if (profile === undefined) {
+	return <p>loading</p>
+  }
+  if ((profile === null || !profile.firstName) && location.pathname !== "/welcome") {
     return <Navigate to={"/welcome"} replace state={{ from: location }} />;
   }
 
