@@ -9,10 +9,9 @@ import { patch } from "../../service/apiClient";
 
 const EditProfile = () => {
   const { userId } = useAuth();
-  const [userProfile, setUserProfile] = useState({});
   const [userInitials, setUserInitials] = useState(``);
   const [user, setUser] = useState({ id: "" });
-  const [ updatedProfile, setUpdatedProfile ] = useState({})
+  const [updatedProfile, setUpdatedProfile] = useState({});
 
   useEffect(() => {
     async function getUserInfo() {
@@ -24,9 +23,8 @@ const EditProfile = () => {
   }, [userId]);
 
   useEffect(() => {
-    setUpdatedProfile(user)
-  }, [user])
-
+    setUpdatedProfile(user);
+  }, [user]);
 
   const updateUser = async () => {
     const response = await patch(`users/1`, {
@@ -60,9 +58,44 @@ const EditProfile = () => {
   };
 
   const handleFirstNameChange = (e) => {
-    console.log(updatedProfile)
-    setUpdatedProfile({...updatedProfile, firstName:e.target.value})
-  }
+    console.log(updatedProfile);
+    setUpdatedProfile({ ...updatedProfile, firstName: e.target.value });
+    if (e.target.value === "") {
+      console.log("Please input information");
+    }
+  };
+
+  const handleGitHubUrlChange = (e) => {
+    console.log(updatedProfile);
+    setUpdatedProfile({ ...updatedProfile, githubUrl: e.target.value });
+    if (e.target.value === "") {
+      console.log("Please input information");
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    console.log(updatedProfile);
+    setUpdatedProfile({ ...updatedProfile, email: e.target.value });
+    if (e.target.value === "") {
+      console.log("Please input information");
+    }
+  };
+
+  const handleLastNameChange = (e) => {
+    console.log(updatedProfile);
+    setUpdatedProfile({ ...updatedProfile, lastName: e.target.value });
+    if (e.target.value === "") {
+      console.log("Please input information");
+    }
+  };
+
+  const hanleBioChange = (e) => {
+    console.log(updatedProfile);
+    setUpdatedProfile({ ...updatedProfile, bio: e.target.value });
+    if (e.target.value === "") {
+      console.log("Please input information");
+    }
+  };
 
   return (
     <>
@@ -107,6 +140,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder={user.lastName}
+                onChange={handleLastNameChange}
               ></textarea>
               <small className="padding-field-name">Username*</small>
               <textarea
@@ -121,6 +155,7 @@ const EditProfile = () => {
                 cols="40"
                 className="textarea-small"
                 placeholder={user.githubUrl}
+                onChange={handleGitHubUrlChange}
               ></textarea>
             </div>
 
@@ -212,6 +247,7 @@ const EditProfile = () => {
                   className="textarea-small"
                   placeholder="alex.walker@boolean.co.uk"
                   value={user.email}
+                  onChange={handleEmailChange}
                 ></textarea>
                 <div className="padding"></div>
                 <small className="padding-field-name">Mobile*</small>
@@ -262,7 +298,11 @@ const EditProfile = () => {
                 <h4>Bio</h4>
                 <div className="padding-top"></div>
                 <small>Bio</small>
-                <textarea spellCheck="false" placeholder={user.bio}></textarea>
+                <textarea
+                  spellCheck="false"
+                  placeholder={user.bio}
+                  onChange={hanleBioChange}
+                ></textarea>
                 <small>0/300</small>
               </div>
 
