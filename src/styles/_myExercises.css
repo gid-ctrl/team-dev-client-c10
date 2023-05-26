@@ -1,43 +1,39 @@
 .exercise-card{
     display: grid;
-    grid-template-columns: 2fr 1fr;
     width: 70vw;
     border:0.5px solid lightgrey;
-    padding-top: 20px;
+    margin-top: 20px;
     grid-template: 
-   'course-info right-section' 1fr
-   'module-section right-section' 1fr /
-   1fr              200px
-   
-
+   "course-info    right-section" 1fr
+   "module-section right-section" 1fr /
+       1fr              200px;
 }
  
 .course-info {
     grid-area: course-info;
     border:0.5px solid lightgrey;
-   
 }
 
 .course-info > p:first-of-type {
     font-size: smaller;
     color: grey;
-  
-
 }
 
 .module-section{
     grid-area: module-section;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 45%));
+    grid-template-columns: repeat(auto-fit);
     border:0.5px solid lightgrey;
-
 }
-
-.right-section > article{
+.right-section {
     grid-area: right-section;
+}
+.right-section > article{
     font-size: smaller;
     color: grey;
     border:0.5px solid lightgrey;
-    
-
+}
+.module-section > article {  
+    height: 50px;
+    border:0.5px solid lightgrey;
 }
