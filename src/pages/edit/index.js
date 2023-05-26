@@ -7,21 +7,23 @@ import { get } from "../../service/apiClient";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { patch } from "../../service/apiClient";
+import { useParams } from "react-router-dom";
 
 const EditProfile = () => {
   const { userId } = useAuth();
+  const urlParams = useParams();
   const [userInitials, setUserInitials] = useState(``);
   const [user, setUser] = useState({ id: "" });
   const [updatedProfile, setUpdatedProfile] = useState({});
 
   useEffect(() => {
     async function getUserInfo() {
-      const userInfo = await get(`users/${userId}`);
+      const userInfo = await get(`users/${urlParams.id}`);
       setUser(userInfo.data.user);
       setUserInitials(getInitailsFromUser(userInfo.data.user));
     }
     getUserInfo();
-  }, [userId]);
+  }, [urlParams.id]);
 
   const updateUser = async () => {
     const response = await patch(`users/${userId}`, updatedProfile);
@@ -30,6 +32,7 @@ const EditProfile = () => {
 
   const handleSaveButtonClick = async () => {
     await updateUser();
+    console.log('user', user, "\n", 'userId', userId);
   };
 
   const userDisplayName = (user) => {
