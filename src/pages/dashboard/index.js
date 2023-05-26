@@ -261,6 +261,8 @@ const Dashboard = () => {
                              </div>
                            ))}
                            <br/>
+                           <hr className="line"/>
+                           <br/>
                             <Link to={'/search'}><Button text={"All students"} classes="button offwhite"></Button></Link>
           
           </Card>
