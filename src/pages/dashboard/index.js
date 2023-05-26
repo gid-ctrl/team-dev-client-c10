@@ -261,7 +261,7 @@ const Dashboard = () => {
                              </div>
                            ))}
                            <br/>
-                            <Link to={'/search'}><Button text={"All students"} classes="button offwhite reduce-size"></Button></Link>
+                            <Link to={'/search'}><Button text={"All students"} classes="button offwhite"></Button></Link>
           
           </Card>
           <Card>
