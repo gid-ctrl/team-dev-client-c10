@@ -59,51 +59,30 @@ const EditProfile = () => {
 
   const handleFirstNameChange = (e) => {
     setUpdatedProfile({ ...updatedProfile, firstName: e.target.value });
-    if (e.target.value === "") {
-      console.log("Please input information");
-    }
   };
 
   const handleCohortIdChange = (e) => {
-    setUpdatedProfile({ ...updatedProfile, cohortId: e.target.value });
-    if (e.target.value === "") {
-      console.log("Please input information");
-    }
+    setUpdatedProfile({ ...updatedProfile, cohortId: Number(e.target.value) });
   };
 
   const handleGitHubUrlChange = (e) => {
     setUpdatedProfile({ ...updatedProfile, githubUrl: e.target.value });
-    if (e.target.value === "") {
-      console.log("Please input information");
-    }
   };
 
   const handleEmailChange = (e) => {
     setUpdatedProfile({ ...updatedProfile, email: e.target.value });
-    if (e.target.value === "") {
-      console.log("Please input information");
-    }
   };
 
   const handleRoleChange = (e) => {
     setUpdatedProfile({ ...updatedProfile, role: e.target.value });
-    if (e.target.value === "") {
-      console.log("Please input information");
-    }
   };
 
   const handleLastNameChange = (e) => {
     setUpdatedProfile({ ...updatedProfile, lastName: e.target.value });
-    if (e.target.value === "") {
-      console.log("Please input information");
-    }
   };
 
   const hanleBioChange = (e) => {
     setUpdatedProfile({ ...updatedProfile, bio: e.target.value });
-    if (e.target.value === "") {
-      console.log("Please input information");
-    }
   };
 
   return (
