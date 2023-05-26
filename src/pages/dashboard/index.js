@@ -35,7 +35,7 @@ const Dashboard = () => {
       setUsers(response.data.users);
     });
   }, []);
-
+    
 
   useEffect(() => {
 	const fetchData = async () => {
@@ -260,6 +260,8 @@ const Dashboard = () => {
                                )}
                              </div>
                            ))}
+                           <br/>
+                            <Link to={'/search'}><Button text={"All students"} classes="button offwhite reduce-size"></Button></Link>
           
           </Card>
           <Card>
