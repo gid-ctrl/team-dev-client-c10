@@ -22,20 +22,8 @@ const EditProfile = () => {
     getUserInfo();
   }, [userId]);
 
-  useEffect(() => {
-    setUpdatedProfile(user);
-  }, [user]);
-
   const updateUser = async () => {
-    const response = await patch(`users/1`, {
-      email: "student@test.com",
-      password: "Testpassword1!",
-      cohortId: 0,
-      firstName: "Joe",
-      lastName: "Bloggs",
-      bio: "",
-      githubUrl: "student1",
-    });
+    const response = await patch(`users/${userId}`, updatedProfile);
     console.log("User updated successfully:", response.data);
   };
 
@@ -243,10 +231,10 @@ const EditProfile = () => {
                 <div className="padding-top"></div>
                 <small className="padding-field-name">Email*</small>
                 <textarea
+                  rows=""
                   cols="40"
                   className="textarea-small"
-                  placeholder="alex.walker@boolean.co.uk"
-                  value={user.email}
+                  placeholder={user.email}
                   onChange={handleEmailChange}
                 ></textarea>
                 <div className="padding"></div>
