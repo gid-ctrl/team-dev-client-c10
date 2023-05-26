@@ -37,7 +37,8 @@ const EditProfile = () => {
 
   const updateUser = async () => {
     const response = await patch(`users/${urlParams.id}`, updatedProfile);
-    console.log("User updated successfully:", response.data);
+    console.log('updatedProfile', updatedProfile);
+    console.log("Patch request sent:", response.data);
   };
 
   const handleSaveButtonClick = async () => {
@@ -62,6 +63,15 @@ const EditProfile = () => {
   const handleFirstNameChange = (e) => {
     console.log(updatedProfile);
     setUpdatedProfile({ ...updatedProfile, firstName: e.target.value });
+    if (e.target.value === "") {
+      console.log("Please input information");
+    }
+  };
+
+  const handleCohortIdChange = (e) => {
+    console.log('e.target.value', e.target.value);
+    console.log(updatedProfile);
+    setUpdatedProfile({ ...updatedProfile, cohortId: e.target.value });
     if (e.target.value === "") {
       console.log("Please input information");
     }
@@ -211,13 +221,23 @@ const EditProfile = () => {
 
                 <small className="padding-field-name">Cohort*</small>
                 <div className="training-info">
-                  <textarea
-                    rows=""
-                    cols="40"
-                    className="textarea-small"
-                    disabled
-                    placeholder={cohortDisplayName(user.cohortId)}
-                  ></textarea>
+                  {loggedInUser.role === 'TEACHER' ? (
+                      <textarea
+                        rows=""
+                        cols="40"
+                        className="textarea-small"
+                        placeholder={user.cohortId}
+                        onChange={handleCohortIdChange}
+                      ></textarea>
+                    ) : (
+                      <textarea
+                        rows=""
+                        cols="40"
+                        disabled
+                        className="textarea-small"
+                        placeholder={cohortDisplayName(user.cohortId)}
+                      ></textarea>
+                  )}
                   <div className="lock-icon">
                     <LockIcon />
                   </div>
