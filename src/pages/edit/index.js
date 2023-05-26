@@ -37,13 +37,10 @@ const EditProfile = () => {
 
   const updateUser = async () => {
     const response = await patch(`users/${urlParams.id}`, updatedProfile);
-    console.log('updatedProfile', updatedProfile);
-    console.log("Patch request sent:", response.data);
   };
 
   const handleSaveButtonClick = async () => {
     await updateUser();
-    console.log('user', user, "\n", 'userId', userId);
   };
 
   const userDisplayName = (user) => {
@@ -61,7 +58,6 @@ const EditProfile = () => {
   };
 
   const handleFirstNameChange = (e) => {
-    console.log(updatedProfile);
     setUpdatedProfile({ ...updatedProfile, firstName: e.target.value });
     if (e.target.value === "") {
       console.log("Please input information");
@@ -69,8 +65,6 @@ const EditProfile = () => {
   };
 
   const handleCohortIdChange = (e) => {
-    console.log('e.target.value', e.target.value);
-    console.log(updatedProfile);
     setUpdatedProfile({ ...updatedProfile, cohortId: e.target.value });
     if (e.target.value === "") {
       console.log("Please input information");
@@ -78,7 +72,6 @@ const EditProfile = () => {
   };
 
   const handleGitHubUrlChange = (e) => {
-    console.log(updatedProfile);
     setUpdatedProfile({ ...updatedProfile, githubUrl: e.target.value });
     if (e.target.value === "") {
       console.log("Please input information");
@@ -86,7 +79,6 @@ const EditProfile = () => {
   };
 
   const handleEmailChange = (e) => {
-    console.log(updatedProfile);
     setUpdatedProfile({ ...updatedProfile, email: e.target.value });
     if (e.target.value === "") {
       console.log("Please input information");
@@ -94,7 +86,6 @@ const EditProfile = () => {
   };
 
   const handleRoleChange = (e) => {
-    console.log(updatedProfile);
     setUpdatedProfile({ ...updatedProfile, role: e.target.value });
     if (e.target.value === "") {
       console.log("Please input information");
@@ -102,7 +93,6 @@ const EditProfile = () => {
   };
 
   const handleLastNameChange = (e) => {
-    console.log(updatedProfile);
     setUpdatedProfile({ ...updatedProfile, lastName: e.target.value });
     if (e.target.value === "") {
       console.log("Please input information");
@@ -110,7 +100,6 @@ const EditProfile = () => {
   };
 
   const hanleBioChange = (e) => {
-    console.log(updatedProfile);
     setUpdatedProfile({ ...updatedProfile, bio: e.target.value });
     if (e.target.value === "") {
       console.log("Please input information");
