@@ -15,6 +15,16 @@ const EditProfile = () => {
   const [userInitials, setUserInitials] = useState(``);
   const [user, setUser] = useState({ id: "" });
   const [updatedProfile, setUpdatedProfile] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState({});
+
+
+  useEffect(() => {
+    async function getUserInfo() {
+      const userInfo = await get(`users/${userId}`);
+      setLoggedInUser(userInfo.data.user);
+    }
+    getUserInfo();
+  }, [userId]);
 
   useEffect(() => {
     async function getUserInfo() {
@@ -154,6 +164,14 @@ const EditProfile = () => {
               <div className="training-info-content info-grid">
                 <small className="padding-field-name">Role*</small>
                 <div className="training-info">
+                  {loggedInUser.role === 'TEACHER' ? (
+                  <textarea
+                    rows="1"
+                    cols="40"
+                    className="textarea-small"
+                    placeholder={user.role}
+                  ></textarea>
+                  ) : (
                   <textarea
                     rows="1"
                     cols="40"
@@ -161,6 +179,8 @@ const EditProfile = () => {
                     disabled
                     placeholder={user.role}
                   ></textarea>
+                  )
+                  }
                   <div className="lock-icon">
                     <LockIcon />
                   </div>
