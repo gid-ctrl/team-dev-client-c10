@@ -1,7 +1,7 @@
 # Cohort Manager  
 
 ## Table of contents
--
+
     -   [Table of contents](#table-of-contents)
     -   [General info](#general-info)
     -   [UI Screenshots](#ui-screenshots)
