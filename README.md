@@ -5,7 +5,6 @@
 -
     -   [Table of contents](#table-of-contents)
     -   [General info](#general-info)
-    -   [UI Screenshots](#ui-screenshots)
           
 
 ## General info
@@ -19,11 +18,6 @@ When signed in, a student user of id 123 can navigate to /home. They will see a 
 A user can create a new post and this should appear on the feed. Any teacher can edit or delete an existing post or comment, unless the post or comment are made by another teacher. A student may edit or delete only the posts and comments that they have made. Any user can add a comment to an existing post. Any user can like or unlike a comment or a post. Liking is only possible if the user has not already liked that post or comment. Unliking is only possible if the user has already liked or unliked that post or comment.
 
 
-## UI Screenshots
-
-
-
-![Spotify Clone](/assets/img/spotify.png)
 
 
 
